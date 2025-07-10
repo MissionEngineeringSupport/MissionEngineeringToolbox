@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace MissionEngineering.MathLibrary;
+﻿namespace MissionEngineering.MathLibrary;
 
 public class Interpolation1D
 {
@@ -8,12 +6,23 @@ public class Interpolation1D
 
     public double[] Y { get; set; }
 
+    public Interpolation1D(Vector x, Vector y)
+    {
+        ArgumentNullException.ThrowIfNull(x, nameof(x));
+        ArgumentNullException.ThrowIfNull(y, nameof(y));
+
+        ArgumentOutOfRangeException.ThrowIfNotEqual(x.NumberOfElements, y.NumberOfElements, nameof(x));
+        
+        X = x.Data;
+        Y = y.Data;
+    }
+
     public Interpolation1D(double[] x, double[] y)
     {
-        if (x == null || y == null)
-            throw new ArgumentNullException("X and Y arrays cannot be null.");
-        if (x.Length != y.Length)
-            throw new ArgumentException("X and Y arrays must have the same length.");
+        ArgumentNullException.ThrowIfNull(x, nameof(x));
+        ArgumentNullException.ThrowIfNull(y, nameof(y));
+
+        ArgumentOutOfRangeException.ThrowIfNotEqual(x.Length, y.Length, nameof(x));   
 
         X = x;
         Y = y;
