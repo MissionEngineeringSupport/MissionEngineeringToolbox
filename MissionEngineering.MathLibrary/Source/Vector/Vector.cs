@@ -1,14 +1,13 @@
 ﻿namespace MissionEngineering.MathLibrary;
 
-public class Vector
+public partial class Vector
 {
     public double[] Data { get; set; }
 
     public int NumberOfElements => Data.Length;
 
-    public Vector()
+    public Vector() : this(0)
     {
-        Data = Array.Empty<double>();
     }       
 
     public Vector(int numberOfElements)
@@ -21,7 +20,13 @@ public class Vector
         Data = data;
     }
 
-     public double this[int index]
+    public double this[int index]
+    {
+        get => Data[index];
+        set => Data[index] = value;
+    }
+
+    public double this[Index index]
     {
         get => Data[index];
         set => Data[index] = value;
