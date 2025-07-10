@@ -5,6 +5,8 @@ VisualStudioVersion = 17.14.36301.6 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.MathLibrary", "MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj", "{24496800-4F40-4FDB-8CBE-8C8728F32E57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.MathLibrary.Tests", "MissionEngineering.MathLibrary.Tests\MissionEngineering.MathLibrary.Tests.csproj", "{15A0341D-A624-40AC-AFEF-65B84292490B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{24496800-4F40-4FDB-8CBE-8C8728F32E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24496800-4F40-4FDB-8CBE-8C8728F32E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24496800-4F40-4FDB-8CBE-8C8728F32E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15A0341D-A624-40AC-AFEF-65B84292490B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A0341D-A624-40AC-AFEF-65B84292490B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A0341D-A624-40AC-AFEF-65B84292490B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A0341D-A624-40AC-AFEF-65B84292490B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
