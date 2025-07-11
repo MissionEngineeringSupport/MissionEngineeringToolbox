@@ -8,7 +8,7 @@ public partial class Vector
 
     public Vector() : this(0)
     {
-    }       
+    }
 
     public Vector(int numberOfElements)
     {

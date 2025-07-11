@@ -21,8 +21,6 @@ public record Attitude
         BankAngleDeg = bankAngleDeg;
     }
 
-
-
     public Matrix GetTransformationMatrix()
     {
         var t1 = CalculateTransformationMatrixHeading();

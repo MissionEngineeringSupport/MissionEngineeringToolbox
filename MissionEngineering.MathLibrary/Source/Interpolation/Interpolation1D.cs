@@ -12,7 +12,7 @@ public class Interpolation1D
         ArgumentNullException.ThrowIfNull(y, nameof(y));
 
         ArgumentOutOfRangeException.ThrowIfNotEqual(x.NumberOfElements, y.NumberOfElements, nameof(x));
-        
+
         X = x.Data;
         Y = y.Data;
     }
@@ -22,7 +22,7 @@ public class Interpolation1D
         ArgumentNullException.ThrowIfNull(x, nameof(x));
         ArgumentNullException.ThrowIfNull(y, nameof(y));
 
-        ArgumentOutOfRangeException.ThrowIfNotEqual(x.Length, y.Length, nameof(x));   
+        ArgumentOutOfRangeException.ThrowIfNotEqual(x.Length, y.Length, nameof(x));
 
         X = x;
         Y = y;
