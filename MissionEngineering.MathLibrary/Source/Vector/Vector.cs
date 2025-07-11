@@ -15,9 +15,14 @@ public partial class Vector
         Data = new double[numberOfElements];
     }
 
-    public Vector(double[] data)
+    public Vector(params double[] data)
     {
         Data = data;
+    }
+
+    public Vector(params IEnumerable<double> data)
+    {
+        Data = data.ToArray();
     }
 
     public double this[int index]
@@ -30,5 +35,52 @@ public partial class Vector
     {
         get => Data[index];
         set => Data[index] = value;
+    }
+
+    public double[] this[Range index]
+    {
+        get => Data[index];
+        set => Data = value;
+    }
+
+    public Vector Copy()
+    {
+        var result = new Vector(NumberOfElements);
+
+        Array.Copy(Data, result.Data, NumberOfElements);
+
+        return result;
+    }
+
+    public bool Equals(Vector x, double tolerance = 1.0e-9)
+    {
+        if (this is null)
+        {
+            return false;
+        }
+
+        if (x is null)
+        {
+            return false;
+        }
+
+        if (x.NumberOfElements != NumberOfElements)
+        {
+            return false;
+        }
+
+        var deltaX = 0.0;
+
+        for (int i = 0; i < Data.Length; i++)
+        {
+            deltaX = Math.Abs(x.Data[i] - Data[i]);
+
+            if (deltaX > tolerance)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
