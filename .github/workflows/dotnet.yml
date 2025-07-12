@@ -37,3 +37,4 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         files: /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.MathLibrary.Tests/coverage.info
+               /home/runner/work/MissionEngineeringToolbox/MissionEngineeringToolbox/MissionEngineering.Platform.Tests/coverage.info
