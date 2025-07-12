@@ -1,6 +1,6 @@
-﻿using System.Globalization;
-using CsvHelper;
+﻿using CsvHelper;
 using CsvHelper.TypeConversion;
+using System.Globalization;
 
 namespace MissionEngineering.Core;
 

@@ -1,5 +1,4 @@
 ﻿using MissionEngineering.MathLibrary;
-using System.ComponentModel.DataAnnotations;
 
 namespace MissionEngineering.Platform;
 

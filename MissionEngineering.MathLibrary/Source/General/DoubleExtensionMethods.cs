@@ -1,6 +1,6 @@
-﻿using static System.Math;
-using static MissionEngineering.MathLibrary.PhysicalConstants;
+﻿using static MissionEngineering.MathLibrary.PhysicalConstants;
 using static MissionEngineering.MathLibrary.UnitConversions;
+using static System.Math;
 
 namespace MissionEngineering.MathLibrary;
 
@@ -188,17 +188,33 @@ public static class DoubleExtensionMethods
         return result;
     }
 
-    //public static double ConstrainAngle0To360(this double x)
-    //{
-    //    var result = MathFunctions.ConstrainAngle0To360(x);
 
-    //    return result;
-    //}
+    public static double ConstrainAngle0To2PI(this double x)
+    {
+        var result = MathFunctions.ConstrainAngle0To2PI(x);
 
-    //public static double ConstrainAnglePlusMinus180(this double x)
-    //{
-    //    var result = MathFunctions.ConstrainAnglePlusMinus180(x);
+        return result;
+    }
 
-    //    return result;
-    //}
+    public static double ConstrainAnglePlusMinusPI(this double x)
+    {
+        var result = MathFunctions.ConstrainAnglePlusMinusPI(x);
+
+        return result;
+    }
+
+    public static double ConstrainAngle0To360(this double x)
+    {
+        var result = MathFunctions.ConstrainAngle0To360(x);
+
+        return result;
+    }
+
+
+    public static double ConstrainAnglePlusMinus180(this double x)
+    {
+        var result = MathFunctions.ConstrainAnglePlusMinus180(x);
+
+        return result;
+    }
 }

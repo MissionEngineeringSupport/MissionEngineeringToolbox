@@ -1,9 +1,44 @@
-﻿using static System.Math;
+﻿using CommunityToolkit.Diagnostics;
+using static System.Math;
 
 namespace MissionEngineering.MathLibrary;
 
 public static class MathFunctions
 {
+    public static double ConstrainAngle0To2PI(double x)
+    {
+        var result = x;
+
+        if (x > 2.0 * PI)
+        {
+            result -= 2.0 * PI;
+        }
+
+        if (x < 0.0)
+        {
+            result += 2.0 * PI;
+        }
+
+        return result;
+    }
+
+    public static double ConstrainAnglePlusMinusPI(double x)
+    {
+        var result = x;
+
+        if (x > PI)
+        {
+            result -= 2.0 * PI;
+        }
+
+        if (x < -180.0)
+        {
+            result += 2.0 * PI;
+        }
+
+        return result;
+    }
+
     public static double ConstrainAngle0To360(double x)
     {
         var result = x;
@@ -75,14 +110,14 @@ public static class MathFunctions
         return bankAngleDeg;
     }
 
-    //public static double CalculateLoadFactorFromBankAngleDeg(double bankAngleDeg)
-    //{
-    //    var bankAngle = bankAngleDeg.DegreesToRadians();
+    public static double CalculateLoadFactorFromBankAngleDeg(double bankAngleDeg)
+    {
+        var bankAngle = bankAngleDeg.DegreesToRadians();
 
-    //    var loadFactor_g = 1 / Cos(bankAngle);
+        var loadFactor_g = 1 / Cos(bankAngle);
 
-    //    return loadFactor_g;
-    //}
+        return loadFactor_g;
+    }
 
     public static double CalculateBankAngleFromLoadFactor(double loadFactor_g)
     {
@@ -91,5 +126,19 @@ public static class MathFunctions
         var bankAngleDeg = bankAngle.RadiansToDegrees();
 
         return bankAngleDeg;
+    }
+
+    public static double FloorToStepSize(double value, double stepSize)
+    {
+        Guard.IsGreaterThan(stepSize, 0, nameof(stepSize));
+
+        return Math.Floor(value / stepSize) * stepSize;
+    }
+
+    public static double RoundToStepSize(double value, double stepSize)
+    {
+        Guard.IsGreaterThan(stepSize, 0, nameof(stepSize));
+
+        return Math.Round(value / stepSize) * stepSize;
     }
 }

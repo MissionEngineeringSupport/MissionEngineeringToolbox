@@ -1,11 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MissionEngineering.MathLibrary;
-using System;
-
-namespace MissionEngineering.MathLibrary.Tests
+﻿namespace MissionEngineering.MathLibrary.Tests
 {
     [TestClass]
-    public class MathUtilitiesTests
+    public class MathFunctionTests
     {
         [DataTestMethod]
         [DataRow(5.7, 1.0, 6.0)]
@@ -17,7 +13,7 @@ namespace MissionEngineering.MathLibrary.Tests
         [DataRow(0.0, 0.1, 0.0)]
         public void RoundToStepSize_ReturnsExpectedResult(double value, double stepSize, double expected)
         {
-            var result = MathUtilities.RoundToStepSize(value, stepSize);
+            var result = MathFunctions.RoundToStepSize(value, stepSize);
             Assert.AreEqual(expected, result, 10e-10);
         }
 
@@ -26,7 +22,7 @@ namespace MissionEngineering.MathLibrary.Tests
         [DataRow(1.0, -1.0)]
         public void RoundToStepSize_InvalidStepSize_Throws(double value, double stepSize)
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => MathUtilities.RoundToStepSize(value, stepSize));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => MathFunctions.RoundToStepSize(value, stepSize));
         }
     }
 }
