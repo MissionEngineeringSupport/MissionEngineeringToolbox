@@ -8,6 +8,10 @@ public record PositionLLA
 
     public double Altitude { get; init; }
 
+    public double Altitude_ft => Altitude * UnitConversions.MeterToFoot;
+
+    public double FlightLevel => UnitConversions.AltitudeFeetToFlightLevel(Altitude_ft);
+
     public PositionLLA()
     {
     }

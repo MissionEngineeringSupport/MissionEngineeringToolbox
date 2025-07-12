@@ -33,4 +33,11 @@ public static class UnitConversions
     public const double MeterPerSecondSquaredToG = 1.0 / GToMeterPerSecondSquared;
 
     public const double GToMeterPerSecondSquared = GravitationalAcceleration;
+
+    public static double AltitudeFeetToFlightLevel(double altitude_ft)
+    {
+        var flightLevel = MathUtilities.RoundToStepSize(altitude_ft, 500.0);
+
+        return flightLevel;
+    }
 }
