@@ -4,9 +4,9 @@ namespace MissionEngineering.Platform;
 
 public record FlightpathData
 {
-    public double SimulationTime { get; init; }
+    public double FlightpathTime { get; init; }
 
-    public int PlatformId { get; init; }
+    public int FlightpathId { get; init; }
 
     public PositionLLA PositionLLA { get; init; }
 
@@ -16,9 +16,21 @@ public record FlightpathData
 
     public AccelerationNED AccelerationNED { get; init; }
 
-    public AccelerationNED AcceleratioTBA { get; init; }
+    public AccelerationTBA AccelerationTBA { get; init; }
 
     public Attitude Attitude { get; init; }
 
     public AttitudeRate AttitudeRate { get; init; }
+
+    public FlightpathData()
+    {
+        FlightpathId = 0;
+        PositionLLA = new PositionLLA();
+        PositionNED = new PositionNED();
+        VelocityNED = new VelocityNED();
+        AccelerationNED = new AccelerationNED();
+        AccelerationTBA = new AccelerationTBA();
+        Attitude = new Attitude();
+        AttitudeRate = new AttitudeRate();
+    }
 }

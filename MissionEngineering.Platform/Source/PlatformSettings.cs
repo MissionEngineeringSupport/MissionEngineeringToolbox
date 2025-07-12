@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using CsvHelper.Configuration.Attributes;
+using System.Drawing;
 
 namespace MissionEngineering.Platform;
 
@@ -14,7 +15,18 @@ public class PlatformSettings
 
     public string PlatformIcon { get; set; }
 
-    public PlatformAffiliation PlatformAffliation { get; set; }
+    public PlatformAffiliation PlatformAffiliation { get; set; }
 
-    public Color PlatformColor { get; set; }
+    public string PlatformColor { get; set; }
+
+    public PlatformSettings()
+    {
+        PlatformId = 1;
+        PlatformName = "Platform 1";
+        PlatformDescription = "Platform 1 Description";
+        PlatformType = "Aircraft";
+        PlatformIcon = "F-35A";
+        PlatformAffiliation = PlatformAffiliation.Friendly;
+        PlatformColor = "Red";
+    }
 }
