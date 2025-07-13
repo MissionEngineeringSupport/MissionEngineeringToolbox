@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.Platform;
+﻿using MissionEngineering.MathLibrary;
+
+namespace MissionEngineering.Platform;
 
 public class PlatformSettings
 {
@@ -20,6 +22,10 @@ public class PlatformSettings
 
     public string PlatformScaleLevel { get; init; }
 
+    public PositionNED PositionNED { get; init; }
+
+    public VelocityNED VelocityNED { get; init; }
+
     public PlatformSettings()
     {
         PlatformId = 1;
@@ -31,5 +37,7 @@ public class PlatformSettings
         PlatformColor = "Red";
         PlatformInterpolate = "1";
         PlatformScaleLevel = "4.0";
+        PositionNED = new PositionNED();
+        VelocityNED = new VelocityNED();
     }
 }

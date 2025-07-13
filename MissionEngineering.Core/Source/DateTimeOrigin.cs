@@ -1,4 +1,4 @@
-﻿namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Core;
 
 public class DateTimeOrigin : IDateTimeOrigin
 {

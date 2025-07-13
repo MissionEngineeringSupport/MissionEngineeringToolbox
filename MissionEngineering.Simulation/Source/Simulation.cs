@@ -80,7 +80,10 @@ public class Simulation : ISimulation
 
         DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
 
-        var platformModel = new PlatformModel();
+        var platformModel = new PlatformModel(SimulationClock, LLAOrigin)
+        { 
+            PlatformSettings = ScenarioSettings.PlatformSettingsList.First() 
+        };
 
         SimulationModels = [platformModel];
 
@@ -148,7 +151,7 @@ public class Simulation : ISimulation
     {
         foreach (var model in SimulationModels)
         {
-            model.Initialise(time);
+            model.Update(time);
         }
     }
 
@@ -156,7 +159,7 @@ public class Simulation : ISimulation
     {
         foreach (var model in SimulationModels)
         {
-            model.Initialise(time);
+            model.Finalise(time);
         }
     }
 

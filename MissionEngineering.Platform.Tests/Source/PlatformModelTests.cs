@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using MissionEngineering.MathLibrary;
 
 namespace MissionEngineering.Platform.Tests
 {
@@ -9,14 +10,28 @@ namespace MissionEngineering.Platform.Tests
         public void Update_WithInitialiseCalled_ExpectSuccess()
         {
             // Arrange:
+            var platformSettings = PlatformSettingsFactory.PlatformSettings_Test_1();
+
             var platformModelState = new PlatformStateData()
             {
                 SimulationModelTimeStamp = new SimulationModelTimeStamp(),
-                PlatformSettings = new PlatformSettings(),
+                PlatformSettings = platformSettings,
                 FlightpathData = new FlightpathData()
             };
 
-            var platformModel = new PlatformModel()
+            var simulationClock = new SimulationClock(new DateTimeOrigin {  DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) } );
+
+            var llaOrigin = new LLAOrigin()
+            {
+                PositionLLA = new PositionLLA()
+                {
+                    LatitudeDeg = 55.1,
+                    LongitudeDeg = 12.0,
+                    Altitude = 0.0
+                }
+            };
+
+            var platformModel = new PlatformModel(simulationClock, llaOrigin)
             {
                 PlatformStateData = platformModelState
             };

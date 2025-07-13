@@ -2,7 +2,7 @@
   "profiles": {
     "MissionEngineering.Simulation.Console": {
       "commandName": "Project",
-      "commandLineArgs": "--number-of-runs 10"
+      "commandLineArgs": "--number-of-runs 1"
     }
   }
 }

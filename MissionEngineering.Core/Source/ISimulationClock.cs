@@ -1,6 +1,4 @@
-﻿using MissionEngineering.Core;
-
-namespace MissionEngineering.Simulation
+﻿namespace MissionEngineering.Core
 {
     public interface ISimulationClock
     {

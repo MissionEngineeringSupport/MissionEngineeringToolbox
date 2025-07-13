@@ -36,7 +36,7 @@ public static class UnitConversions
 
     public static double AltitudeFeetToFlightLevel(double altitude_ft)
     {
-        var flightLevel = MathFunctions.RoundToStepSize(altitude_ft, 500.0);
+        var flightLevel = MathFunctions.FloorToStepSize(altitude_ft, 100.0);
 
         return flightLevel;
     }

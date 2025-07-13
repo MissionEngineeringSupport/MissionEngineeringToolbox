@@ -8,6 +8,8 @@ public record FlightpathData
 
     public int FlightpathId { get; init; }
 
+    public string FlightpathName { get; init; }
+
     public PositionLLA PositionLLA { get; init; }
 
     public PositionNED PositionNED { get; init; }
@@ -24,7 +26,9 @@ public record FlightpathData
 
     public FlightpathData()
     {
+        FlightpathTime = 0.0;
         FlightpathId = 0;
+        FlightpathName = string.Empty;
         PositionLLA = new PositionLLA();
         PositionNED = new PositionNED();
         VelocityNED = new VelocityNED();
