@@ -10,7 +10,7 @@ namespace MissionEngineering.Platform.Tests
         public void Update_WithInitialiseCalled_ExpectSuccess()
         {
             // Arrange:
-            var platformSettings = PlatformSettingsFactory.PlatformSettings_Test_1();
+            var platformSettings = PlatformSettingsFactory.PlatformSettings_1();
 
             var simulationClock = new SimulationClock(new DateTimeOrigin {  DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) } );
 

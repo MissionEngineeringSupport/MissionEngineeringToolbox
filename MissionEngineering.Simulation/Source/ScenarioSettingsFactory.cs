@@ -24,14 +24,15 @@ public static class ScenarioSettingsFactory
             Altitude = 0.0
         };
 
-        var ps1 = PlatformSettingsFactory.PlatformSettings_Test_1();
+        var ps1 = PlatformSettingsFactory.PlatformSettings_1();
+        var ps2 = PlatformSettingsFactory.PlatformSettings_2();
 
         var scenarioSettings = new ScenarioSettings()
         {
             ScenarioName = "Scenario_Test_1",
             SimulationClockSettings = simulationClockSettings,
             LLAOrigin = llaOrigin,
-            PlatformSettingsList = [ps1]
+            PlatformSettingsList = [ps1, ps2]
         };
 
         return scenarioSettings;

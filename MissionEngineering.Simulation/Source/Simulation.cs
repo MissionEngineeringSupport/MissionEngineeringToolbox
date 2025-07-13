@@ -80,12 +80,17 @@ public class Simulation : ISimulation
 
         DataRecorder.SimulationData.ScenarioSettings = ScenarioSettings;
 
-        var platformModel = new PlatformModel(SimulationClock, LLAOrigin)
-        { 
-            PlatformSettings = ScenarioSettings.PlatformSettingsList.First() 
-        };
+        SimulationModels = [];
 
-        SimulationModels = [platformModel];
+        foreach (var platformSettings in ScenarioSettings.PlatformSettingsList)
+        {
+            var platformModel = new PlatformModel(SimulationClock, LLAOrigin)
+            {
+                PlatformSettings = platformSettings
+            };
+
+            SimulationModels.Add(platformModel);
+        }
 
         InitialiseModels(time);
 
@@ -165,9 +170,13 @@ public class Simulation : ISimulation
 
     public List<FlightpathData> GeneratePlatformDataAll()
     {
-        var platformModel = (PlatformModel)(SimulationModels.First());
+        var platformDataAll = new List<FlightpathData>(); 
 
-        var platformDataAll = platformModel.FlightpathDataList;
+        foreach (var model in SimulationModels)
+        {
+            platformDataAll.AddRange(((PlatformModel)model).FlightpathDataList);
+
+        }
         
         return platformDataAll;
     }
