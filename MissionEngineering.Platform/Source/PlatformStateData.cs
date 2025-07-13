@@ -2,7 +2,7 @@
 
 namespace MissionEngineering.Platform;
 
-public class PlatformModelState : ISimulationModelState
+public class PlatformStateData : ISimulationModelState
 {
     public SimulationModelTimeStamp SimulationModelTimeStamp { get; set; }
 

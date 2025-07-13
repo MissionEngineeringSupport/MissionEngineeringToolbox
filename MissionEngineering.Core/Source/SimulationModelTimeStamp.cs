@@ -12,4 +12,13 @@ public record SimulationModelTimeStamp
     {
         WallClockDateTime = DateTime.Now;
     }
+
+    public SimulationModelTimeStamp(DateTime simulationDateTime, double simulationTime)
+    {
+        WallClockDateTime = DateTime.Now;
+
+        SimulationDateTime = simulationDateTime;
+
+        SimulationTime = simulationTime;
+    }
 }

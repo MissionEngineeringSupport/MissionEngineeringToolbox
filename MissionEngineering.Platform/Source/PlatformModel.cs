@@ -1,5 +1,4 @@
 ﻿using MissionEngineering.Core;
-using System.Collections.Generic;
 
 namespace MissionEngineering.Platform;
 
@@ -7,22 +6,22 @@ public class PlatformModel : ISimulationModel
 {
     public ISimulationModelInitialState SimulationModelInitialState { get; set; }
 
-    public ISimulationModelState SimulationModelState { get => PlatformModelState; set => PlatformModelState = (PlatformModelState)SimulationModelState; }
+    public ISimulationModelState SimulationModelState { get => PlatformStateData; set => PlatformStateData = (PlatformStateData)SimulationModelState; }
 
-    public List<ISimulationModelState> SimulationModelStateList { get => PlatformModelStateList.Cast<ISimulationModelState>().ToList(); set => PlatformModelStateList = SimulationModelStateList.Cast<PlatformModelState>().ToList(); }
+    public List<ISimulationModelState> SimulationModelStateList { get => PlatformStateDataList.Cast<ISimulationModelState>().ToList(); set => PlatformStateDataList = SimulationModelStateList.Cast<PlatformStateData>().ToList(); }
 
-    public PlatformModelState PlatformModelState { get; set; }
+    public PlatformStateData PlatformStateData { get; set; }
 
-    public List<PlatformModelState> PlatformModelStateList { get; set; }
+    public List<PlatformStateData> PlatformStateDataList { get; set; }
 
     public void Initialise(double time)
     {
-        PlatformModelStateList = [];
+        PlatformStateDataList = [];
     }
 
     public void Update(double time)
     {
-        PlatformModelStateList.Add(PlatformModelState);
+        PlatformStateDataList.Add(PlatformStateData);
     }
 
     public void Finalise(double time)

@@ -1,7 +1,4 @@
-﻿using CsvHelper.Configuration.Attributes;
-using System.Drawing;
-
-namespace MissionEngineering.Platform;
+﻿namespace MissionEngineering.Platform;
 
 public class PlatformSettings
 {
@@ -19,6 +16,10 @@ public class PlatformSettings
 
     public string PlatformColor { get; set; }
 
+    public string PlatformInterpolate { get; init; }
+
+    public string PlatformScaleLevel { get; init; }
+
     public PlatformSettings()
     {
         PlatformId = 1;
@@ -28,5 +29,7 @@ public class PlatformSettings
         PlatformIcon = "F-35A";
         PlatformAffiliation = PlatformAffiliation.Friendly;
         PlatformColor = "Red";
+        PlatformInterpolate = "1";
+        PlatformScaleLevel = "4.0";
     }
 }

@@ -9,7 +9,7 @@ namespace MissionEngineering.Platform.Tests
         public void Update_WithInitialiseCalled_ExpectSuccess()
         {
             // Arrange:
-            var platformModelState = new PlatformModelState()
+            var platformModelState = new PlatformStateData()
             {
                 SimulationModelTimeStamp = new SimulationModelTimeStamp(),
                 PlatformSettings = new PlatformSettings(),
@@ -18,7 +18,7 @@ namespace MissionEngineering.Platform.Tests
             
             var platformModel = new PlatformModel()
             { 
-                PlatformModelState = platformModelState
+                PlatformStateData = platformModelState
             };
 
             platformModel.Initialise(0.0);
@@ -32,7 +32,7 @@ namespace MissionEngineering.Platform.Tests
             //platformModel.PlatformModelStateList.WriteToCsvFile(path);
 
             // Assert:
-            Assert.IsTrue(platformModel.PlatformModelStateList.Count == 2);
+            Assert.IsTrue(platformModel.PlatformStateDataList.Count == 2);
          }
     }
 }
