@@ -33,6 +33,7 @@ namespace MissionEngineering.Platform.Tests
 
             var platformModel = new PlatformModel(simulationClock, llaOrigin)
             {
+                PlatformSettings = platformSettings,
                 PlatformStateData = platformModelState
             };
 
