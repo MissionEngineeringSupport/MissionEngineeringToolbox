@@ -2,5 +2,5 @@
 
 public interface ISimulationModelState
 {
-    SimulationModelTimeStamp SimulationModelTimeStamp { get; set; }
+    SimulationModelTimeStamp TimeStamp { get; set; }
 }

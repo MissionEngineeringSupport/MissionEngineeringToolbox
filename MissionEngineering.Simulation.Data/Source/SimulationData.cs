@@ -8,9 +8,9 @@ public class SimulationData
 
     public ScenarioSettings ScenarioSettings { get; set; }
 
-    public List<PlatformStateData> PlatformStateDataAll { get; set; }
+    public List<FlightpathData> PlatformDataAll { get; set; }
 
-    public List<List<PlatformStateData>> PlatformStateDataPerPlatform { get; set; }
+    public List<List<FlightpathData>> PlatformDataPerPlatform { get; set; }
 
     public SimulationData(SimulationSettings simulationSettings)
     {

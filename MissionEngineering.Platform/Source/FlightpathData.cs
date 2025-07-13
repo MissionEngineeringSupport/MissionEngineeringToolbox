@@ -1,14 +1,15 @@
-﻿using MissionEngineering.MathLibrary;
+﻿using MissionEngineering.Core;
+using MissionEngineering.MathLibrary;
 
 namespace MissionEngineering.Platform;
 
-public record FlightpathData
+public record FlightpathData : ISimulationModelState
 {
-    public double FlightpathTime { get; init; }
+    public SimulationModelTimeStamp TimeStamp { get; set; }
 
-    public int FlightpathId { get; init; }
+    public int PlatformId { get; init; }
 
-    public string FlightpathName { get; init; }
+    public string PlatformName { get; init; }
 
     public PositionLLA PositionLLA { get; init; }
 
@@ -26,9 +27,8 @@ public record FlightpathData
 
     public FlightpathData()
     {
-        FlightpathTime = 0.0;
-        FlightpathId = 0;
-        FlightpathName = string.Empty;
+        PlatformId = 0;
+        PlatformName = string.Empty;
         PositionLLA = new PositionLLA();
         PositionNED = new PositionNED();
         VelocityNED = new VelocityNED();

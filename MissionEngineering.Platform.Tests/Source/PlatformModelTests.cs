@@ -12,13 +12,6 @@ namespace MissionEngineering.Platform.Tests
             // Arrange:
             var platformSettings = PlatformSettingsFactory.PlatformSettings_Test_1();
 
-            var platformModelState = new PlatformStateData()
-            {
-                SimulationModelTimeStamp = new SimulationModelTimeStamp(),
-                PlatformSettings = platformSettings,
-                FlightpathData = new FlightpathData()
-            };
-
             var simulationClock = new SimulationClock(new DateTimeOrigin {  DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) } );
 
             var llaOrigin = new LLAOrigin()
@@ -34,7 +27,6 @@ namespace MissionEngineering.Platform.Tests
             var platformModel = new PlatformModel(simulationClock, llaOrigin)
             {
                 PlatformSettings = platformSettings,
-                PlatformStateData = platformModelState
             };
 
             platformModel.Initialise(0.0);
@@ -45,10 +37,10 @@ namespace MissionEngineering.Platform.Tests
 
             //var path = @"C:\Temp\MissionEngineeringToolbox\PlatformData.csv";
 
-            //platformModel.PlatformModelStateList.WriteToCsvFile(path);
+            //platformModel.FlightpathDataList.WriteToCsvFile(path);
 
             // Assert:
-            Assert.IsTrue(platformModel.PlatformStateDataList.Count == 2);
+            Assert.IsTrue(platformModel.FlightpathDataList.Count == 2);
         }
     }
 }

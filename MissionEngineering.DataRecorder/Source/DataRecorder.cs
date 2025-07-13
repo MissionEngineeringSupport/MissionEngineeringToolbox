@@ -18,8 +18,6 @@ public class DataRecorder : IDataRecorder
 
     public void Initialise(double time)
     {
-        SimulationData.PlatformStateDataAll = [];
-        SimulationData.PlatformStateDataPerPlatform = [];
     }
 
     public void Finalise(double time)
@@ -55,13 +53,15 @@ public class DataRecorder : IDataRecorder
 
     public void CreatePlatformData()
     {
+        SimulationData.PlatformDataPerPlatform = [];
+
         foreach (var platformSettings in SimulationData.ScenarioSettings.PlatformSettingsList)
         {
             var platformId = platformSettings.PlatformId;
 
-            var platformData = SimulationData.PlatformStateDataAll.Where(s => s.PlatformSettings.PlatformId == platformId).ToList();
+            var platformData = SimulationData.PlatformDataAll.Where(s => s.PlatformId == platformId).ToList();
 
-            SimulationData.PlatformStateDataPerPlatform.Add(platformData);
+            SimulationData.PlatformDataPerPlatform.Add(platformData);
         }
     }
 
@@ -103,7 +103,7 @@ public class DataRecorder : IDataRecorder
 
     public void WritePlatformDataAllToCsv()
     {
-        var platformDataAll = SimulationData.PlatformStateDataAll;
+        var platformDataAll = SimulationData.PlatformDataAll;
 
         var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_All.csv";
 
@@ -118,7 +118,7 @@ public class DataRecorder : IDataRecorder
 
         foreach (var platformSettings in SimulationData.ScenarioSettings.PlatformSettingsList)
         {
-            var platformDataList = SimulationData.PlatformStateDataPerPlatform[index];
+            var platformDataList = SimulationData.PlatformDataPerPlatform[index];
 
             var fileName = $"{SimulationData.SimulationSettings.SimulationName}_PlatformData_{platformSettings.PlatformName}.csv";
 

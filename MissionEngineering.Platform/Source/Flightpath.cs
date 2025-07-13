@@ -11,10 +11,13 @@ public class Flightpath
 
     public List<FlightpathData> FlightpathDataList { get; set; }
 
+    public ISimulationClock SimulationClock { get; set; }
+
     public ILLAOrigin LLAOrigin { get; set; }
 
-    public Flightpath(ILLAOrigin llaOrigin)
+    public Flightpath(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
     {
+         SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
 
         FlightpathData = new FlightpathData();
@@ -30,11 +33,13 @@ public class Flightpath
 
         var positionLLA = positionNED.ToPositionLLA(LLAOrigin.PositionLLA);
 
+        var timeStamp = SimulationClock.GetTimeStamp(time);
+
         FlightpathData = new FlightpathData()
         {
-            FlightpathTime = time,
-            FlightpathId = PlatformSettings.PlatformId,
-            FlightpathName = PlatformSettings.PlatformName,
+            TimeStamp = timeStamp,
+            PlatformId = PlatformSettings.PlatformId,
+            PlatformName = PlatformSettings.PlatformName,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,
@@ -44,7 +49,7 @@ public class Flightpath
 
     public void Update(double time)
     {
-        var dt = time - FlightpathData.FlightpathTime;
+        var dt = time - FlightpathData.TimeStamp.SimulationTime;
 
         var deltaTime = new DeltaTime(dt);
 
@@ -67,11 +72,13 @@ public class Flightpath
 
         var attitudeRate = new AttitudeRate(0.0, 0.0, bankAngleRateDeg);
 
+        var timeStamp = SimulationClock.GetTimeStamp(time);
+
         FlightpathData = new FlightpathData()
         {
-            FlightpathTime = time,
-            FlightpathId = PlatformSettings.PlatformId,
-            FlightpathName = PlatformSettings.PlatformName,
+            TimeStamp = timeStamp,
+            PlatformId = PlatformSettings.PlatformId,
+            PlatformName = PlatformSettings.PlatformName,
             PositionLLA = positionLLA,
             PositionNED = positionNED,
             VelocityNED = velocityNED,

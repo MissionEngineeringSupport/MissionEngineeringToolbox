@@ -67,11 +67,11 @@ public class SimdisExporter : ISimdisExporter
 
             var platformIdSimdis = GetSimdisPlatformId(platformId);
 
-            var platformStateDataList = SimulationData.PlatformStateDataPerPlatform[index];
+            var platformDataList = SimulationData.PlatformDataPerPlatform[index];
 
             CreatePlatformInitialisation(platformIdSimdis, platformSettings);
 
-            CreatePlatformData(platformIdSimdis, platformStateDataList);
+            CreatePlatformData(platformIdSimdis, platformDataList);
 
             index++;
         }
@@ -97,13 +97,11 @@ public class SimdisExporter : ISimdisExporter
         AddLine("");
     }
 
-    public void CreatePlatformData(int platformId, List<PlatformStateData> platformStateDataList)
+    public void CreatePlatformData(int platformId, List<FlightpathData> flightpathDataList)
     {
-        foreach (var pd in platformStateDataList)
+        foreach (var fd in flightpathDataList)
         {
-            var fd = pd.FlightpathData;
-
-            var time = fd.FlightpathTime;
+            var time = fd.TimeStamp.SimulationTime;
             var lla = fd.PositionLLA;
             var pos = fd.PositionNED;
             var vel = fd.VelocityNED;

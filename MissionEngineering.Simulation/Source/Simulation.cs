@@ -115,9 +115,9 @@ public class Simulation : ISimulation
 
         FinaliseModels(time);
 
-        var platformDataAll = GeneratePlatformStateDataAll();
+        var platformDataAll = GeneratePlatformDataAll();
 
-        DataRecorder.SimulationData.PlatformStateDataAll = platformDataAll;
+        DataRecorder.SimulationData.PlatformDataAll = platformDataAll;
 
         DataRecorder.Finalise(time);
 
@@ -163,11 +163,13 @@ public class Simulation : ISimulation
         }
     }
 
-    public List<PlatformStateData> GeneratePlatformStateDataAll()
+    public List<FlightpathData> GeneratePlatformDataAll()
     {
-        var platformModelStateAll = SimulationModels.First().SimulationModelStateList.Cast<PlatformStateData>().ToList();
+        var platformModel = (PlatformModel)(SimulationModels.First());
 
-        return platformModelStateAll;
+        var platformDataAll = platformModel.FlightpathDataList;
+        
+        return platformDataAll;
     }
 
     public void CreateZipFile()
