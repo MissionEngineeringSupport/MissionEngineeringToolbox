@@ -1,6 +1,4 @@
-﻿using MissionEngineering.Simulation.Core;
-
-namespace MissionEngineering.Simulation;
+﻿namespace MissionEngineering.Simulation;
 
 public static class SimulationSettingsFactory
 {

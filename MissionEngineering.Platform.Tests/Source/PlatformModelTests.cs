@@ -15,9 +15,9 @@ namespace MissionEngineering.Platform.Tests
                 PlatformSettings = new PlatformSettings(),
                 FlightpathData = new FlightpathData()
             };
-            
+
             var platformModel = new PlatformModel()
-            { 
+            {
                 PlatformStateData = platformModelState
             };
 
@@ -33,6 +33,6 @@ namespace MissionEngineering.Platform.Tests
 
             // Assert:
             Assert.IsTrue(platformModel.PlatformStateDataList.Count == 2);
-         }
+        }
     }
 }

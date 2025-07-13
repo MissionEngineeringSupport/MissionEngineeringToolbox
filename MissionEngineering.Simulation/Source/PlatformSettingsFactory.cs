@@ -1,5 +1,4 @@
-﻿using MissionEngineering.MathLibrary;
-using MissionEngineering.Platform;
+﻿using MissionEngineering.Platform;
 
 namespace MissionEngineering.Simulation;
 

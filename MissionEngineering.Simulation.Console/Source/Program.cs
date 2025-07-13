@@ -3,7 +3,7 @@
 namespace MissionEngineering.Simulation;
 
 /// <summary>
-/// 
+///
 /// </summary>
 public class Program
 {

@@ -188,7 +188,6 @@ public static class DoubleExtensionMethods
         return result;
     }
 
-
     public static double ConstrainAngle0To2PI(this double x)
     {
         var result = MathFunctions.ConstrainAngle0To2PI(x);
@@ -209,7 +208,6 @@ public static class DoubleExtensionMethods
 
         return result;
     }
-
 
     public static double ConstrainAnglePlusMinus180(this double x)
     {
