@@ -13,6 +13,8 @@ public class Flightpath
 
     public ISimulationClock SimulationClock { get; set; }
 
+    public FlightpathAutopilot FlightpathAutopilot { get; set; }
+
     public ILLAOrigin LLAOrigin { get; set; }
 
     public Flightpath(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
@@ -45,6 +47,24 @@ public class Flightpath
             VelocityNED = velocityNED,
             Attitude = attitude
         };
+
+        var flightpathDynamics = new FlightpathDynamics();
+
+        var flightpathDemand = new FlightpathDemand()
+        {
+            FlightpathDemandFlightpathId = FlightpathData.PlatformId,
+            FlightpathDemandTime = time,
+            HeadingAngleDemandDeg = FlightpathData.Attitude.HeadingAngleDeg + 90.0,
+            TotalSpeedDemand = FlightpathData.VelocityNED.TotalSpeed + 50,
+            AltitudeDemand = FlightpathData.PositionLLA.Altitude + 1000.0,
+        };
+
+        FlightpathAutopilot = new FlightpathAutopilot(flightpathDynamics)
+        {
+            FlightpathData = FlightpathData
+        };
+
+        FlightpathAutopilot.SetFlightpathDemand(flightpathDemand);
     }
 
     public void Update(double time)
@@ -88,6 +108,8 @@ public class Flightpath
             AttitudeRate = attitudeRate,
         };
 
+        FlightpathAutopilot.FlightpathData = FlightpathData;
+
         FlightpathDataList.Add(FlightpathData);
     }
 
@@ -97,7 +119,8 @@ public class Flightpath
 
     public AccelerationTBA GetAccelerationTBA(double time)
     {
-        // Placeholder for actual acceleration calculation logic
-        return new AccelerationTBA(0.0, 0.0, 0.0);
+        var accelerationTBA = FlightpathAutopilot.GetAccelerationTBA(time);
+
+        return accelerationTBA;
     }
 }
