@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.SimdisLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulation.Console", "MissionEngineering.Simulation.Console\MissionEngineering.Simulation.Console.csproj", "{D916AFBE-1E71-4991-84C7-39CB8327B07D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Scanner", "MissionEngineering.Scanner\MissionEngineering.Scanner.csproj", "{1C777554-A277-4889-AC8B-58E96BE2BCC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{D916AFBE-1E71-4991-84C7-39CB8327B07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D916AFBE-1E71-4991-84C7-39CB8327B07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D916AFBE-1E71-4991-84C7-39CB8327B07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
