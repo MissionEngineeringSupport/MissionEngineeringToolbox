@@ -13,7 +13,6 @@ public static class RadarFunctions
             i.RadarSystemSettings.RFCentreWavelength,
             i.RadarAntennaSettings.AntennaGainTransmit_dB,
             i.RadarAntennaSettings.AntennaGainReceive_dB,
-            i.WaveformSettings.PulseWidth,
             i.WaveformSettings.PulseBandwidth,
             i.WaveformSettings.NumberOfPulses,
             i.RadarSystemSettings.SystemLosses_dB,
@@ -35,15 +34,15 @@ public static class RadarFunctions
         return signalPower;
     }
 
-    public static double CalculateSignalPower(double transmitPower, double rfCenterWavelength, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseWidth, double pulseBandwidth, int numberOfPulses, double systemLosses_dB, double targetRange, double targetRangeRate, double radarCrossSection)
+    public static double CalculateSignalPower(double transmitPower, double rfCenterWavelength, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth, int numberOfPulses, double systemLosses_dB, double targetRange, double targetRangeRate, double radarCrossSection)
     {
         var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
         var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
 
         var systemLosses = systemLosses_dB.DecibelsToPower();
 
-        var numerator = transmitPower * antennaGainTransmit * antennaGainReceive * pulseWidth * numberOfPulses * radarCrossSection;
-        var denominator = Math.Pow(4 * Math.PI, 3) * Math.Pow(targetRange, 4) * rfCenterWavelength * rfCenterWavelength * systemLosses;
+        var numerator = transmitPower * antennaGainTransmit * antennaGainReceive * rfCenterWavelength * rfCenterWavelength *  radarCrossSection * numberOfPulses;
+        var denominator = Math.Pow(4 * Math.PI, 3) * Math.Pow(targetRange, 4) * systemLosses;
 
         var signalPower = numerator / denominator;
 

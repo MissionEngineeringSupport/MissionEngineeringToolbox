@@ -4,6 +4,8 @@ namespace MissionEngineering.Radar;
 
 public class RadarDetectionModelOutputData
 {
+    public double TargetRange { get; set; }
+
     public double SignalPower { get; set; }
 
     public double SignalPower_dB => SignalPower.PowerToDecibels();
