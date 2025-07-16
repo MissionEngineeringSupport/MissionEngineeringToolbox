@@ -19,7 +19,7 @@ public class Flightpath
 
     public Flightpath(ISimulationClock simulationClock, ILLAOrigin llaOrigin)
     {
-         SimulationClock = simulationClock;
+        SimulationClock = simulationClock;
         LLAOrigin = llaOrigin;
 
         FlightpathData = new FlightpathData();

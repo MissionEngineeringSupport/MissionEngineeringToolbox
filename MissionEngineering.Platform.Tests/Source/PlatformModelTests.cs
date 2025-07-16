@@ -12,7 +12,7 @@ namespace MissionEngineering.Platform.Tests
             // Arrange:
             var platformSettings = PlatformSettingsFactory.PlatformSettings_1();
 
-            var simulationClock = new SimulationClock(new DateTimeOrigin {  DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) } );
+            var simulationClock = new SimulationClock(new DateTimeOrigin { DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) });
 
             var llaOrigin = new LLAOrigin()
             {

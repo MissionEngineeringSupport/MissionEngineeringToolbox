@@ -7,7 +7,7 @@ public class RadarDetectionModelInputData
     public RadarAntennaSettings RadarAntennaSettings { get; set; }
 
     public RadarTransmitterSettings RadarTransmitterSettings { get; set; }
-    
+
     public RadarReceiverSettings RadarReceiverSettings { get; set; }
 
     public WaveformSettings WaveformSettings { get; set; }

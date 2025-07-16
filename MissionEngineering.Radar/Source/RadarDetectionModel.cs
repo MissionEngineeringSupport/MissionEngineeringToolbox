@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MissionEngineering.Radar;
+﻿namespace MissionEngineering.Radar;
 
 public class RadarDetectionModel
 {
@@ -20,7 +14,7 @@ public class RadarDetectionModel
     {
         var signalPower = GenerateSignalPower();
         var noisePower = GenerateNoisePower();
-        
+
         var snr = signalPower / noisePower;
 
         OutputData = new RadarDetectionModelOutputData

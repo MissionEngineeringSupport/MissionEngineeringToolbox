@@ -2,7 +2,7 @@
 
 public class WaveformSettings
 {
-    public int WaveformId { get; set; } 
+    public int WaveformId { get; set; }
 
     public string WaveformName { get; set; }
 

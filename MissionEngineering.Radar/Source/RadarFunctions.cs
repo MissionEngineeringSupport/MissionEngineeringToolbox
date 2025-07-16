@@ -39,9 +39,9 @@ public static class RadarFunctions
     {
         var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
         var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
-        
+
         var systemLosses = systemLosses_dB.DecibelsToPower();
-        
+
         var numerator = transmitPower * antennaGainTransmit * antennaGainReceive * pulseWidth * numberOfPulses * radarCrossSection;
         var denominator = Math.Pow(4 * Math.PI, 3) * Math.Pow(targetRange, 4) * rfCenterWavelength * rfCenterWavelength * systemLosses;
 

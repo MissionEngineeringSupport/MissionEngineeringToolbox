@@ -170,14 +170,13 @@ public class Simulation : ISimulation
 
     public List<FlightpathData> GeneratePlatformDataAll()
     {
-        var platformDataAll = new List<FlightpathData>(); 
+        var platformDataAll = new List<FlightpathData>();
 
         foreach (var model in SimulationModels)
         {
             platformDataAll.AddRange(((PlatformModel)model).FlightpathDataList);
-
         }
-        
+
         return platformDataAll;
     }
 

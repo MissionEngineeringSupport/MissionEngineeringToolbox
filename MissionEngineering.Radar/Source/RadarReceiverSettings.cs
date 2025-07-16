@@ -1,6 +1,4 @@
-﻿using MissionEngineering.MathLibrary;
-
-namespace MissionEngineering.Radar;
+﻿namespace MissionEngineering.Radar;
 
 public class RadarReceiverSettings
 {
