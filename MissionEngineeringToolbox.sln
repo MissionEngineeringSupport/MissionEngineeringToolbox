@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Scanner", "MissionEngineering.Scanner\MissionEngineering.Scanner.csproj", "{1C777554-A277-4889-AC8B-58E96BE2BCC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Radar", "MissionEngineering.Radar\MissionEngineering.Radar.csproj", "{84F565B4-0B3A-41D6-A83C-4B2918E055B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Radar.Tests", "MissionEngineering.Radar.Tests\MissionEngineering.Radar.Tests.csproj", "{FAA2F5A7-3CB9-4AE2-BCC3-D6902AAC325C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C777554-A277-4889-AC8B-58E96BE2BCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84F565B4-0B3A-41D6-A83C-4B2918E055B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F565B4-0B3A-41D6-A83C-4B2918E055B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F565B4-0B3A-41D6-A83C-4B2918E055B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F565B4-0B3A-41D6-A83C-4B2918E055B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA2F5A7-3CB9-4AE2-BCC3-D6902AAC325C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA2F5A7-3CB9-4AE2-BCC3-D6902AAC325C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA2F5A7-3CB9-4AE2-BCC3-D6902AAC325C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA2F5A7-3CB9-4AE2-BCC3-D6902AAC325C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

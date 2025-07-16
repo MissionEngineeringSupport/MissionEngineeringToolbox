@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.MathLibrary;
+﻿using System.Collections;
+
+namespace MissionEngineering.MathLibrary;
 
 public partial class Vector
 {
@@ -41,6 +43,11 @@ public partial class Vector
     {
         get => Data[index];
         set => Data = value;
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return Data.GetEnumerator();
     }
 
     public Vector Copy()
