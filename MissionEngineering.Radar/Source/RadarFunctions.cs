@@ -9,16 +9,16 @@ public static class RadarFunctions
         var i = inputData;
 
         var signalPower = CalculateSignalPower(
-            i.RadarTransmitterSettings.TransmitPower,
-            i.RadarSystemSettings.RFCentreWavelength,
+            i.RadarTransmitterSettings.TransmitPower_W,
+            i.RadarSystemSettings.RFCentreWavelength_m,
             i.RadarAntennaSettings.AntennaGainTransmit_dB,
             i.RadarAntennaSettings.AntennaGainReceive_dB,
-            i.WaveformSettings.PulseBandwidth,
-            i.WaveformSettings.NumberOfPulses,
+            i.RadarWaveformSettings.PulseBandwidth_Hz,
+            i.RadarWaveformSettings.NumberOfPulses,
             i.RadarSystemSettings.SystemLosses_dB,
-            i.RadarTargetSettings.TargetRange,
-            i.RadarTargetSettings.TargetRangeRate,
-            i.RadarTargetSettings.RadarCrossSection);
+            i.RadarTargetSettings.TargetRange_m,
+            i.RadarTargetSettings.TargetRangeRate_ms,
+            i.RadarTargetSettings.RadarCrossSection_sqm);
 
         return signalPower;
     }
@@ -28,7 +28,7 @@ public static class RadarFunctions
         var i = inputData;
 
         var signalPower = CalculateNoisePower(
-            i.RadarReceiverSettings.ReceiverBandwidth,
+            i.RadarReceiverSettings.ReceiverBandwidth_Hz,
             i.RadarReceiverSettings.ReceiverNoiseFigure_dB);
 
         return signalPower;
@@ -65,5 +65,19 @@ public static class RadarFunctions
         var noisePower_dB = noisePower.PowerToDecibels();
 
         return noisePower_dB;
+    }
+
+    public static double CalculateMaximumUnambiguousRange(double pulseRepetitionFrequency)
+    {
+        var maximumUnambiguousRange = PhysicalConstants.SpeedOfLight / (2 * pulseRepetitionFrequency);
+
+        return maximumUnambiguousRange;
+    }
+
+    public static double CalculateMaximumUnambiguousRangeRate(double rfWavelength, double pulseRepetitionFrequency)
+    {
+        var maximumUnambiguousRangeRate = rfWavelength * pulseRepetitionFrequency / 2.0;
+
+        return maximumUnambiguousRangeRate;
     }
 }

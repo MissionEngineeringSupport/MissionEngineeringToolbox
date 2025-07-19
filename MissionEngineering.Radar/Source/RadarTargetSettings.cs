@@ -4,13 +4,11 @@ namespace MissionEngineering.Radar;
 
 public class RadarTargetSettings
 {
-    public double TargetRange { get; set; }
+    public double TargetRange_m { get; set; }
 
-    public double TargetRangeRate { get; set; }
+    public double TargetRangeRate_ms { get; set; }
 
-    public double RadarCrossSection { get; set; }
+    public double RadarCrossSection_sqm { get; set; }
 
-    public double RadarCrossSection_dB => RadarCrossSection.PowerToDecibels();
-
-    public double RadarCrossSection_dBm => RadarCrossSection_dB + 30.0;
+    public double RadarCrossSection_dBsm => RadarCrossSection_sqm.PowerToDecibels();
 }
