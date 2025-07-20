@@ -5,7 +5,7 @@ namespace MissionEngineering.Simulation;
 
 public class Program
 {
-    public static string OutputFolder {  get; set; }
+    public static string OutputFolder { get; set; }
 
     public static string ScenarioName { get; set; }
 
@@ -47,7 +47,7 @@ public class Program
 
     private static void CreateLog()
     {
-        var logFile = Path.Combine(OutputFolder, @"{ScenarioName}.log");
+        var logFile = Path.Combine(OutputFolder, $@"{ScenarioName}_RadarDetectionModel.log");
 
         LogUtilities.CreateLogger(logFile);
     }
@@ -55,7 +55,7 @@ public class Program
     private static void CreateDetectionModelHarness()
     {
         RadarDetectionModelHarness = new RadarDetectionModelHarness()
-        { 
+        {
             InputData = RadarDetectionModelInputData,
             TargetRangeStart = 10000.0,
             TargetRangeEnd = 200000.0,
@@ -70,17 +70,13 @@ public class Program
 
     private static void OutputData()
     {
-        var outputFolder = @"C:\Temp\MissionEngineeringToolbox\RadarDetectionModel\";
-
-        var inputDataFileName = outputFolder + @"Radar_Test_1_DetectionModel_InputData.json";
+        var inputDataFileName = $"{OutputFolder}{ScenarioName}_RadarDetectionModel_InputData.json";
+        var outputDataFileName = $"{OutputFolder}{ScenarioName}_RadarDetectionModel_OutputData.csv";
+        var texFileName = $"{OutputFolder}{ScenarioName}_RadarDetectionModel_Report.tex";
 
         RadarDetectionModelInputData.WriteToJsonFile(inputDataFileName);
-
-        var outputDataFileName = outputFolder + @"Radar_Test_1_DetectionModel_OutputData.csv";
-
         RadarDetectionModelHarness.OutputDataList.WriteToCsvFile(outputDataFileName);
-
-        var texFileName = outputFolder + @"GenerateJSON.tex";
+        RadarDetectionModelHarness.GenerateTexFile(texFileName, inputDataFileName, outputDataFileName);
 
         LaTexUtilities.ConvertTexToPdf(texFileName);
     }

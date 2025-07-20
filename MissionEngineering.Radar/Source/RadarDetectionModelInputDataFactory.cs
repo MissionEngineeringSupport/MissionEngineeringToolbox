@@ -30,9 +30,9 @@ public static class RadarDetectionModelInputDataFactory
                 WaveformId = 1,
                 WaveformName = "Waveform_Test_1",
                 PulseCenterFrequency_Hz = rfCenterFrequency_Hz,
-                PulseWidth_s = 10.0e-6,
+                PulseWidth_s = 1.0e-6,
                 PulseBandwidth_Hz = pulseBandwidth_Hz,
-                PulseRepetitionFrequency_Hz = 1500.0,
+                PulseRepetitionFrequency_Hz = 150000.0,
                 NumberOfPulses = 1024
             },
             RadarReceiverSettings = new RadarReceiverSettings()

@@ -19,9 +19,9 @@ public class RadarDetectionModel
 
         OutputData = new RadarDetectionModelOutputData
         {
-            TargetRange = InputData.RadarTargetSettings.TargetRange_m,
-            SignalPower = signalPower,
-            NoisePower = noisePower,
+            TargetRange_m = InputData.RadarTargetSettings.TargetRange_m,
+            SignalPower_W = signalPower,
+            NoisePower_W = noisePower,
             SNR = snr
         };
     }
