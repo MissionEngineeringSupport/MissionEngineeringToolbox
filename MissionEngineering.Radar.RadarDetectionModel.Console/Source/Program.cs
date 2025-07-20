@@ -5,6 +5,8 @@ namespace MissionEngineering.Simulation;
 
 public class Program
 {
+    public static string InputFileName { get; set; }
+
     public static string OutputFolder { get; set; }
 
     public static string ScenarioName { get; set; }
@@ -13,16 +15,20 @@ public class Program
 
     public static RadarDetectionModelInputData RadarDetectionModelInputData { get; set; }
 
-    public static void Main()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="inputFileName"></param>
+    public static void Main(string inputFileName)
     {
+        InputFileName = inputFileName;
+
         Run();
     }
 
     private static void Run()
     {
         GenerateDetectionModelSettings();
-
-        SetOutputFolder();
 
         CreateLog();
 
@@ -35,14 +41,31 @@ public class Program
 
     private static void GenerateDetectionModelSettings()
     {
+        if (string.IsNullOrEmpty(InputFileName))
+        {
+            GenerateDetectionModelSettingsDefault();
+        }
+        else
+        {
+            GenerateDetectionModelSettingsFromFile();
+        }
+    }
+    private static void GenerateDetectionModelSettingsDefault()
+    {
         RadarDetectionModelInputData = RadarDetectionModelInputDataFactory.RadarDetectionModelInputData_Test_1();
 
         ScenarioName = RadarDetectionModelInputData.RadarSystemSettings.RadarSystemName;
+
+        OutputFolder = Environment.CurrentDirectory + @"\";
     }
 
-    private static void SetOutputFolder()
+    private static void GenerateDetectionModelSettingsFromFile()
     {
-        OutputFolder = @"C:\Temp\MissionEngineeringToolbox\RadarDetectionModel\";
+        RadarDetectionModelInputData = JsonUtilities.ReadFromJsonFile<RadarDetectionModelInputData>(InputFileName);
+
+        ScenarioName = Path.GetFileNameWithoutExtension(InputFileName);
+
+        OutputFolder = Path.GetDirectoryName(InputFileName) + @"\";
     }
 
     private static void CreateLog()

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MissionEngineering.Radar.RadarDetectionModel.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "--input-file-name \"C:\\Temp\\MissionEngineeringToolbox\\RadarDetectionModel\\Radar_Test_1.json\""
+    }
+  }
+}
