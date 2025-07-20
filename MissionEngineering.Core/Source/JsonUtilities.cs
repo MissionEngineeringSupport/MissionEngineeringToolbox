@@ -31,7 +31,7 @@ public static class JsonUtilities
 
     public static T ReadFromJsonFile<T>(string fileName)
     {
-        LogUtilities.LogInformation($"Reading  Json File : {fileName}");
+        LogUtilities.LogInformation($"Reading Json File : {fileName}");
 
         var jsonString = File.ReadAllText(fileName);
 

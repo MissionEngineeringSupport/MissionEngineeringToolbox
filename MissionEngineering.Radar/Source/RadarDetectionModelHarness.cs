@@ -1,9 +1,11 @@
-﻿using MissionEngineering.MathLibrary;
+﻿using MissionEngineering.Core;
+using MissionEngineering.MathLibrary;
 using System;
 using System.Drawing;
 using System.Globalization;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Xml.Linq;
 using static System.Collections.Specialized.BitVector32;
@@ -144,6 +146,9 @@ public class RadarDetectionModelHarness
         lines.AppendLine(@"\end{tikzpicture}");
         lines.AppendLine(@"");
         lines.AppendLine(@"\end{document}");
+
+        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}");
+        LogUtilities.LogInformation($"");
 
         File.WriteAllText(texFilePath, lines.ToString());
     }
