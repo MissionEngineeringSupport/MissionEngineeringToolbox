@@ -42,8 +42,6 @@ public static class RadarDetectionModelInputDataFactory
             },
             RadarTargetSettings = new RadarTargetSettings()
             {
-                TargetRange_m = 1000.0,
-                TargetRangeRate_ms = 300.0,
                 RadarCrossSection_sqm = 10.0
             }
         };

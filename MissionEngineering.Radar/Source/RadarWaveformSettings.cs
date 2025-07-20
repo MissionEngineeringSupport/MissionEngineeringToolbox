@@ -46,6 +46,8 @@ public class RadarWaveformSettings
 
     public double PulseBandwidth_MHz => PulseBandwidth_Hz / 1_000_000.0;
 
+    public double PulseCompressionRatio => PulseWidth_s * PulseBandwidth_Hz;
+
     public int NumberOfPulses { get; set; }
 
     public double PulseBurstDuration_s => PulseRepetitionInterval_s * NumberOfPulses;
@@ -62,7 +64,11 @@ public class RadarWaveformSettings
 
     public double MaximumUnambiguousRangeRate_kts => MaximumUnambiguousRangeRate_ms.MetersPerSecondToKnots();
 
-    public double RangeCellWidth_m => 150.0 / PulseBandwidth_MHz;
+    public double PulseWidthUncompressed_m => RadarFunctions.CalculateMaximumUnambiguousRange(PulseWidth_s);
+
+    public double PulseWidthCompressed_m => PulseWidthUncompressed_m / PulseCompressionRatio;
+
+    public double RangeCellWidth_m => PulseWidthCompressed_m;
 
     public double DopplerCellWidth_ms => MaximumUnambiguousRangeRate_ms / NumberOfPulses;
 

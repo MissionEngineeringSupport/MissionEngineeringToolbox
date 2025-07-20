@@ -46,7 +46,7 @@ public class RadarDetectionModelHarness
 
         foreach (double range in TargetRanges)
         {
-            InputData.RadarTargetSettings.TargetRange_m = range;
+            model.TargetRange_m = range;
 
             model.Run();
 

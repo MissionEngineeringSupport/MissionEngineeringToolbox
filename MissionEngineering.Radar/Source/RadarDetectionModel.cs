@@ -6,6 +6,10 @@ public class RadarDetectionModel
 
     public RadarDetectionModelOutputData OutputData { get; set; }
 
+    public double TargetRange_m { get; set; }
+
+    public double TargetRangeRate_ms { get; set; }
+
     public RadarDetectionModel()
     {
     }
@@ -19,7 +23,7 @@ public class RadarDetectionModel
 
         OutputData = new RadarDetectionModelOutputData
         {
-            TargetRange_m = InputData.RadarTargetSettings.TargetRange_m,
+            TargetRange_m = TargetRange_m,
             SignalPower_W = signalPower,
             NoisePower_W = noisePower,
             SNR = snr
@@ -28,7 +32,7 @@ public class RadarDetectionModel
 
     private double GenerateSignalPower()
     {
-        var signalPower = RadarFunctions.CalculateSignalPower(InputData);
+        var signalPower = RadarFunctions.CalculateSignalPower(InputData, TargetRange_m, TargetRangeRate_ms);
 
         return signalPower;
     }
