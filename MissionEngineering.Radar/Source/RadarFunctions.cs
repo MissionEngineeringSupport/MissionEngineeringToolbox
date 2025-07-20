@@ -68,9 +68,9 @@ public static class RadarFunctions
         return noisePower_dB;
     }
 
-    public static double CalculateMaximumUnambiguousRange(double pulseRepetitionFrequency)
+    public static double CalculateRangeTwoWay(double pulseRepetitionInterval)
     {
-        var maximumUnambiguousRange = PhysicalConstants.SpeedOfLight / (2 * pulseRepetitionFrequency);
+        var maximumUnambiguousRange = PhysicalConstants.SpeedOfLight * pulseRepetitionInterval / 2.0;
 
         return maximumUnambiguousRange;
     }
