@@ -18,6 +18,7 @@ public class RadarDetectionModel
     {
         var signalPower = GenerateSignalPower();
         var noisePower = GenerateNoisePower();
+        var atmosphericLoss_dB = GenerateAtmosphericLoss_dB();
 
         var snr = signalPower / noisePower;
 
@@ -26,6 +27,7 @@ public class RadarDetectionModel
             TargetRange_m = TargetRange_m,
             SignalPower_W = signalPower,
             NoisePower_W = noisePower,
+            AtmosphericLoss_dB = atmosphericLoss_dB,
             SNR = snr
         };
     }
@@ -42,5 +44,12 @@ public class RadarDetectionModel
         var noisePower = RadarFunctions.CalculateNoisePower(InputData);
 
         return noisePower;
+    }
+
+    private double GenerateAtmosphericLoss_dB()
+    {
+        var atmosphericLoss_dB = RadarFunctions.CalculateAtmosphericLoss_dB(InputData, TargetRange_m);
+
+        return atmosphericLoss_dB;
     }
 }

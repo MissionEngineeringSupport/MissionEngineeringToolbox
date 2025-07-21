@@ -9,6 +9,8 @@ public class Program
 {
     public static string InputFileName { get; set; }
 
+    public static string InputFileNameFinal { get; set; }
+
     public static string InputFilePath { get; set; }
 
     public static string LogFile { get; set; }
@@ -73,11 +75,7 @@ public class Program
         WriteFinished();
     }
 
-    private static void WriteFinished()
-    {
-        LogUtilities.LogInformation(@"Radar Detection Model Harness. Done.");
-        LogUtilities.LogInformation(@"");
-    }
+
 
     private static void GenerateDetectionModelSettings()
     {
@@ -98,12 +96,14 @@ public class Program
 
         ScenarioName = RadarDetectionModelHarnessInputData.ScenarioName;
 
-        InputFileName = ScenarioName + "_RadarDetectionModelHarness_InputData.json";
-        InputFilePath = Path.Combine(OutputFolder, InputFileName);
+        InputFileNameFinal = ScenarioName + "_RadarDetectionModelHarness_InputData.json";
+        InputFilePath = Path.Combine(OutputFolder, InputFileNameFinal);
     }
 
     private static void GenerateDetectionModelSettingsFromFile()
     {
+        InputFileNameFinal = InputFileName;
+
         InputFilePath = InputFileName;
 
         ScenarioName = Path.GetFileNameWithoutExtension(InputFileName);
@@ -129,17 +129,21 @@ public class Program
 
     private static void WriteSettings()
     {
-        LogUtilities.LogInformation(@"Radar Detection Model Harness...");
+        LogUtilities.LogInformation(@"Running Radar Detection Model Harness...");
         LogUtilities.LogInformation(@"");
-        LogUtilities.LogInformation(@"    Input Settings. Start.");
+        LogUtilities.LogInformation(@"    Displaying Command Line Data...");
         LogUtilities.LogInformation($"        Is Generate Example : {IsGenerateExample}");
         LogUtilities.LogInformation($"        Input File Name     : {InputFileName}");
+        LogUtilities.LogInformation(@"    Displaying Command Line Data. Done.");
+        LogUtilities.LogInformation(@"");
+        LogUtilities.LogInformation(@"    Displaying Program Settings...");
+        LogUtilities.LogInformation($"        Scenario Name       : {ScenarioName}");
         LogUtilities.LogInformation($"        Current Directory   : {Environment.CurrentDirectory}");
         LogUtilities.LogInformation($"        Output Folder       : {OutputFolder}");
-        LogUtilities.LogInformation($"        Scenario Name       : {ScenarioName}");
+        LogUtilities.LogInformation($"        Input File Name     : {InputFileNameFinal}");
         LogUtilities.LogInformation($"        Input File Path     : {InputFilePath}");
         LogUtilities.LogInformation($"        Log File            : {LogFile}");
-        LogUtilities.LogInformation(@"    Input Settings. End.");
+        LogUtilities.LogInformation(@"    Displaying Settings. Done.");
         LogUtilities.LogInformation(@"");
     }
     private static void ReadInputFile()
@@ -175,5 +179,11 @@ public class Program
     private static void OutputData()
     {
         RadarDetectionModelHarness.OutputData();
+    }
+
+    private static void WriteFinished()
+    {
+        LogUtilities.LogInformation(@"Running Radar Detection Model Harness. Done.");
+        LogUtilities.LogInformation(@"");
     }
 }

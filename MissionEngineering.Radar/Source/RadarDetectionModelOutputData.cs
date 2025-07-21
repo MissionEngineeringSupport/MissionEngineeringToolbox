@@ -22,6 +22,8 @@ public class RadarDetectionModelOutputData
 
     public double NoisePower_dBm => NoisePower_dB + 30.0;
 
+    public double AtmosphericLoss_dB { get; set; }
+
     public double SNR { get; set; }
 
     public double SNR_dB => SNR.PowerToDecibels();

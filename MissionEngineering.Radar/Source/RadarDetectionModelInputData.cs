@@ -13,4 +13,6 @@ public class RadarDetectionModelInputData
     public RadarWaveformSettings RadarWaveformSettings { get; set; }
 
     public RadarTargetSettings RadarTargetSettings { get; set; }
+
+    public RadarEnvironmentSettings RadarEnvironmentSettings { get; set; }
 }

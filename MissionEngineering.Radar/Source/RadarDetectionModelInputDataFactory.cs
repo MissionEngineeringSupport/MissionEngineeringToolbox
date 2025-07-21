@@ -43,6 +43,10 @@ public static class RadarDetectionModelInputDataFactory
             RadarTargetSettings = new RadarTargetSettings()
             {
                 RadarCrossSection_sqm = 10.0
+            },
+            RadarEnvironmentSettings = new RadarEnvironmentSettings()
+            { 
+                AtmophericLoss_dB_per_km = 0.01
             }
         };
 
@@ -60,6 +64,8 @@ public static class RadarDetectionModelInputDataFactory
         inputData.RadarWaveformSettings.WaveformName = "Waveform_Test_2";
 
         inputData.RadarWaveformSettings.PulseWidth_s = 2.0e-6;
+
+        inputData.RadarEnvironmentSettings.AtmophericLoss_dB_per_km = 0.1;
 
         return inputData;
     }
