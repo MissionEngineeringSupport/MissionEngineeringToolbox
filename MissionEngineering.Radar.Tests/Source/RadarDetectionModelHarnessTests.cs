@@ -9,20 +9,17 @@ public sealed class RadarDetectionModelHarnessTests
     public void Update_WithInitialiseCalled_ExpectSuccess()
     {
         // Arrange:
-        var inputData = RadarDetectionModelInputDataFactory.RadarDetectionModelInputData_Test_1();
+        var inputData = RadarDetectionModelHarnessInputDataFactory.Scenario_1();
 
         var radarDetectionModelHarness = new RadarDetectionModelHarness()
         {
             InputData = inputData,
-            TargetRangeStart = 10000.0,
-            TargetRangeEnd = 200000.0,
-            TargetRangeStep = 1000.0
         };
 
         // Act:
         radarDetectionModelHarness.Run();
 
         // Assert:
-        Assert.AreEqual(radarDetectionModelHarness.TargetRanges.NumberOfElements, radarDetectionModelHarness.OutputDataList.Count);
+        Assert.AreEqual(radarDetectionModelHarness.TargetRanges.NumberOfElements, radarDetectionModelHarness.OutputDataList[0].Count);
     }
 }

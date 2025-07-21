@@ -1,50 +1,59 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.MathLibrary;
-using System;
-using System.Drawing;
-using System.Globalization;
-using System.Reflection.Emit;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
+using Serilog.Core;
 using System.Text;
-using System.Xml.Linq;
-using static System.Collections.Specialized.BitVector32;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MissionEngineering.Radar;
 
 public class RadarDetectionModelHarness
 {
-    public RadarDetectionModelInputData InputData { get; set; }
+    public RadarDetectionModelHarnessInputData InputData { get; set; }
 
-    public List<RadarDetectionModelOutputData> OutputDataList { get; set; }
-
-    public double TargetRangeStart { get; set; }
-
-    public double TargetRangeEnd { get; set; }
-
-    public double TargetRangeStep { get; set; }
+    public List<List<RadarDetectionModelOutputData>> OutputDataList { get; set; }
 
     public Vector TargetRanges { get; set; }
 
+    public int NumberOfTestCases => InputData.InputDataList.Count;
+
+    public string OutputFolder { get; set; }
+
+    public string InputFilePath { get; set; }
+
+    public string ScenarioName => InputData.ScenarioName;
+
     public RadarDetectionModelHarness()
     {
-        OutputDataList = new List<RadarDetectionModelOutputData>();
-        TargetRangeStart = 0.0;
-        TargetRangeEnd = 10000.0;
-        TargetRangeStep = 100.0;
     }
 
     public void Run()
     {
-        TargetRanges = Vector.LinearlySpacedVector(TargetRangeStart, TargetRangeEnd, TargetRangeStep);
+        LogUtilities.LogInformation(@"    Running Test Cases...");
 
-        OutputDataList = new List<RadarDetectionModelOutputData>(TargetRanges.NumberOfElements);
+        TargetRanges = Vector.LinearlySpacedVector(InputData.TargetRangeData.TargetRangeStart, InputData.TargetRangeData.TargetRangeEnd, InputData.TargetRangeData.TargetRangeStep);
 
+        OutputDataList = new List<List<RadarDetectionModelOutputData>>(NumberOfTestCases);
+
+        foreach (var inputData in InputData.InputDataList)
+        {
+            var outputDataList = RunSingleTestCase(inputData);
+
+            OutputDataList.Add(outputDataList);
+        }
+
+        LogUtilities.LogInformation(@"    Running Test Cases. Done.");
+        LogUtilities.LogInformation(@"");
+    }
+
+    public List<RadarDetectionModelOutputData> RunSingleTestCase(RadarDetectionModelInputData inputData)
+    {
         var model = new RadarDetectionModel
         {
-            InputData = InputData
+            InputData = inputData
         };
+
+        LogUtilities.LogInformation($"        Test Case: {inputData.RadarSystemSettings.RadarSystemName}");
+
+        var outputDataList = new List<RadarDetectionModelOutputData>(TargetRanges.NumberOfElements);
 
         foreach (double range in TargetRanges)
         {
@@ -52,11 +61,63 @@ public class RadarDetectionModelHarness
 
             model.Run();
 
-            OutputDataList.Add(model.OutputData);
+            outputDataList.Add(model.OutputData);
         }
+
+        return outputDataList;
     }
 
-    public void GenerateTexFile(string texFilePath, string jsonFilePath, string csvFilePath)
+    public void OutputData()
+    {
+        OutputDataAll();
+
+        LogUtilities.LogInformation(@"    Outputting Test Cases...");
+
+        for (int i = 0; i < OutputDataList.Count; i++)
+        {
+            var inputData = InputData.InputDataList[i];
+            var outputDataList = OutputDataList[i];
+
+            OutputDataSingleTestCase(inputData, outputDataList);
+        }
+
+
+        LogUtilities.LogInformation(@"    Outputting Test Cases. Done.");
+        LogUtilities.LogInformation(@"");
+    }
+
+    public void OutputDataAll()
+    {
+        LogUtilities.LogInformation($"    Outputting Combined Data...");
+
+        InputData.WriteToJsonFile(InputFilePath, 12);
+
+        LogUtilities.LogInformation($"    Outputting Combined Data. Done.");
+        LogUtilities.LogInformation($"");
+    }
+
+    public void OutputDataSingleTestCase(RadarDetectionModelInputData inputData, List<RadarDetectionModelOutputData> outputDataList)
+    {
+        var padding = 12;
+
+        LogUtilities.LogInformation($"        Test Case: {inputData.RadarSystemSettings.RadarSystemName}...");
+
+        var radarName = inputData.RadarSystemSettings.RadarSystemName;
+
+        var inputDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_InputData.json";
+        var outputDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_OutputData.csv";
+        var texFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_Report.tex";
+
+        inputData.WriteToJsonFile(inputDataFileName, padding);
+        outputDataList.WriteToCsvFile(outputDataFileName, padding);
+        GenerateTexFile(texFileName, inputDataFileName, outputDataFileName, padding);
+
+        LaTexUtilities.ConvertTexToPdf(texFileName, padding);
+
+        LogUtilities.LogInformation($"        Test Case: {inputData.RadarSystemSettings.RadarSystemName}. Done.");
+    }
+
+    public void GenerateTexFile(string texFilePath, string jsonFilePath, string csvFilePath, int padding = 0)
     {
         var jsonFileName = Path.GetFileName(jsonFilePath);
         var csvFileName = Path.GetFileName(csvFilePath);
@@ -147,8 +208,7 @@ public class RadarDetectionModelHarness
         lines.AppendLine(@"");
         lines.AppendLine(@"\end{document}");
 
-        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}");
-        LogUtilities.LogInformation($"");
+        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}", padding);
 
         File.WriteAllText(texFilePath, lines.ToString());
     }

@@ -4,19 +4,14 @@ namespace MissionEngineering.Core;
 
 public static class LaTexUtilities
 {
-    public static void ConvertTexToPdf(string texFile)
+    public static void ConvertTexToPdf(string texFile, int padding = 0)
     {
-        LogUtilities.LogInformation("Converting Tex to PDF. Starting...");
-        LogUtilities.LogInformation("");
-
         var path = Path.GetDirectoryName(texFile);
         var fileNameTex = Path.GetFileName(texFile);
 
         var pdfFile = texFile.Replace(".tex", ".pdf");
 
-        LogUtilities.LogInformation($"     Input Tex file = {texFile}");
-        LogUtilities.LogInformation($"    Output Pdf file = {pdfFile}");
-        LogUtilities.LogInformation("");
+        LogUtilities.LogInformation($"Writing Pdf  file : {pdfFile}", padding);
 
         Process process = new Process();
 
@@ -27,8 +22,5 @@ public static class LaTexUtilities
         process.Start();
 
         process.WaitForExit();
-
-        LogUtilities.LogInformation("Converting Tex to PDF. Done.");
-        LogUtilities.LogInformation("");
     }
 }

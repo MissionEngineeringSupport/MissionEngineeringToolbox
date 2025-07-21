@@ -23,7 +23,7 @@ public class Program
 
     public static RadarDetectionModelHarness RadarDetectionModelHarness { get; set; }
 
-    public static RadarDetectionModelInputData RadarDetectionModelInputData { get; set; }
+    public static RadarDetectionModelHarnessInputData RadarDetectionModelHarnessInputData { get; set; }
 
     /// <summary>
     /// Radar Detection Model Console Application
@@ -69,6 +69,14 @@ public class Program
         RunDetectionModel();
 
         OutputData();
+
+        WriteFinished();
+    }
+
+    private static void WriteFinished()
+    {
+        LogUtilities.LogInformation(@"Radar Detection Model Harness. Done.");
+        LogUtilities.LogInformation(@"");
     }
 
     private static void GenerateDetectionModelSettings()
@@ -84,13 +92,13 @@ public class Program
     }
     private static void GenerateDetectionModelSettingsExample()
     {
-        RadarDetectionModelInputData = RadarDetectionModelInputDataFactory.RadarDetectionModelInputData_Test_1();
-
-        ScenarioName = RadarDetectionModelInputData.RadarSystemSettings.RadarSystemName;
+        RadarDetectionModelHarnessInputData = RadarDetectionModelHarnessInputDataFactory.Scenario_1();
 
         OutputFolder = Environment.CurrentDirectory;
 
-        InputFileName = ScenarioName + "_RadarDetectionModel_InputData.json";
+        ScenarioName = RadarDetectionModelHarnessInputData.ScenarioName;
+
+        InputFileName = ScenarioName + "_RadarDetectionModelHarness_InputData.json";
         InputFilePath = Path.Combine(OutputFolder, InputFileName);
     }
 
@@ -99,6 +107,9 @@ public class Program
         InputFilePath = InputFileName;
 
         ScenarioName = Path.GetFileNameWithoutExtension(InputFileName);
+
+        ScenarioName = ScenarioName.Replace("_RadarDetectionModelHarness", "");
+        ScenarioName = ScenarioName.Replace("_InputData", "");
 
         OutputFolder = Path.GetDirectoryName(InputFileName);
 
@@ -111,20 +122,24 @@ public class Program
 
     private static void CreateLog()
     {
-        LogFile = Path.Combine(OutputFolder, $@"{ScenarioName}_RadarDetectionModel.log");
+        LogFile = Path.Combine(OutputFolder, $@"{ScenarioName}_RadarDetectionModelHarness.log");
 
         LogUtilities.CreateLogger(LogFile);
     }
 
     private static void WriteSettings()
     {
-        LogUtilities.LogInformation(@"Radar Detection Model Settings.");
-        LogUtilities.LogInformation($"    Is Generate Example : {IsGenerateExample}");
-        LogUtilities.LogInformation($"    Input File Name     : {InputFileName}");
-        LogUtilities.LogInformation($"    Current Directory   : {Environment.CurrentDirectory}");
-        LogUtilities.LogInformation($"    Output Folder       : {OutputFolder}");
-        LogUtilities.LogInformation($"    Input File Path     : {InputFilePath}");
-        LogUtilities.LogInformation($"    Log File            : {LogFile}");
+        LogUtilities.LogInformation(@"Radar Detection Model Harness...");
+        LogUtilities.LogInformation(@"");
+        LogUtilities.LogInformation(@"    Input Settings. Start.");
+        LogUtilities.LogInformation($"        Is Generate Example : {IsGenerateExample}");
+        LogUtilities.LogInformation($"        Input File Name     : {InputFileName}");
+        LogUtilities.LogInformation($"        Current Directory   : {Environment.CurrentDirectory}");
+        LogUtilities.LogInformation($"        Output Folder       : {OutputFolder}");
+        LogUtilities.LogInformation($"        Scenario Name       : {ScenarioName}");
+        LogUtilities.LogInformation($"        Input File Path     : {InputFilePath}");
+        LogUtilities.LogInformation($"        Log File            : {LogFile}");
+        LogUtilities.LogInformation(@"    Input Settings. End.");
         LogUtilities.LogInformation(@"");
     }
     private static void ReadInputFile()
@@ -133,12 +148,12 @@ public class Program
         {
             if (!File.Exists(InputFilePath))
             {
-                LogUtilities.LogInformation($"Input file not found: {InputFilePath}");
+                LogUtilities.LogInformation($"    Input file not found: {InputFilePath}");
                 IsValidRun = false;
                 return;
             }
 
-            RadarDetectionModelInputData = JsonUtilities.ReadFromJsonFile<RadarDetectionModelInputData>(InputFilePath);
+            RadarDetectionModelHarnessInputData = JsonUtilities.ReadFromJsonFile<RadarDetectionModelHarnessInputData>(InputFilePath);
         }
     }
 
@@ -146,10 +161,9 @@ public class Program
     {
         RadarDetectionModelHarness = new RadarDetectionModelHarness()
         {
-            InputData = RadarDetectionModelInputData,
-            TargetRangeStart = 10000.0,
-            TargetRangeEnd = 200000.0,
-            TargetRangeStep = 1000.0
+            InputFilePath = InputFilePath,
+            OutputFolder = OutputFolder,
+            InputData = RadarDetectionModelHarnessInputData,
         };
     }
 
@@ -160,14 +174,6 @@ public class Program
 
     private static void OutputData()
     {
-        var inputDataFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModel_InputData.json";
-        var outputDataFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModel_OutputData.csv";
-        var texFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModel_Report.tex";
-
-        RadarDetectionModelInputData.WriteToJsonFile(inputDataFileName);
-        RadarDetectionModelHarness.OutputDataList.WriteToCsvFile(outputDataFileName);
-        RadarDetectionModelHarness.GenerateTexFile(texFileName, inputDataFileName, outputDataFileName);
-
-        LaTexUtilities.ConvertTexToPdf(texFileName);
+        RadarDetectionModelHarness.OutputData();
     }
 }

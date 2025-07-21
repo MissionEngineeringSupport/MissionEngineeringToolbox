@@ -17,8 +17,12 @@ public class LogUtilities
         Log.CloseAndFlush();
     }
 
-    public static void LogInformation(string message, params object?[]? propertyValues)
+    public static void LogInformation(string message, int padding = 0, params object?[]? propertyValues)
     {
-        Log.Information(message, propertyValues);
+        var paddingString = new string(' ', padding);
+
+        var messageFull = paddingString + message;
+
+        Log.Information(messageFull, propertyValues);
     }
 }

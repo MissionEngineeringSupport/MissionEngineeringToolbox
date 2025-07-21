@@ -2,7 +2,7 @@
 
 public static class RadarDetectionModelInputDataFactory
 {
-    public static RadarDetectionModelInputData RadarDetectionModelInputData_Test_1()
+    public static RadarDetectionModelInputData Radar_Test_1()
     {
         var rfCenterFrequency_Hz = 9.5e9;
         var pulseBandwidth_Hz = 5.0e6;
@@ -45,6 +45,21 @@ public static class RadarDetectionModelInputDataFactory
                 RadarCrossSection_sqm = 10.0
             }
         };
+
+        return inputData;
+    }
+
+    public static RadarDetectionModelInputData Radar_Test_2()
+    {
+        var inputData = Radar_Test_1();
+
+        inputData.RadarSystemSettings.RadarSystemName = "Radar_Test_2";
+
+        inputData.RadarTransmitterSettings.TransmitPower_W = 20000.0;
+
+        inputData.RadarWaveformSettings.WaveformName = "Waveform_Test_2";
+
+        inputData.RadarWaveformSettings.PulseWidth_s = 2.0e-6;
 
         return inputData;
     }

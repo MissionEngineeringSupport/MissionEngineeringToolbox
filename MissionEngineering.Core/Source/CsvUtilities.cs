@@ -6,9 +6,9 @@ namespace MissionEngineering.Core;
 
 public static class CsvUtilities
 {
-    public static void WriteToCsvFile<T>(this IEnumerable<T> records, string fileName)
+    public static void WriteToCsvFile<T>(this IEnumerable<T> records, string fileName, int padding = 0)
     {
-        LogUtilities.LogInformation($"Writing Csv  File : {fileName}");
+        LogUtilities.LogInformation($"Writing Csv  File : {fileName}", padding);
 
         using var writer = new StreamWriter(fileName);
 

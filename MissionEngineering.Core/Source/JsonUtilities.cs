@@ -20,9 +20,9 @@ public static class JsonUtilities
         return obj;
     }
 
-    public static void WriteToJsonFile<T>(this T obj, string fileName)
+    public static void WriteToJsonFile<T>(this T obj, string fileName, int padding = 0)
     {
-        LogUtilities.LogInformation($"Writing Json File : {fileName}");
+        LogUtilities.LogInformation($"Writing Json File : {fileName}", padding);
 
         string jsonString = obj.ConvertToJsonString();
 
