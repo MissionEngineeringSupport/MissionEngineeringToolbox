@@ -69,8 +69,6 @@ public class RadarDetectionModelHarness
 
     public void OutputData()
     {
-        OutputDataAll();
-
         LogUtilities.LogInformation(@"    Outputting Test Cases...");
 
         for (int i = 0; i < OutputDataList.Count; i++)
@@ -81,19 +79,10 @@ public class RadarDetectionModelHarness
             OutputDataSingleTestCase(inputData, outputDataList);
         }
 
-
         LogUtilities.LogInformation(@"    Outputting Test Cases. Done.");
         LogUtilities.LogInformation(@"");
-    }
 
-    public void OutputDataAll()
-    {
-        LogUtilities.LogInformation($"    Outputting Combined Data...");
-
-        InputData.WriteToJsonFile(InputFilePath, 12);
-
-        LogUtilities.LogInformation($"    Outputting Combined Data. Done.");
-        LogUtilities.LogInformation($"");
+        OutputDataCombined(InputData);
     }
 
     public void OutputDataSingleTestCase(RadarDetectionModelInputData inputData, List<RadarDetectionModelOutputData> outputDataList)
@@ -104,112 +93,53 @@ public class RadarDetectionModelHarness
 
         var radarName = inputData.RadarSystemSettings.RadarSystemName;
 
-        var inputDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_InputData.json";
-        var outputDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_OutputData.csv";
+        var jsonDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_InputData.json";
+        var csvDataFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_OutputData.csv";
         var texFileName = $@"{OutputFolder}\{ScenarioName}_{radarName}_RadarDetectionModel_Report.tex";
 
-        inputData.WriteToJsonFile(inputDataFileName, padding);
-        outputDataList.WriteToCsvFile(outputDataFileName, padding);
-        GenerateTexFile(texFileName, inputDataFileName, outputDataFileName, padding);
+        inputData.WriteToJsonFile(jsonDataFileName, padding);
+        outputDataList.WriteToCsvFile(csvDataFileName, padding);
+
+        GenerateTexFileSingleTestCase(inputData, texFileName, jsonDataFileName, csvDataFileName, padding);
 
         LaTexUtilities.ConvertTexToPdf(texFileName, padding);
 
         LogUtilities.LogInformation($"        Test Case: {inputData.RadarSystemSettings.RadarSystemName}. Done.");
     }
 
-    public void GenerateTexFile(string texFilePath, string jsonFilePath, string csvFilePath, int padding = 0)
+    public void GenerateTexFileSingleTestCase(RadarDetectionModelInputData inputData, string texFilePath, string jsonFilePath, string csvFilePath, int padding = 0)
     {
-        var jsonFileName = Path.GetFileName(jsonFilePath);
-        var csvFileName = Path.GetFileName(csvFilePath);
-
-        var lines = new StringBuilder();
-
-        lines.AppendLine(@"\documentclass{article}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\usepackage{amsmath}");
-        lines.AppendLine(@"\usepackage{graphicx}");
-        lines.AppendLine(@"\usepackage{listings}");
-        lines.AppendLine(@"\usepackage{xcolor}");
-        lines.AppendLine(@"\usepackage{pdflscape}");
-        lines.AppendLine(@"\usepackage{pgfplots}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\pgfplotsset{compat=1.18}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\lstdefinelanguage{json}");
-        lines.AppendLine(@"{");
-        lines.AppendLine(@"    basicstyle       = \ttfamily\small,");
-        lines.AppendLine(@"    numbers          = left,");
-        lines.AppendLine(@"    numberstyle      = \tiny\color{gray},");
-        lines.AppendLine(@"    stepnumber       = 1,");
-        lines.AppendLine(@"    numbersep        = 8pt,");
-        lines.AppendLine(@"    showstringspaces = false,");
-        lines.AppendLine(@"    breaklines       = true,");
-        lines.AppendLine(@"    frame            = single,");
-        lines.AppendLine(@"    backgroundcolor  = \color{lightgray!20}");
-        lines.AppendLine(@"}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\begin{document}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\newpage");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\section*{Inputs}");
-        lines.AppendLine(@"");
-        lines.AppendLine($@"\lstinputlisting[language = json, caption = Radar Detection Model - Inputs]{{{jsonFileName}}}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\newpage");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\section*{Outputs}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\subsection{SNR vs Target Range (km)}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\begin{tikzpicture}");
-        lines.AppendLine(@"    \begin{axis}");
-        lines.AppendLine(@"    [");
-        lines.AppendLine(@"        xlabel = {Target Range (km)},");
-        lines.AppendLine(@"        ylabel = {SNR (dB)},");
-        lines.AppendLine(@"        title  = {SNR vs Target Range (km)},");
-        lines.AppendLine(@"        grid   = both,");
-        lines.AppendLine(@"        width  = 15cm,");
-        lines.AppendLine(@"        height = 15cm");
-        lines.AppendLine(@"    ]");
-        lines.AppendLine(@"        \addplot[");
-        lines.AppendLine(@"            only marks,");
-        lines.AppendLine(@"            scatter, ");
-        lines.AppendLine(@"            mark = *,");
-        lines.AppendLine(@"            color = blue");
-        lines.AppendLine(@"        ]");
-        lines.AppendLine($@"       table[col sep = comma, x=TargetRange_km, y=SNR_dB]{{{csvFileName}}};");
-        lines.AppendLine(@"    \end{axis}");
-        lines.AppendLine(@"\end{tikzpicture}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\newpage");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\subsection{SNR vs Target Range (NM)}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\begin{tikzpicture}");
-        lines.AppendLine(@"    \begin{axis}");
-        lines.AppendLine(@"    [");
-        lines.AppendLine(@"        xlabel = {Target Range (NM)},");
-        lines.AppendLine(@"        ylabel = {SNR (dB)},");
-        lines.AppendLine(@"        title  = {SNR vs Target Range (NM)},");
-        lines.AppendLine(@"        grid   = both,");
-        lines.AppendLine(@"        width  = 15cm,");
-        lines.AppendLine(@"        height = 15cm");
-        lines.AppendLine(@"    ]");
-        lines.AppendLine(@"        \addplot[");
-        lines.AppendLine(@"            only marks,");
-        lines.AppendLine(@"            scatter, ");
-        lines.AppendLine(@"            mark = *,");
-        lines.AppendLine(@"            color = blue");
-        lines.AppendLine(@"        ]");
-        lines.AppendLine($@"       table[col sep = comma, x=TargetRange_NM, y=SNR_dB]{{{csvFileName}}};");
-        lines.AppendLine(@"    \end{axis}");
-        lines.AppendLine(@"\end{tikzpicture}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\end{document}");
+        var texString = RadarDetectionModelTexUtilities.GenerateTexStringSingleTestCase(inputData, jsonFilePath, csvFilePath);
 
         LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}", padding);
 
-        File.WriteAllText(texFilePath, lines.ToString());
+        File.WriteAllText(texFilePath, texString);
+    }
+
+    public void OutputDataCombined(RadarDetectionModelHarnessInputData inputData)
+    {
+        var padding = 12;
+
+        LogUtilities.LogInformation($"    Outputting Combined Data...");
+
+        InputData.WriteToJsonFile(InputFilePath, 12);
+
+        var texFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModelHarness_Report.tex";
+
+        GenerateTexFileCombined(InputData, texFileName, padding);
+
+        LaTexUtilities.ConvertTexToPdf(texFileName, padding);
+
+        LogUtilities.LogInformation($"    Outputting Combined Data. Done.");
+        LogUtilities.LogInformation($"");
+    }
+
+    public void GenerateTexFileCombined(RadarDetectionModelHarnessInputData inputData, string texFilePath, int padding = 0)
+    {
+        var texString = RadarDetectionModelTexUtilities.GenerateTexStringCombined(inputData, OutputFolder, ScenarioName);
+
+        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}", padding);
+
+        File.WriteAllText(texFilePath, texString);
     }
 }

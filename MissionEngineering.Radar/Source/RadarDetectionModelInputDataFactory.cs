@@ -13,6 +13,7 @@ public static class RadarDetectionModelInputDataFactory
             {
                 RadarSystemId = 1,
                 RadarSystemName = "Radar_Test_1",
+                RadarSystemColor = "blue",
                 SystemLosses_dB = 5.0,
                 RFCenterFrequency_Hz = rfCenterFrequency_Hz,
             },
@@ -58,6 +59,7 @@ public static class RadarDetectionModelInputDataFactory
         var inputData = Radar_Test_1();
 
         inputData.RadarSystemSettings.RadarSystemName = "Radar_Test_2";
+        inputData.RadarSystemSettings.RadarSystemColor = "red";
 
         inputData.RadarTransmitterSettings.TransmitPower_W = 20000.0;
 

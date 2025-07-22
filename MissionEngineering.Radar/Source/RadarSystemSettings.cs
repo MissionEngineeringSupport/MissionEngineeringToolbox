@@ -8,6 +8,8 @@ public class RadarSystemSettings
 
     public string RadarSystemName { get; set; }
 
+    public string RadarSystemColor { get; set; }
+
     public double RFCenterFrequency_Hz { get; set; }
 
     public double RFCenterFrequency_kHz => RFCenterFrequency_Hz / 1000.0;
