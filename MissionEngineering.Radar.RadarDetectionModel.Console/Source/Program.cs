@@ -1,7 +1,5 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.Radar;
-using System.Xml;
-using System.Xml.XPath;
 
 namespace MissionEngineering.Simulation;
 
@@ -75,8 +73,6 @@ public class Program
         WriteFinished();
     }
 
-
-
     private static void GenerateDetectionModelSettings()
     {
         if (IsGenerateExample)
@@ -88,6 +84,7 @@ public class Program
             GenerateDetectionModelSettingsFromFile();
         }
     }
+
     private static void GenerateDetectionModelSettingsExample()
     {
         RadarDetectionModelHarnessInputData = RadarDetectionModelHarnessInputDataFactory.Scenario_1();
@@ -146,6 +143,7 @@ public class Program
         LogUtilities.LogInformation(@"    Displaying Settings. Done.");
         LogUtilities.LogInformation(@"");
     }
+
     private static void ReadInputFile()
     {
         if (!IsGenerateExample)

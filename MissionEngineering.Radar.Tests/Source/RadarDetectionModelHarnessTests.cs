@@ -1,6 +1,4 @@
-﻿using MissionEngineering.Core;
-
-namespace MissionEngineering.Radar.Tests;
+﻿namespace MissionEngineering.Radar.Tests;
 
 [TestClass]
 public sealed class RadarDetectionModelHarnessTests

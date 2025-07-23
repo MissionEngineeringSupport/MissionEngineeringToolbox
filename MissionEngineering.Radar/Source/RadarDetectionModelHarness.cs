@@ -1,7 +1,5 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.MathLibrary;
-using Serilog.Core;
-using System.Text;
 
 namespace MissionEngineering.Radar;
 

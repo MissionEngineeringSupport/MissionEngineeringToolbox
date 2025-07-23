@@ -46,7 +46,7 @@ public static class RadarDetectionModelInputDataFactory
                 RadarCrossSection_sqm = 10.0
             },
             RadarEnvironmentSettings = new RadarEnvironmentSettings()
-            { 
+            {
                 AtmophericLoss_dB_per_km = 0.01
             }
         };

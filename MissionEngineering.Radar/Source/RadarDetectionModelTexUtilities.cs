@@ -1,7 +1,4 @@
-﻿using MissionEngineering.Core;
-using System;
-using System.Reflection;
-using System.Text;
+﻿using System.Text;
 
 namespace MissionEngineering.Radar;
 
@@ -112,6 +109,7 @@ public static class RadarDetectionModelTexUtilities
         lines.AppendLine(@"\section{Inputs}");
         lines.AppendLine(@"");
     }
+
     public static void CreateOutputSection(StringBuilder lines)
     {
         lines.AppendLine(@"\section{Outputs}");

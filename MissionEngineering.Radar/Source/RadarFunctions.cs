@@ -16,7 +16,7 @@ public static class RadarFunctions
             i.RadarWaveformSettings.PulseBandwidth_Hz,
             i.RadarWaveformSettings.PulseCompressionRatio,
             i.RadarWaveformSettings.NumberOfPulses,
-            i.RadarSystemSettings.SystemLosses_dB,   
+            i.RadarSystemSettings.SystemLosses_dB,
             targetRange_m,
             targetRangeRate_ms,
             i.RadarTargetSettings.RadarCrossSection_sqm,
