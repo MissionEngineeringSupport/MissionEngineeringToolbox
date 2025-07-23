@@ -22,5 +22,9 @@ public static class LaTexUtilities
         process.Start();
 
         process.WaitForExit();
+
+        process.Start();
+
+        process.WaitForExit();
     }
 }

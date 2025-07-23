@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using System.Reflection;
 using System.Text;
 
 namespace MissionEngineering.Radar;
@@ -64,6 +65,12 @@ public static class RadarDetectionModelTexUtilities
         lines.AppendLine(@"\usepackage{xcolor}");
         lines.AppendLine(@"\usepackage{pdflscape}");
         lines.AppendLine(@"\usepackage{pgfplots}");
+        lines.AppendLine(@"\usepackage{hyperref}");
+        lines.AppendLine(@"\hypersetup{");
+        lines.AppendLine(@"colorlinks=true,");
+        lines.AppendLine(@"linkcolor=blue,");
+        lines.AppendLine(@"urlcolor=blue");
+        lines.AppendLine(@"}");
         lines.AppendLine(@"");
         lines.AppendLine(@"\pgfplotsset{compat=1.18}");
         lines.AppendLine(@"");
@@ -82,15 +89,21 @@ public static class RadarDetectionModelTexUtilities
         lines.AppendLine(@"");
         lines.AppendLine(@"\begin{document}");
         lines.AppendLine(@"");
+        lines.AppendLine(@"\title{Radar Detection Model}");
+        lines.AppendLine(@"");
+        lines.AppendLine(@"\maketitle");
+        lines.AppendLine(@"");
+        lines.AppendLine(@"\tableofcontents");
+        lines.AppendLine(@"");
         lines.AppendLine(@"\newpage");
         lines.AppendLine(@"");
-        lines.AppendLine(@"\section*{Inputs}");
+        lines.AppendLine(@"\section{Inputs}");
         lines.AppendLine(@"");
         lines.AppendLine($@"\lstinputlisting[language = json, caption = Radar Detection Model - Inputs]{{{jsonFileName}}}");
         lines.AppendLine(@"");
         lines.AppendLine(@"\newpage");
         lines.AppendLine(@"");
-        lines.AppendLine(@"\section*{Outputs}");
+        lines.AppendLine(@"\section{Outputs}");
         lines.AppendLine(@"");
         lines.AppendLine(@"\subsection{SNR vs Target Range (km)}");
         lines.AppendLine(@"");
