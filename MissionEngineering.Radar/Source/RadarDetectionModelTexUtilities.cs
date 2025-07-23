@@ -1,4 +1,5 @@
 ﻿using MissionEngineering.Core;
+using System;
 using System.Reflection;
 using System.Text;
 
@@ -8,15 +9,19 @@ public static class RadarDetectionModelTexUtilities
 {
     public static string GenerateTexStringSingleTestCase(RadarDetectionModelInputData inputData, string jsonFilePath, string csvFilePath)
     {
+        var radarName = inputData.RadarSystemSettings.RadarSystemName;
+
         var jsonFileName = Path.GetFileName(jsonFilePath);
         var csvFileName = Path.GetFileName(csvFilePath);
 
         var lines = new StringBuilder();
 
         var colorString = inputData.RadarSystemSettings.RadarSystemColor;
-        var legendName = inputData.RadarSystemSettings.RadarSystemName.Replace("_", " ");
+        var legendName = radarName.Replace("_", " ");
 
-        CreateDocumentHeader(lines, jsonFileName);
+        CreateDocumentHeader(lines);
+        AddInputListing(lines, legendName, jsonFileName);
+        CreateOutputSection(lines);
         AddPlot(lines, csvFileName, legendName, colorString);
         CreateDocumentFooter(lines);
 
@@ -27,21 +32,28 @@ public static class RadarDetectionModelTexUtilities
 
     public static string GenerateTexStringCombined(RadarDetectionModelHarnessInputData inputData, string outputFolder, string scenarioName)
     {
-        var inputDataSingleTestCase = inputData.InputDataList.FirstOrDefault();
-
-        var radarName1 = inputDataSingleTestCase.RadarSystemSettings.RadarSystemName;
-
         var lines = new StringBuilder();
 
-        var jsonFileName = $@"{scenarioName}_{radarName1}_RadarDetectionModel_InputData.json";
+        CreateDocumentHeader(lines);
 
-        CreateDocumentHeader(lines, jsonFileName);
-        
         foreach (var i in inputData.InputDataList)
         {
-            var colorString = i.RadarSystemSettings.RadarSystemColor;
-            var legendName = i.RadarSystemSettings.RadarSystemName.Replace("_", " ");
             var radarName = i.RadarSystemSettings.RadarSystemName;
+
+            var legendName = radarName.Replace("_", " ");
+
+            var jsonFileName = $@"{scenarioName}_{radarName}_RadarDetectionModel_InputData.json";
+
+            AddInputListing(lines, legendName, jsonFileName);
+        }
+
+        CreateOutputSection(lines);
+
+        foreach (var i in inputData.InputDataList)
+        {
+            var radarName = i.RadarSystemSettings.RadarSystemName;
+            var colorString = i.RadarSystemSettings.RadarSystemColor;
+            var legendName = radarName.Replace("_", " ");
 
             var csvFileName = $@"{scenarioName}_{radarName}_RadarDetectionModel_OutputData.csv";
 
@@ -55,7 +67,7 @@ public static class RadarDetectionModelTexUtilities
         return texString;
     }
 
-    public static void CreateDocumentHeader(StringBuilder lines, string jsonFileName)
+    public static void CreateDocumentHeader(StringBuilder lines)
     {
         lines.AppendLine(@"\documentclass{article}");
         lines.AppendLine(@"");
@@ -99,10 +111,9 @@ public static class RadarDetectionModelTexUtilities
         lines.AppendLine(@"");
         lines.AppendLine(@"\section{Inputs}");
         lines.AppendLine(@"");
-        lines.AppendLine($@"\lstinputlisting[language = json, caption = Radar Detection Model - Inputs]{{{jsonFileName}}}");
-        lines.AppendLine(@"");
-        lines.AppendLine(@"\newpage");
-        lines.AppendLine(@"");
+    }
+    public static void CreateOutputSection(StringBuilder lines)
+    {
         lines.AppendLine(@"\section{Outputs}");
         lines.AppendLine(@"");
         lines.AppendLine(@"\subsection{SNR vs Target Range (km)}");
@@ -117,6 +128,18 @@ public static class RadarDetectionModelTexUtilities
         lines.AppendLine(@"        width  = 15cm,");
         lines.AppendLine(@"        height = 15cm");
         lines.AppendLine(@"    ]");
+    }
+
+    public static void AddInputListing(StringBuilder lines, string subsectionTitle, string fileName)
+    {
+        var caption = "Radar Detection Model Inputs - " + subsectionTitle;
+
+        lines.AppendLine($@"\subsection{{{subsectionTitle}}}");
+        lines.AppendLine(@"");
+        lines.AppendLine($@"\lstinputlisting[language = json, caption = {caption}]{{{fileName}}}");
+        lines.AppendLine(@"");
+        lines.AppendLine(@"\newpage");
+        lines.AppendLine(@"");
     }
 
     public static void AddPlot(StringBuilder lines, string csvFileName, string legendName, string colorString)
