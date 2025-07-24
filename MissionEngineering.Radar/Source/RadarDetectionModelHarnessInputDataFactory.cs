@@ -13,7 +13,7 @@ public static class RadarDetectionModelHarnessInputDataFactory
             InputDataList = [test_1, test_2],
             TargetRangeData = new RadarDetectionModelHarnessTargetRangeData
             {
-                TargetRangeStart = 1000.0,
+                TargetRangeStart = 1000,
                 TargetRangeEnd = 200000.0,
                 TargetRangeStep = 1000.0
             }

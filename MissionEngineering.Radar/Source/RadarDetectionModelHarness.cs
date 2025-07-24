@@ -109,7 +109,7 @@ public class RadarDetectionModelHarness
     {
         var texString = RadarDetectionModelTexUtilities.GenerateTexStringSingleTestCase(inputData, jsonFilePath, csvFilePath);
 
-        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}", padding);
+        LogUtilities.LogInformation($"Writing     TeX  file : {texFilePath}", padding);
 
         File.WriteAllText(texFilePath, texString);
     }
@@ -121,6 +121,13 @@ public class RadarDetectionModelHarness
         LogUtilities.LogInformation($"    Outputting Combined Data...");
 
         InputData.WriteToJsonFile(InputFilePath, 12);
+
+        var csvFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModelHarness_InputData.csv";
+        var csvFileName2 = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModelHarness_InputData_Rows.csv";
+
+        inputData.InputDataList.WriteToCsvFile(csvFileName, padding);
+
+        CsvUtilities.TransposeCsvFile(csvFileName, csvFileName2, padding);
 
         var texFileName = $@"{OutputFolder}\{ScenarioName}_RadarDetectionModelHarness_Report.tex";
 
@@ -136,7 +143,7 @@ public class RadarDetectionModelHarness
     {
         var texString = RadarDetectionModelTexUtilities.GenerateTexStringCombined(inputData, OutputFolder, ScenarioName);
 
-        LogUtilities.LogInformation($"Writing TeX  file : {texFilePath}", padding);
+        LogUtilities.LogInformation($"Writing     TeX  file : {texFilePath}", padding);
 
         File.WriteAllText(texFilePath, texString);
     }

@@ -22,7 +22,7 @@ public static class JsonUtilities
 
     public static void WriteToJsonFile<T>(this T obj, string fileName, int padding = 0)
     {
-        LogUtilities.LogInformation($"Writing Json File : {fileName}", padding);
+        LogUtilities.LogInformation($"Writing     Json File : {fileName}", padding);
 
         string jsonString = obj.ConvertToJsonString();
 
@@ -31,7 +31,7 @@ public static class JsonUtilities
 
     public static T ReadFromJsonFile<T>(string fileName)
     {
-        LogUtilities.LogInformation($"Reading Json File : {fileName}");
+        LogUtilities.LogInformation($"Reading     Json File : {fileName}");
 
         var jsonString = File.ReadAllText(fileName);
 

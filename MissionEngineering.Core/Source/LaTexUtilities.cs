@@ -6,12 +6,14 @@ public static class LaTexUtilities
 {
     public static void ConvertTexToPdf(string texFile, int padding = 0)
     {
+        return;
+
         var path = Path.GetDirectoryName(texFile);
         var fileNameTex = Path.GetFileName(texFile);
 
         var pdfFile = texFile.Replace(".tex", ".pdf");
 
-        LogUtilities.LogInformation($"Writing Pdf  file : {pdfFile}", padding);
+        LogUtilities.LogInformation($"Writing    Pdf  file : {pdfFile}", padding);
 
         Process process = new Process();
 

@@ -20,15 +20,21 @@ public class RadarDetectionModel
         var noisePower = GenerateNoisePower();
         var atmosphericLoss_dB = GenerateAtmosphericLoss_dB();
 
+        var jammerPower = GenerateJammerPower();
+
         var snr = signalPower / noisePower;
+
+        var sinr = signalPower / (jammerPower + noisePower);
 
         OutputData = new RadarDetectionModelOutputData
         {
             TargetRange_m = TargetRange_m,
             SignalPower_W = signalPower,
             NoisePower_W = noisePower,
+            JammerPower_W = jammerPower,
             AtmosphericLoss_dB = atmosphericLoss_dB,
-            SNR = snr
+            SNR = snr,
+            SINR = sinr
         };
     }
 
@@ -51,5 +57,17 @@ public class RadarDetectionModel
         var atmosphericLoss_dB = RadarFunctions.CalculateAtmosphericLoss_dB(InputData, TargetRange_m);
 
         return atmosphericLoss_dB;
+    }
+
+    private double GenerateJammerPower()
+    {
+        if (!InputData.RadarJammerSettings.IsJammerOn)
+        {
+            return 1.0e-20;
+        }
+
+        var jammerPower = RadarFunctions.CalculateJammerPower(InputData, TargetRange_m, TargetRangeRate_ms);
+
+        return jammerPower;
     }
 }

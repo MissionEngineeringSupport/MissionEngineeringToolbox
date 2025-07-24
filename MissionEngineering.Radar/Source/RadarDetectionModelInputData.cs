@@ -14,5 +14,7 @@ public class RadarDetectionModelInputData
 
     public RadarTargetSettings RadarTargetSettings { get; set; }
 
+    public RadarJammerSettings RadarJammerSettings { get; set; }
+
     public RadarEnvironmentSettings RadarEnvironmentSettings { get; set; }
 }

@@ -24,7 +24,8 @@ public static class RadarDetectionModelInputDataFactory
             RadarAntennaSettings = new RadarAntennaSettings()
             {
                 AntennaGainTransmit_dB = 35.0,
-                AntennaGainReceive_dB = 32.0
+                AntennaGainReceive_dB = 32.0,
+                AntennaSidelobeLevelReceive_dB = -30.0
             },
             RadarWaveformSettings = new RadarWaveformSettings()
             {
@@ -45,9 +46,14 @@ public static class RadarDetectionModelInputDataFactory
             {
                 RadarCrossSection_sqm = 10.0
             },
+            RadarJammerSettings = new RadarJammerSettings()
+            {
+                IsJammerOn = false,
+                JammerPower_W = 100.0,
+            },
             RadarEnvironmentSettings = new RadarEnvironmentSettings()
             {
-                AtmophericLoss_dB_per_km = 0.01
+                AtmosphericLoss_dB_per_km = 0.0
             }
         };
 
@@ -58,16 +64,21 @@ public static class RadarDetectionModelInputDataFactory
     {
         var inputData = Radar_Test_1();
 
+        inputData.RadarSystemSettings.RadarSystemId = 2;
         inputData.RadarSystemSettings.RadarSystemName = "Radar_Test_2";
         inputData.RadarSystemSettings.RadarSystemColor = "red";
 
-        inputData.RadarTransmitterSettings.TransmitPower_W = 20000.0;
+        var radarJammerSettings = new RadarJammerSettings()
+        {
+            IsJammerOn = true,
+            JammerType = RadarJammerType.SelfProtect,
+            JammerAntennaType = RadarJammerAntennaType.Sidelobe,
+            JammerPower_W = 100.0,
+            JammerBandwidth_Hz = 500.0e6,
+            JammerAntennaGainTransmit_dB = 15.0,
+        };
 
-        inputData.RadarWaveformSettings.WaveformName = "Waveform_Test_2";
-
-        inputData.RadarWaveformSettings.PulseWidth_s = 2.0e-6;
-
-        inputData.RadarEnvironmentSettings.AtmophericLoss_dB_per_km = 0.1;
+        inputData.RadarJammerSettings = radarJammerSettings;
 
         return inputData;
     }

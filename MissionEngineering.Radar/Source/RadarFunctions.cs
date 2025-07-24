@@ -20,7 +20,7 @@ public static class RadarFunctions
             targetRange_m,
             targetRangeRate_ms,
             i.RadarTargetSettings.RadarCrossSection_sqm,
-            i.RadarEnvironmentSettings.AtmophericLoss_dB_per_km);
+            i.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km);
 
         return signalPower;
     }
@@ -36,11 +36,36 @@ public static class RadarFunctions
         return signalPower;
     }
 
+
     public static double CalculateAtmosphericLoss_dB(RadarDetectionModelInputData inputData, double targetRange_m)
     {
-        var atmosphericLoss_dB = CalculateAtmosphericLoss_dB(inputData.RadarEnvironmentSettings.AtmophericLoss_dB_per_km, targetRange_m);
+        var atmosphericLoss_dB = CalculateAtmosphericLoss_dB(inputData.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km, targetRange_m);
 
         return atmosphericLoss_dB;
+    }
+    public static double CalculateJammerPower(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
+    {
+        var antennaGainReceive_dB = inputData.RadarAntennaSettings.AntennaGainReceive_dB;
+
+        if (inputData.RadarJammerSettings.JammerAntennaType == RadarJammerAntennaType.Sidelobe)
+        {
+            antennaGainReceive_dB = antennaGainReceive_dB + inputData.RadarAntennaSettings.AntennaSidelobeLevelReceive_dB;
+        }
+
+        var i = inputData;
+
+        var jammerPower = CalculateJammerPower(
+            i.RadarJammerSettings.JammerPower_W,
+            i.RadarSystemSettings.RFCentreWavelength_m,
+            i.RadarJammerSettings.JammerAntennaGainTransmit_dB,
+            antennaGainReceive_dB,
+            i.RadarJammerSettings.JammerBandwidth_Hz,
+            i.RadarJammerSettings.JammerSystemLosses_dB,
+            targetRange_m,
+            targetRangeRate_ms,
+            i.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km);
+
+        return jammerPower;
     }
 
     public static double CalculateSignalPower(double transmitPower, double rfCenterWavelength, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth, double pulseCompressionRatio, int numberOfPulses, double systemLosses_dB, double targetRange, double targetRangeRate, double radarCrossSection, double atmophericLoss_dB_per_km)
@@ -48,7 +73,7 @@ public static class RadarFunctions
         var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
         var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
 
-        var atmosphericLoss_dB = atmophericLoss_dB_per_km * 2.0 * targetRange / 1000.0;
+        var atmosphericLoss_dB = CalculateAtmosphericLoss_dB(atmophericLoss_dB_per_km, targetRange, isTwoWay: true);
         var atmosphericLoss = atmosphericLoss_dB.DecibelsToPower();
 
         var systemLosses = systemLosses_dB.DecibelsToPower();
@@ -79,6 +104,24 @@ public static class RadarFunctions
         return noisePower_dB;
     }
 
+    public static double CalculateJammerPower(double transmitPower, double rfCenterWavelength, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth, double systemLosses_dB, double targetRange, double targetRangeRate, double atmophericLoss_dB_per_km)
+    {
+        var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
+        var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
+
+        var atmosphericLoss_dB = CalculateAtmosphericLoss_dB(atmophericLoss_dB_per_km, targetRange, isTwoWay: false);
+        var atmosphericLoss = atmosphericLoss_dB.DecibelsToPower();
+
+        var systemLosses = systemLosses_dB.DecibelsToPower();
+
+        var numerator = transmitPower * antennaGainTransmit * antennaGainReceive * rfCenterWavelength * rfCenterWavelength;
+        var denominator = Math.Pow(4 * Math.PI, 2) * Math.Pow(targetRange, 2) * systemLosses * atmosphericLoss;
+
+        var jammerPower = numerator / denominator;
+
+        return jammerPower;
+    }
+
     public static double CalculateRangeTwoWay(double pulseRepetitionInterval)
     {
         var maximumUnambiguousRange = PhysicalConstants.SpeedOfLight * pulseRepetitionInterval / 2.0;
@@ -93,9 +136,14 @@ public static class RadarFunctions
         return maximumUnambiguousRangeRate;
     }
 
-    public static double CalculateAtmosphericLoss_dB(double atmophericLoss_dB_per_km, double targetRange)
+    public static double CalculateAtmosphericLoss_dB(double atmophericLoss_dB_per_km, double targetRange, bool isTwoWay = true)
     {
-        var atmosphericLoss_dB = atmophericLoss_dB_per_km * 2.0 * targetRange / 1000.0;
+        var atmosphericLoss_dB = atmophericLoss_dB_per_km * targetRange / 1000.0;
+
+        if (isTwoWay)
+        {
+            atmosphericLoss_dB *= 2.0;
+        }
 
         return atmosphericLoss_dB;
     }

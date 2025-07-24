@@ -22,6 +22,12 @@ public class RadarDetectionModelOutputData
 
     public double NoisePower_dBm => NoisePower_dB + 30.0;
 
+    public double JammerPower_W { get; set; }
+
+    public double JammerPower_dB => JammerPower_W.PowerToDecibels();
+
+    public double JammerPower_dBm => JammerPower_dB + 30.0;
+
     public double AtmosphericLoss_dB { get; set; }
 
     public double SNR { get; set; }
@@ -29,4 +35,10 @@ public class RadarDetectionModelOutputData
     public double SNR_dB => SNR.PowerToDecibels();
 
     public double SNR_dBm => SNR_dB + 30.0;
+
+    public double SINR { get; set; }
+
+    public double SINR_dB => SINR.PowerToDecibels();
+
+    public double SINR_dBm => SINR_dB + 30.0;
 }
