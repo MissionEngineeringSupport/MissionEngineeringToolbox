@@ -122,9 +122,21 @@ public static class RadarFunctions
         return jammerPower;
     }
 
-    public static double CalculateRangeTwoWay(double pulseRepetitionInterval)
+    public static double CalculateRangeFromTimeDelay(double timeDelay, bool isTwoWay = true)
     {
-        var maximumUnambiguousRange = PhysicalConstants.SpeedOfLight * pulseRepetitionInterval / 2.0;
+        var range = PhysicalConstants.SpeedOfLight * timeDelay;
+
+        if (isTwoWay)
+        {
+            range /= 2.0;
+        }
+
+        return range;
+    }
+
+    public static double CalculateMaximumUnambiguousRange(double pulseRepetitionInterval)
+    {
+        var maximumUnambiguousRange = CalculateRangeFromTimeDelay(pulseRepetitionInterval);
 
         return maximumUnambiguousRange;
     }
