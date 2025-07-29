@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Task", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Task.Tests", "MissionEngineering.Task.Tests\MissionEngineering.Task.Tests.csproj", "{7B175A30-800B-4C52-BFB1-6692BF62963C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulation.Tests", "MissionEngineering.Simulation.Tests\MissionEngineering.Simulation.Tests.csproj", "{42FBDD13-243B-4AAA-9C47-E5669EAB825C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42FBDD13-243B-4AAA-9C47-E5669EAB825C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42FBDD13-243B-4AAA-9C47-E5669EAB825C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42FBDD13-243B-4AAA-9C47-E5669EAB825C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42FBDD13-243B-4AAA-9C47-E5669EAB825C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
