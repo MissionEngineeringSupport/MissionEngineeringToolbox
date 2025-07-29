@@ -33,6 +33,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.MissionE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Radar.RadarDetectionModel.Console", "MissionEngineering.Radar.RadarDetectionModel.Console\MissionEngineering.Radar.RadarDetectionModel.Console.csproj", "{8B3AD380-1E21-4584-82A6-8C8F75B6739F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Task", "MissionEngineering.Task\MissionEngineering.Task.csproj", "{629E2227-3288-44E7-BA9C-1CDD4BCC7B3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Task.Tests", "MissionEngineering.Task.Tests\MissionEngineering.Task.Tests.csproj", "{7B175A30-800B-4C52-BFB1-6692BF62963C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +103,14 @@ Global
 		{8B3AD380-1E21-4584-82A6-8C8F75B6739F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B3AD380-1E21-4584-82A6-8C8F75B6739F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B3AD380-1E21-4584-82A6-8C8F75B6739F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629E2227-3288-44E7-BA9C-1CDD4BCC7B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629E2227-3288-44E7-BA9C-1CDD4BCC7B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629E2227-3288-44E7-BA9C-1CDD4BCC7B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629E2227-3288-44E7-BA9C-1CDD4BCC7B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B175A30-800B-4C52-BFB1-6692BF62963C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
