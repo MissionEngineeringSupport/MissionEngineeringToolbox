@@ -1,8 +1,8 @@
 ﻿namespace MissionEngineering.Task;
 
-public class TaskDemand_Mission_Search : TaskDemand
+public class Task_Mission_Search : Task
 {
-    public TaskDemand_Mission_Search()
+    public Task_Mission_Search()
     {
         TaskHeader = new TaskHeader
         {
@@ -12,9 +12,9 @@ public class TaskDemand_Mission_Search : TaskDemand
             TaskType = TaskType.Mission_Search,
             TaskDemandType = TaskDemandType.Create,
             TaskLevel = TaskLevelType.Mission,
-            CreationDate = DateTime.UtcNow,
-            ModificationDate = DateTime.UtcNow,
-            ModificationCount = 0
+            TaskCreationDate = DateTime.UtcNow,
+            TaskModificationDate = DateTime.UtcNow,
+            TaskModificationCount = 0
         };
     }
 }

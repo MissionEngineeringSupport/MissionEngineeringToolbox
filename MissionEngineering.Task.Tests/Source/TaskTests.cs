@@ -12,23 +12,25 @@ public sealed class TaskTests
             TaskId = 1001,
             TaskName = "Mission Task 1",
             TaskDescription = "Mission Task 1 Description",
+            TaskLevel = TaskLevelType.Mission,
             TaskType = TaskType.Mission_Search,
             TaskDemandType = TaskDemandType.Create,
-            TaskLevel = TaskLevelType.Mission,
-            CreationDate = DateTime.UtcNow,
-            ModificationDate = DateTime.UtcNow,
-            ModificationCount = 1
+            TaskCreationDate = DateTime.UtcNow,
+            TaskModificationDate = DateTime.UtcNow,
+            TaskModificationCount = 1,
+            TaskQualityMinimum = 10,
+            TaskQualityDesired = 20,
+            TaskStatusType = TaskStatusType.InProgress,
+            TaskQualityAchieved = 18,
         };
 
-        var taskDemand = new TaskDemand_Mission_Search
+        // Act:
+        var task = new Task_Mission_Search
         {
             TaskHeader = taskHeader
         };
 
-        // Act:
-        var task = new Task(taskDemand);
-
         // Assert:
-        Assert.AreEqual(task.TaskDemand.TaskHeader.TaskId, task.TaskStatus.TaskHeader.TaskId);
+        Assert.AreEqual(task.TaskHeader.TaskQualityStatus, TaskQualityStatusType.AboveQMin);
     }
 }

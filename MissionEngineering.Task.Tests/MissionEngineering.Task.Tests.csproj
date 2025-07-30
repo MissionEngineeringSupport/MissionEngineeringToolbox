@@ -19,6 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
 	  <ProjectReference Include="..\MissionEngineering.Task\MissionEngineering.Task.csproj" />
 	</ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿namespace MissionEngineering.Task;
 
-public interface ITaskStatus
+public interface ITask
 {
     TaskHeader TaskHeader { get; set; }
 }

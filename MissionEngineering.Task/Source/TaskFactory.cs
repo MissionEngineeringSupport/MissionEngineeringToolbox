@@ -1,0 +1,59 @@
+﻿using Bogus;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MissionEngineering.Task;
+
+public static class TaskFactory
+{
+    public static List<ITask> GenerateFakeTasks(int numberOfTasks)
+    {
+        var faker = new Faker("en");
+
+        var taskList = new List<ITask>(numberOfTasks);
+
+        for (int i = 0; i < numberOfTasks; i++)
+        {
+            var task = GenerateFakeTask(faker);
+
+            taskList.Add(task);
+        }
+
+        return taskList;
+    }
+
+    public static ITask GenerateFakeTask(Faker faker = null)
+    {
+        if (faker is null)
+        {
+            faker = new Faker("en");
+        }
+
+        var taskHeader = new TaskHeader()
+        {
+            TaskId = faker.Random.Number(1, 100),
+            TaskName = faker.Random.Words(3),
+            TaskDescription = faker.Random.Words(10),
+            TaskLevel = faker.Random.Enum<TaskLevelType>(),
+            TaskType = faker.Random.Enum<TaskType>(),
+            TaskDemandType = faker.Random.Enum<TaskDemandType>(),
+            TaskCreationDate = faker.Date.Past(),
+            TaskModificationDate = faker.Date.Past(),
+            TaskModificationCount = faker.Random.Number(1, 10),
+            TaskQualityMinimum = faker.Random.Number(100),
+            TaskQualityDesired = faker.Random.Number(100),
+            TaskStatusType = faker.Random.Enum<TaskStatusType>(),
+            TaskQualityAchieved = faker.Random.Number(100),
+        };
+
+        var task = new Task_Mission_Search()
+        { 
+            TaskHeader = taskHeader
+        };
+
+        return task;
+    }
+}
