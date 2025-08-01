@@ -12,11 +12,11 @@ public static class PlatformSettingsFactory
             PlatformName = "Platform 1",
             PlatformDescription = "Platform 1 Description",
             PlatformType = "Aircraft",
-            PlatformIcon = "F-35A",
+            PlatformIcon = "f-35a_lightning",
             PlatformAffiliation = PlatformAffiliation.Friendly,
             PlatformColor = "Red",
             PlatformInterpolate = "1",
-            PlatformScaleLevel = "4.0",
+            PlatformScaleLevel = "2.5",
             PositionNED = new PositionNED(1000.0, 2000.0, -1000.0),
             VelocityNED = new VelocityNED(-200.0, 200.0, 0.0)
         };
@@ -32,11 +32,11 @@ public static class PlatformSettingsFactory
             PlatformName = "Platform 2",
             PlatformDescription = "Platform 2 Description",
             PlatformType = "Aircraft",
-            PlatformIcon = "F-35A",
+            PlatformIcon = "rq-1b_predator",
             PlatformAffiliation = PlatformAffiliation.Friendly,
             PlatformColor = "Red",
             PlatformInterpolate = "1",
-            PlatformScaleLevel = "4.0",
+            PlatformScaleLevel = "2.5",
             PositionNED = new PositionNED(10000.0, 32000.0, -2000.0),
             VelocityNED = new VelocityNED(200.0, -200.0, 0.0)
         };

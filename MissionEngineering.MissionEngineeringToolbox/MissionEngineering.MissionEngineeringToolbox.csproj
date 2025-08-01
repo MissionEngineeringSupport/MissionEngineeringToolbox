@@ -9,7 +9,17 @@
     <Copyright>Mission Engineering Support Limited 2025</Copyright>
     <PackageProjectUrl>https://github.com/MissionEngineeringSupport/MissionEngineeringToolbox/wiki</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MissionEngineeringSupport/MissionEngineeringToolbox</RepositoryUrl>
+    <FileVersion>1.0.1.1</FileVersion>
+    <AssemblyVersion>1.0.1.1</AssemblyVersion>
+    <Version>1.0.1</Version>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GitVersion.MsBuild" Version="6.3.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
@@ -20,6 +30,7 @@
     <ProjectReference Include="..\MissionEngineering.Scanner\MissionEngineering.Scanner.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation.Data\MissionEngineering.Simulation.Data.csproj" />
     <ProjectReference Include="..\MissionEngineering.Simulation\MissionEngineering.Simulation.csproj" />
+    <ProjectReference Include="..\MissionEngineering.Task\MissionEngineering.Task.csproj" />
   </ItemGroup>
 
 </Project>

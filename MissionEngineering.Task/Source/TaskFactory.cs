@@ -19,6 +19,16 @@ public static class TaskFactory
         {
             var task = GenerateFakeTask(faker);
 
+            var taskId = i + 1;
+
+            task.TaskHeader.TaskId = taskId;
+            task.TaskHeader.TaskIdParent = (i / 10) + 1;
+
+            if (i == 0)
+            {
+                task.TaskHeader.TaskIdParent = -1;
+            }
+
             taskList.Add(task);
         }
 
@@ -34,7 +44,8 @@ public static class TaskFactory
 
         var taskHeader = new TaskHeader()
         {
-            TaskId = faker.Random.Number(1, 100),
+            TaskIdParent = faker.Random.Number(1, 5),
+            TaskId = faker.Random.Number(10, 100),
             TaskName = faker.Random.Words(3),
             TaskDescription = faker.Random.Words(10),
             TaskLevel = faker.Random.Enum<TaskLevelType>(),
