@@ -15,13 +15,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitVersion.MsBuild" Version="6.3.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MissionEngineering.Core\MissionEngineering.Core.csproj" />
     <ProjectReference Include="..\MissionEngineering.DataRecorder\MissionEngineering.DataRecorder.csproj" />
     <ProjectReference Include="..\MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj" />
