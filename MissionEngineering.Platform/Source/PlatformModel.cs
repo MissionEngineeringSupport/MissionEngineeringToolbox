@@ -6,6 +6,7 @@ namespace MissionEngineering.Platform;
 public class PlatformModel : ISimulationModel
 {
     public PlatformSettings PlatformSettings { get; set; }
+
     public List<FlightpathData> FlightpathDataList { get; set; }
 
     public Flightpath Flightpath { get; set; }
