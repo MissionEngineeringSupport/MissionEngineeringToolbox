@@ -51,7 +51,7 @@ public class SimdisExporter : ISimdisExporter
         AddLine(@$"ScenarioInfo     ""{SimulationData.SimulationSettings.SimulationName}"" ");
         AddLine("""VerticalDatum    "WGS84" """);
         AddLine("""CoordSystem      "LLA" """);
-        AddLine($"RefLLA           {llaOrigin.LatitudeDeg} {llaOrigin.LongitudeDeg} {llaOrigin.Altitude}");
+        AddLine($"RefLLA           {llaOrigin.Latitude_deg} {llaOrigin.Longitude_deg} {llaOrigin.Altitude_m}");
         AddLine("""ReferenceTimeECI "0.0" """);
         AddLine("DegreeAngles     1");
         AddLine("");
@@ -107,7 +107,7 @@ public class SimdisExporter : ISimdisExporter
             var vel = fd.VelocityNED;
             var att = fd.Attitude;
 
-            string line = $"PlatformData {platformId} {time} {pos.PositionNorth} {pos.PositionEast} {pos.PositionDown} {att.HeadingAngleDeg} {att.PitchAngleDeg} {att.BankAngleDeg} {vel.VelocityNorth} {vel.VelocityEast} {vel.VelocityDown}";
+            string line = $"PlatformData {platformId} {time} {pos.PositionNorth_m} {pos.PositionEast_m} {pos.PositionDown_m} {att.HeadingAngle_deg} {att.PitchAngle_deg} {att.BankAngle_deg} {vel.VelocityNorth_ms} {vel.VelocityEast_ms} {vel.VelocityDown_ms}";
 
             AddLine(line);
         }

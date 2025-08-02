@@ -2,13 +2,13 @@
 
 public record PositionLLA
 {
-    public double LatitudeDeg { get; init; }
+    public double Latitude_deg { get; init; }
 
-    public double LongitudeDeg { get; init; }
+    public double Longitude_deg { get; init; }
 
-    public double Altitude { get; init; }
+    public double Altitude_m { get; init; }
 
-    public double Altitude_ft => Altitude * UnitConversions.MeterToFoot;
+    public double Altitude_ft => Altitude_m * UnitConversions.MeterToFoot;
 
     public double FlightLevel => UnitConversions.AltitudeFeetToFlightLevel(Altitude_ft);
 
@@ -16,10 +16,10 @@ public record PositionLLA
     {
     }
 
-    public PositionLLA(double latitudeDeg, double longitudeDeg, double altitude)
+    public PositionLLA(double latitude_deg, double longitude_deg, double altitude_m)
     {
-        LatitudeDeg = latitudeDeg;
-        LongitudeDeg = longitudeDeg;
-        Altitude = altitude;
+        Latitude_deg = latitude_deg;
+        Longitude_deg = longitude_deg;
+        Altitude_m = altitude_m;
     }
 }

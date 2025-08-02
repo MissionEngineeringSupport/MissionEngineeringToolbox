@@ -4,21 +4,21 @@ namespace MissionEngineering.MathLibrary;
 
 public record Attitude
 {
-    public double HeadingAngleDeg { get; set; }
+    public double HeadingAngle_deg { get; set; }
 
-    public double PitchAngleDeg { get; set; }
+    public double PitchAngle_deg { get; set; }
 
-    public double BankAngleDeg { get; set; }
+    public double BankAngle_deg { get; set; }
 
     public Attitude()
     {
     }
 
-    public Attitude(double headingAngleDeg, double pitchAngleDeg, double bankAngleDeg)
+    public Attitude(double headingAngle_deg, double pitchAngle_deg, double bankAngle_deg)
     {
-        HeadingAngleDeg = headingAngleDeg;
-        PitchAngleDeg = pitchAngleDeg;
-        BankAngleDeg = bankAngleDeg;
+        HeadingAngle_deg = headingAngle_deg;
+        PitchAngle_deg = pitchAngle_deg;
+        BankAngle_deg = bankAngle_deg;
     }
 
     public Matrix GetTransformationMatrix()
@@ -34,9 +34,9 @@ public record Attitude
 
     public Matrix GetTransformationMatrix_Inverse()
     {
-        var headingAngle = HeadingAngleDeg.DegreesToRadians();
-        var pitchAngle = PitchAngleDeg.DegreesToRadians();
-        var bankAngle = BankAngleDeg.DegreesToRadians();
+        var headingAngle = HeadingAngle_deg.DegreesToRadians();
+        var pitchAngle = PitchAngle_deg.DegreesToRadians();
+        var bankAngle = BankAngle_deg.DegreesToRadians();
 
         var ct = Cos(headingAngle);
         var st = Sin(headingAngle);
@@ -61,7 +61,7 @@ public record Attitude
 
     public Matrix CalculateTransformationMatrixHeading()
     {
-        var headingAngle = HeadingAngleDeg.DegreesToRadians();
+        var headingAngle = HeadingAngle_deg.DegreesToRadians();
 
         var ct = Cos(headingAngle);
         var st = Sin(headingAngle);
@@ -73,7 +73,7 @@ public record Attitude
 
     public Matrix CalculateTransformationMatrixPitch()
     {
-        var pitchAngle = PitchAngleDeg.DegreesToRadians();
+        var pitchAngle = PitchAngle_deg.DegreesToRadians();
 
         var cp = Cos(pitchAngle);
         var sp = Sin(pitchAngle);
@@ -85,7 +85,7 @@ public record Attitude
 
     public Matrix CalculateTransformationMatrixBank()
     {
-        var bankAngle = BankAngleDeg.DegreesToRadians();
+        var bankAngle = BankAngle_deg.DegreesToRadians();
 
         var ct = Cos(bankAngle);
         var st = Sin(bankAngle);

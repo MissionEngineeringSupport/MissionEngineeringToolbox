@@ -19,14 +19,14 @@ public static class FrameConversions
 
     public static Attitude GetAttitudeFromVelocityVector(VelocityNED velocityNED)
     {
-        var headingAngle = Atan2(velocityNED.VelocityEast, velocityNED.VelocityNorth);
-        var pitchAngle = -Asin(velocityNED.VelocityDown / velocityNED.TotalSpeed);
+        var headingAngle_rad = Atan2(velocityNED.VelocityEast_ms, velocityNED.VelocityNorth_ms);
+        var pitchAngle_rad = -Asin(velocityNED.VelocityDown_ms / velocityNED.TotalSpeed_ms);
 
-        var headingAngleDeg = headingAngle.RadiansToDegrees();
-        var pitchAngleDeg = pitchAngle.RadiansToDegrees();
-        var bankAngleDeg = 0.0;
+        var headingAngle_deg = headingAngle_rad.RadiansToDegrees();
+        var pitchAngle_deg = pitchAngle_rad.RadiansToDegrees();
+        var bankAngle_deg = 0.0;
 
-        var attitude = new Attitude(headingAngleDeg, pitchAngleDeg, bankAngleDeg);
+        var attitude = new Attitude(headingAngle_deg, pitchAngle_deg, bankAngle_deg);
 
         return attitude;
     }

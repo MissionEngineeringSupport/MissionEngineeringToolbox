@@ -53,10 +53,10 @@ public class Flightpath
         var flightpathDemand = new FlightpathDemand()
         {
             FlightpathDemandFlightpathId = FlightpathData.PlatformId,
-            FlightpathDemandTime = time,
-            HeadingAngleDemandDeg = FlightpathData.Attitude.HeadingAngleDeg + 90.0,
-            TotalSpeedDemand = FlightpathData.VelocityNED.TotalSpeed + 50,
-            AltitudeDemand = FlightpathData.PositionLLA.Altitude + 1000.0,
+            FlightpathDemandTime_s = time,
+            HeadingAngleDemand_deg = FlightpathData.Attitude.HeadingAngle_deg + 90.0,
+            TotalSpeedDemand_ms = FlightpathData.VelocityNED.TotalSpeed_ms + 50,
+            AltitudeDemand_m = FlightpathData.PositionLLA.Altitude_m + 1000.0,
         };
 
         FlightpathAutopilot = new FlightpathAutopilot(flightpathDynamics)
@@ -73,7 +73,7 @@ public class Flightpath
 
         var deltaTime = new DeltaTime(dt);
 
-        var bankAngleDegOld = FlightpathData.Attitude.BankAngleDeg;
+        var bankAngleDegOld = FlightpathData.Attitude.BankAngle_deg;
 
         var attitude = FrameConversions.GetAttitudeFromVelocityVector(FlightpathData.VelocityNED);
 
@@ -84,13 +84,13 @@ public class Flightpath
         var positionNED = FlightpathData.PositionNED + velocityNED * deltaTime;
         var positionLLA = positionNED.ToPositionLLA(LLAOrigin.PositionLLA);
 
-        var bankAngleRateDeg = 0.0;
+        var bankAngleRate_deg = 0.0;
 
-        var bankAngleDeg = bankAngleDegOld + bankAngleRateDeg * dt;
+        var bankAngle_deg = bankAngleDegOld + bankAngleRate_deg * dt;
 
-        attitude.BankAngleDeg = bankAngleDeg;
+        attitude.BankAngle_deg = bankAngle_deg;
 
-        var attitudeRate = new AttitudeRate(0.0, 0.0, bankAngleRateDeg);
+        var attitudeRate = new AttitudeRate(0.0, 0.0, bankAngleRate_deg);
 
         var timeStamp = SimulationClock.GetTimeStamp(time);
 
@@ -115,6 +115,27 @@ public class Flightpath
 
     public void Finalise(double time)
     {
+    }
+
+    public FlightpathData GetPredictedFlightpathData(double time)
+    {
+        var predictionTime = time - FlightpathData.TimeStamp.SimulationTime;
+
+        var deltaTime = new DeltaTime(predictionTime);
+
+        var velocityNED = FlightpathData.VelocityNED + FlightpathData.AccelerationNED * deltaTime;
+        var positionNED = FlightpathData.PositionNED + FlightpathData.VelocityNED * deltaTime;
+        var positionLLA = positionNED.ToPositionLLA(LLAOrigin.PositionLLA);
+
+        var flightpathData = FlightpathData with
+        {
+            TimeStamp = SimulationClock.GetTimeStamp(time),
+            PositionLLA = positionLLA,
+            PositionNED = positionNED,
+            VelocityNED = velocityNED,
+        };
+
+        return flightpathData;
     }
 
     public AccelerationTBA GetAccelerationTBA(double time)

@@ -21,10 +21,10 @@ public class FlightpathAutopilot
     public void Initialise(double time)
     {
         FlightpathDemand.FlightpathDemandFlightpathId = FlightpathData.PlatformId;
-        FlightpathDemand.FlightpathDemandTime = time;
-        FlightpathDemand.HeadingAngleDemandDeg = FlightpathData.Attitude.HeadingAngleDeg;
-        FlightpathDemand.TotalSpeedDemand = FlightpathData.VelocityNED.TotalSpeed;
-        FlightpathDemand.AltitudeDemand = FlightpathData.PositionLLA.Altitude;
+        FlightpathDemand.FlightpathDemandTime_s = time;
+        FlightpathDemand.HeadingAngleDemand_deg = FlightpathData.Attitude.HeadingAngle_deg;
+        FlightpathDemand.TotalSpeedDemand_ms = FlightpathData.VelocityNED.TotalSpeed_ms;
+        FlightpathDemand.AltitudeDemand_m = FlightpathData.PositionLLA.Altitude_m;
     }
 
     public AccelerationTBA GetAccelerationTBA(double time)
@@ -45,90 +45,90 @@ public class FlightpathAutopilot
 
     public double GetAxialAcceleration()
     {
-        var axialAccelerationMax = FlightpathDynamics.AxialAccelerationMaximum;
+        var axialAccelerationMax_ms2 = FlightpathDynamics.AxialAccelerationMaximum_ms2;
 
-        var speed = FlightpathData.VelocityNED.TotalSpeed;
+        var speed_ms = FlightpathData.VelocityNED.TotalSpeed_ms;
 
-        var speedDemand = FlightpathDemand.TotalSpeedDemand;
+        var speedDemand_ms = FlightpathDemand.TotalSpeedDemand_ms;
 
-        var speedError = speed - speedDemand;
+        var speedError_ms = speed_ms - speedDemand_ms;
 
-        var axialAcceleration = -speedError * FlightpathDynamics.AxialAccelerationGain;
+        var axialAcceleration_ms2 = -speedError_ms * FlightpathDynamics.AxialAccelerationGain;
 
-        axialAcceleration = MathFunctions.LimitWithinRange(-axialAccelerationMax, axialAccelerationMax, axialAcceleration);
+        axialAcceleration_ms2 = MathFunctions.LimitWithinRange(-axialAccelerationMax_ms2, axialAccelerationMax_ms2, axialAcceleration_ms2);
 
-        return axialAcceleration;
+        return axialAcceleration_ms2;
     }
 
     public double GetLateralAcceleration()
     {
-        var lateralAccelerationMax = FlightpathDynamics.LateralAccelerationMaximum;
+        var lateralAccelerationMax_ms2 = FlightpathDynamics.LateralAccelerationMaximum_ms2;
 
-        var headingAngleDeg = FlightpathData.Attitude.HeadingAngleDeg;
+        var headingAngle_deg = FlightpathData.Attitude.HeadingAngle_deg;
 
-        var headingAngleDemandDeg = FlightpathDemand.HeadingAngleDemandDeg;
+        var headingAngleDemand_deg = FlightpathDemand.HeadingAngleDemand_deg;
 
-        var headingAngleErrorDeg = MathFunctions.AzimuthDifferenceDeg(headingAngleDeg, headingAngleDemandDeg);
+        var headingAngleError_deg = MathFunctions.AzimuthDifferenceDeg(headingAngle_deg, headingAngleDemand_deg);
 
-        var lateralAcceleration = -headingAngleErrorDeg * FlightpathDynamics.LateralAccelerationGain;
+        var lateralAcceleration_ms2 = -headingAngleError_deg * FlightpathDynamics.LateralAccelerationGain;
 
-        lateralAcceleration = MathFunctions.LimitWithinRange(-lateralAccelerationMax, lateralAccelerationMax, lateralAcceleration);
+        lateralAcceleration_ms2 = MathFunctions.LimitWithinRange(-lateralAccelerationMax_ms2, lateralAccelerationMax_ms2, lateralAcceleration_ms2);
 
-        var bankAngleDemandMaxDeg = FlightpathDynamics.BankAngleMaximumDeg;
+        var bankAngleDemandMax_deg = FlightpathDynamics.BankAngleMaximum_deg;
 
-        var bankAngleDemandDeg = SetBankAngleFromLateralAcceleration(lateralAcceleration);
+        var bankAngleDemand_deg = SetBankAngleFromLateralAcceleration(lateralAcceleration_ms2);
 
-        bankAngleDemandDeg = MathFunctions.LimitWithinRange(-bankAngleDemandMaxDeg, bankAngleDemandMaxDeg, bankAngleDemandDeg);
+        bankAngleDemand_deg = MathFunctions.LimitWithinRange(-bankAngleDemandMax_deg, bankAngleDemandMax_deg, bankAngleDemand_deg);
 
-        var bankAngleDeg = FlightpathData.Attitude.BankAngleDeg;
+        var bankAngle_deg = FlightpathData.Attitude.BankAngle_deg;
 
-        var bankAngleErrorDeg = bankAngleDeg - bankAngleDemandDeg;
+        var bankAngleError_deg = bankAngle_deg - bankAngleDemand_deg;
 
-        var bankAngleRateDemandDeg = -bankAngleErrorDeg * FlightpathDynamics.BankAngleGain;
+        var bankAngleRateDemand_deg = -bankAngleError_deg * FlightpathDynamics.BankAngleGain;
 
-        FlightpathDemand.BankAngleDemandDeg = bankAngleDemandDeg;
-        FlightpathDemand.BankAngleRateDemandDeg = bankAngleRateDemandDeg;
+        FlightpathDemand.BankAngleDemand_deg = bankAngleDemand_deg;
+        FlightpathDemand.BankAngleRateDemand_deg = bankAngleRateDemand_deg;
 
-        return lateralAcceleration;
+        return lateralAcceleration_ms2;
     }
 
     public double GetVerticalAcceleration()
     {
-        var pitchAngleMaxDeg = FlightpathDynamics.PitchAngleMaximumDeg;
-        var verticalAccelerationMax = FlightpathDynamics.VerticalAccelerationMaximum;
+        var pitchAngleMax_deg = FlightpathDynamics.PitchAngleMaximum_deg;
+        var verticalAccelerationMax_ms2 = FlightpathDynamics.VerticalAccelerationMaximum_ms2;
 
-        var altitude = FlightpathData.PositionLLA.Altitude;
+        var altitude_m = FlightpathData.PositionLLA.Altitude_m;
 
-        var altitudeDemand = FlightpathDemand.AltitudeDemand;
+        var altitudeDemand_m = FlightpathDemand.AltitudeDemand_m;
 
-        var altitudeError = altitude - altitudeDemand;
+        var altitudeError_m = altitude_m - altitudeDemand_m;
 
-        var pitchAngleDemandDeg = -altitudeError * FlightpathDynamics.PitchAngleGain;
+        var pitchAngleDemand_deg = -altitudeError_m * FlightpathDynamics.PitchAngleGain;
 
-        pitchAngleDemandDeg = MathFunctions.LimitWithinRange(-pitchAngleMaxDeg, pitchAngleMaxDeg, pitchAngleDemandDeg);
+        pitchAngleDemand_deg = MathFunctions.LimitWithinRange(-pitchAngleMax_deg, pitchAngleMax_deg, pitchAngleDemand_deg);
 
-        var pitchAngleDeg = FlightpathData.Attitude.PitchAngleDeg;
+        var pitchAngle_deg = FlightpathData.Attitude.PitchAngle_deg;
 
-        var pitchAngleErorDeg = pitchAngleDeg - pitchAngleDemandDeg;
+        var pitchAngleEror_deg = pitchAngle_deg - pitchAngleDemand_deg;
 
-        var verticalAcceleration = pitchAngleErorDeg * FlightpathDynamics.VerticalAccelerationGain;
+        var verticalAcceleration_ms2 = pitchAngleEror_deg * FlightpathDynamics.VerticalAccelerationGain;
 
-        verticalAcceleration = MathFunctions.LimitWithinRange(-verticalAccelerationMax, verticalAccelerationMax, verticalAcceleration);
+        verticalAcceleration_ms2 = MathFunctions.LimitWithinRange(-verticalAccelerationMax_ms2, verticalAccelerationMax_ms2, verticalAcceleration_ms2);
 
-        FlightpathDemand.PitchAngleDemandDeg = pitchAngleDemandDeg;
+        FlightpathDemand.PitchAngleDemand_deg = pitchAngleDemand_deg;
 
-        return verticalAcceleration;
+        return verticalAcceleration_ms2;
     }
 
-    public double SetBankAngleFromLateralAcceleration(double lateralAcceleration)
+    public double SetBankAngleFromLateralAcceleration(double lateralAcceleration_ms2)
     {
         if (!FlightpathDynamics.IsUseBankedTurns)
         {
             return 0.0;
         }
 
-        var bankAngleDemandDeg = MathFunctions.CalculateBankAngleDegFromLateralAcceleration(lateralAcceleration);
+        var bankAngleDemand_deg = MathFunctions.CalculateBankAngleDegFromLateralAcceleration(lateralAcceleration_ms2);
 
-        return bankAngleDemandDeg;
+        return bankAngleDemand_deg;
     }
 }

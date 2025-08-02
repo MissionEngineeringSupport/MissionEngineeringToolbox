@@ -55,7 +55,7 @@ public static class DoubleExtensionMethods
         return result;
     }
 
-    public static double KilometersToMeteres(this double x)
+    public static double KilometersToMeters(this double x)
     {
         var result = x * KilometerToMeter;
 

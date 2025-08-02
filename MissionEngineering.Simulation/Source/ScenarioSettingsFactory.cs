@@ -19,9 +19,9 @@ public static class ScenarioSettingsFactory
 
         var llaOrigin = new PositionLLA()
         {
-            LatitudeDeg = 55.1,
-            LongitudeDeg = 12.0,
-            Altitude = 0.0
+            Latitude_deg = 55.1,
+            Longitude_deg = 12.0,
+            Altitude_m = 0.0
         };
 
         var ps1 = PlatformSettingsFactory.PlatformSettings_1();

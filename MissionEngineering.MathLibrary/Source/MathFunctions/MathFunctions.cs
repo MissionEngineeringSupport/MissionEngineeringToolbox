@@ -103,11 +103,11 @@ public static class MathFunctions
 
         var loadFactor_g = Abs(lateralAcceleration_g) + 1.0;
 
-        var bankAngleDeg = CalculateBankAngleFromLoadFactor(loadFactor_g);
+        var bankAngle_deg = CalculateBankAngleFromLoadFactor(loadFactor_g);
 
-        bankAngleDeg = bankAngleDeg * Sign(lateralAcceleration_g);
+        bankAngle_deg = bankAngle_deg * Sign(lateralAcceleration_g);
 
-        return bankAngleDeg;
+        return bankAngle_deg;
     }
 
     public static double CalculateLoadFactorFromBankAngleDeg(double bankAngleDeg)
@@ -123,9 +123,9 @@ public static class MathFunctions
     {
         var bankAngle = Acos(1 / loadFactor_g);
 
-        var bankAngleDeg = bankAngle.RadiansToDegrees();
+        var bankAngle_deg = bankAngle.RadiansToDegrees();
 
-        return bankAngleDeg;
+        return bankAngle_deg;
     }
 
     public static double FloorToStepSize(double value, double stepSize)

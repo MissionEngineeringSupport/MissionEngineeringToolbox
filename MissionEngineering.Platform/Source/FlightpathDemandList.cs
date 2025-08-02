@@ -13,7 +13,7 @@ public class FlightpathDemandList : IFlightpathDemandList
 
     public List<FlightpathDemand> GetFlightpathDemands(double time)
     {
-        var flightpathDemands = FlightpathDemands.Where(s => s.FlightpathDemandTime > currentTime && s.FlightpathDemandTime <= time).ToList();
+        var flightpathDemands = FlightpathDemands.Where(s => s.FlightpathDemandTime_s > currentTime && s.FlightpathDemandTime_s <= time).ToList();
 
         currentTime = time;
 

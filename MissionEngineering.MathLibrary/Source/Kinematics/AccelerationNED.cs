@@ -2,41 +2,41 @@
 
 public record AccelerationNED
 {
-    public double AccelerationNorth { get; init; }
+    public double AccelerationNorth_ms2 { get; init; }
 
-    public double AccelerationEast { get; init; }
+    public double AccelerationEast_ms2 { get; init; }
 
-    public double AccelerationDown { get; init; }
+    public double AccelerationDown_ms2 { get; init; }
 
     public AccelerationNED()
     {
     }
 
-    public AccelerationNED(double accelerationNorth, double accelerationEast, double accelerationDown)
+    public AccelerationNED(double accelerationNorth_ms2, double accelerationEast_ms2, double accelerationDown_ms2)
     {
-        AccelerationNorth = accelerationNorth;
-        AccelerationEast = accelerationEast;
-        AccelerationDown = accelerationDown;
+        AccelerationNorth_ms2 = accelerationNorth_ms2;
+        AccelerationEast_ms2 = accelerationEast_ms2;
+        AccelerationDown_ms2 = accelerationDown_ms2;
     }
 
-    public AccelerationNED(double[] accelerationNED)
+    public AccelerationNED(double[] accelerationNED_ms2)
     {
-        AccelerationNorth = accelerationNED[0];
-        AccelerationEast = accelerationNED[1];
-        AccelerationDown = accelerationNED[2];
+        AccelerationNorth_ms2 = accelerationNED_ms2[0];
+        AccelerationEast_ms2 = accelerationNED_ms2[1];
+        AccelerationDown_ms2 = accelerationNED_ms2[2];
     }
 
-    public AccelerationNED(Vector accelerationNED) : this(accelerationNED.Data)
+    public AccelerationNED(Vector accelerationNED_ms2) : this(accelerationNED_ms2.Data)
     {
     }
 
     public static AccelerationNED operator +(AccelerationNED left, AccelerationNED right)
     {
-        var accelerationNorth = left.AccelerationNorth + right.AccelerationNorth;
-        var accelerationEast = left.AccelerationEast + right.AccelerationEast;
-        var accelerationDown = left.AccelerationDown + right.AccelerationDown;
+        var accelerationNorth_ms2 = left.AccelerationNorth_ms2 + right.AccelerationNorth_ms2;
+        var accelerationEast_ms2 = left.AccelerationEast_ms2 + right.AccelerationEast_ms2;
+        var accelerationDown_ms2 = left.AccelerationDown_ms2 + right.AccelerationDown_ms2;
 
-        var result = new AccelerationNED(accelerationNorth, accelerationEast, accelerationDown);
+        var result = new AccelerationNED(accelerationNorth_ms2, accelerationEast_ms2, accelerationDown_ms2);
 
         return result;
     }
@@ -89,11 +89,11 @@ public record AccelerationNED
     {
         var time = right.Time;
 
-        var accelerationNorth = left.AccelerationNorth * time;
-        var accelerationEast = left.AccelerationEast * time;
-        var accelerationDown = left.AccelerationDown * time;
+        var accelerationNorth_ms2 = left.AccelerationNorth_ms2 * time;
+        var accelerationEast_ms2 = left.AccelerationEast_ms2 * time;
+        var accelerationDown_ms2 = left.AccelerationDown_ms2 * time;
 
-        var result = new VelocityNED(accelerationNorth, accelerationEast, accelerationDown);
+        var result = new VelocityNED(accelerationNorth_ms2, accelerationEast_ms2, accelerationDown_ms2);
 
         return result;
     }

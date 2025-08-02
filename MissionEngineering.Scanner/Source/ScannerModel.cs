@@ -8,17 +8,17 @@ public class ScannerModel
     /// <summary>
     /// The total width of the scan in azimuth (degrees).
     /// </summary>
-    public double AzimuthWidthDeg { get; set; }
+    public double AzimuthWidth_deg { get; set; }
 
     /// <summary>
     /// The center of the scan in azimuth (degrees).
     /// </summary>
-    public double AzimuthCenterDeg { get; set; }
+    public double AzimuthCenter_deg { get; set; }
 
     /// <summary>
     /// The center of the scan in elevation (degrees).
     /// </summary>
-    public double ElevationCenterDeg { get; set; }
+    public double ElevationCenter_deg { get; set; }
 
     /// <summary>
     /// The number of elevation bars in the scan.
@@ -28,7 +28,7 @@ public class ScannerModel
     /// <summary>
     /// The current scan angle in azimuth (degrees).
     /// </summary>
-    public double ScanAngleDeg { get; private set; }
+    public double ScanAngle_deg { get; private set; }
 
     /// <summary>
     /// The current scan rate in azimuth (degrees/second).
@@ -64,16 +64,16 @@ public class ScannerModel
     /// Initializes a new instance of the <see cref="ScannerModel"/> class.
     /// </summary>
     public ScannerModel(
-        double azimuthWidthDeg,
-        double azimuthCenterDeg,
-        double elevationCenterDeg,
+        double azimuthWidth_deg,
+        double azimuthCenter_deg,
+        double elevationCenter_deg,
         int numberOfBars)
     {
-        AzimuthWidthDeg = azimuthWidthDeg;
-        AzimuthCenterDeg = azimuthCenterDeg;
-        ElevationCenterDeg = elevationCenterDeg;
+        AzimuthWidth_deg = azimuthWidth_deg;
+        AzimuthCenter_deg = azimuthCenter_deg;
+        ElevationCenter_deg = elevationCenter_deg;
         NumberOfBars = numberOfBars > 0 ? numberOfBars : 1;
-        ScanAngleDeg = AzimuthCenterDeg - AzimuthWidthDeg / 2.0;
+        ScanAngle_deg = AzimuthCenter_deg - AzimuthWidth_deg / 2.0;
         ScanRateDegPerSec = 0.0;
         ScanAccelerationDegPerSec2 = 0.0;
         CurrentBar = 0;
@@ -88,23 +88,23 @@ public class ScannerModel
         if (NumberOfBars < 1) return;
 
         // Calculate scan endpoints
-        double leftLimit = AzimuthCenterDeg - AzimuthWidthDeg / 2.0;
-        double rightLimit = AzimuthCenterDeg + AzimuthWidthDeg / 2.0;
+        double leftLimit = AzimuthCenter_deg - AzimuthWidth_deg / 2.0;
+        double rightLimit = AzimuthCenter_deg + AzimuthWidth_deg / 2.0;
 
         // Simple constant rate scan for demonstration
-        double scanSpeed = AzimuthWidthDeg / BarScanTimeSec;
+        double scanSpeed = AzimuthWidth_deg / BarScanTimeSec;
         ScanRateDegPerSec = scanDirection * scanSpeed;
         ScanAccelerationDegPerSec2 = 0.0; // No acceleration in this simple model
 
-        ScanAngleDeg += ScanRateDegPerSec * deltaTimeSec;
+        ScanAngle_deg += ScanRateDegPerSec * deltaTimeSec;
         barTime += deltaTimeSec;
 
         // Check for reaching scan limits
-        if ((scanDirection > 0 && ScanAngleDeg >= rightLimit) ||
-            (scanDirection < 0 && ScanAngleDeg <= leftLimit))
+        if ((scanDirection > 0 && ScanAngle_deg >= rightLimit) ||
+            (scanDirection < 0 && ScanAngle_deg <= leftLimit))
         {
             // Clamp to limit
-            ScanAngleDeg = scanDirection > 0 ? rightLimit : leftLimit;
+            ScanAngle_deg = scanDirection > 0 ? rightLimit : leftLimit;
             scanDirection *= -1; // Reverse direction
 
             // Move to next bar
@@ -114,7 +114,7 @@ public class ScannerModel
                 CurrentBar = 0;
             }
             // Reset scan angle for new bar
-            ScanAngleDeg = scanDirection > 0 ? leftLimit : rightLimit;
+            ScanAngle_deg = scanDirection > 0 ? leftLimit : rightLimit;
             barTime = 0.0;
         }
     }
@@ -124,10 +124,10 @@ public class ScannerModel
     /// </summary>
     public double GetCurrentElevationDeg()
     {
-        if (NumberOfBars == 1) return ElevationCenterDeg;
+        if (NumberOfBars == 1) return ElevationCenter_deg;
         // Distribute bars symmetrically around the center
         double barSpacing = 1.0; // You can parameterize this as needed
-        double firstBar = ElevationCenterDeg - (NumberOfBars - 1) * barSpacing / 2.0;
+        double firstBar = ElevationCenter_deg - (NumberOfBars - 1) * barSpacing / 2.0;
         return firstBar + CurrentBar * barSpacing;
     }
 }
