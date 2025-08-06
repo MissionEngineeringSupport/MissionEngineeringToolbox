@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using CommunityToolkit.Diagnostics;
+using static System.Math;
 
 namespace MissionEngineering.MathLibrary;
 
@@ -25,6 +26,24 @@ public record VelocityNED
         VelocityNorth_ms = velocityNorth_ms;
         VelocityEast_ms = velocityEast_ms;
         VelocityDown_ms = velocityDown_ms;
+    }
+
+    public VelocityNED(double[] velocityNED)
+    {
+        Guard.IsEqualTo(velocityNED.Length, 3, nameof(velocityNED));
+
+        VelocityNorth_ms = velocityNED[0];
+        VelocityEast_ms = velocityNED[1];
+        VelocityDown_ms = velocityNED[2];
+    }
+
+    public VelocityNED(Vector velocityNED)
+    {
+        Guard.IsEqualTo(velocityNED.NumberOfElements, 3, nameof(velocityNED));
+
+        VelocityNorth_ms = velocityNED[0];
+        VelocityEast_ms = velocityNED[1];
+        VelocityDown_ms = velocityNED[2];
     }
 
     public static VelocityNED operator +(VelocityNED left, VelocityNED right)

@@ -39,10 +39,10 @@ public partial class Vector
         set => Data[index] = value;
     }
 
-    public Vector this[Range index]
+    public double[] this[Range index]
     {
-        get => new Vector(Data[index]);
-        set => Data = value.Data;
+        get => Data[index];
+        set => Data = value;
     }
 
     public IEnumerator GetEnumerator()

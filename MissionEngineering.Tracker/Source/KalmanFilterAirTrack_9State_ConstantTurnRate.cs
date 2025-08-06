@@ -2,11 +2,11 @@
 
 namespace MissionEngineering.Tracker;
 
-public class EPIICKalmanFilterAirTrack_9State_ConstantTurnRate : KalmanFilter
+public class KalmanFilterAirTrack_9State_ConstantTurnRate : KalmanFilter
 {
     public double Omega { get; set; }
 
-    public EPIICKalmanFilterAirTrack_9State_ConstantTurnRate()
+    public KalmanFilterAirTrack_9State_ConstantTurnRate()
     {
         NumberOfStates = 9;
 
@@ -25,8 +25,8 @@ public class EPIICKalmanFilterAirTrack_9State_ConstantTurnRate : KalmanFilter
 
     public void CalculateTurnRate()
     {
-        var velocity = X[3..5];
-        var acceleration = X[6..8];
+        var velocity = new Vector(X[3..5]);
+        var acceleration = new Vector(X[6..8]);
 
         var turnRate = acceleration.Norm() / velocity.Norm();
 

@@ -41,6 +41,32 @@ public class Track
 
     public void PredictTrack(double time)
     {
+        var (xPred, PPred) = GetPredictedTrack(time);
+
+        var pos = xPred[0..2];
+
+        var positionNED = new PositionNED(xPred[0..2]);
+        var velocityNED = new VelocityNED(xPred[3..5]);
+
+        var attitude = FrameConversions.GetAttitudeFromVelocityVector(velocityNED);
+
+        var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(positionNED, LLAOrigin.PositionLLA);
+
+        var ts = TrackDataSmoothed;
+
+        TrackDataPredicted = new TrackDataPredicted
+        {
+            TrackId = ts.TrackId,
+            PredictionTime = time,
+            TimeSinceLastUpdate = time - ts.LastUpdateTime,
+            LastUpdateTime = ts.LastUpdateTime,
+            NumberOfUpdates = ts.NumberOfUpdates,
+
+            PositionLLA = positionLLA,
+            PositionNED = positionNED,
+            VelocityNED = velocityNED,
+            Attitude = attitude,
+        };
     }
 
     public (Vector xPred, Matrix PPred) GetPredictedTrack(double time)

@@ -1,4 +1,6 @@
-﻿namespace MissionEngineering.MathLibrary;
+﻿using CommunityToolkit.Diagnostics;
+
+namespace MissionEngineering.MathLibrary;
 
 public record PositionNED
 {
@@ -11,12 +13,29 @@ public record PositionNED
     public PositionNED()
     {
     }
-
     public PositionNED(double positionNorth_m, double positionEast_m, double positionDown_m)
     {
         PositionNorth_m = positionNorth_m;
         PositionEast_m = positionEast_m;
         PositionDown_m = positionDown_m;
+    }
+
+    public PositionNED(double[] positionNED)
+    {
+        Guard.IsEqualTo(positionNED.Length, 3, nameof(positionNED));
+
+        PositionNorth_m = positionNED[0];
+        PositionEast_m = positionNED[1];
+        PositionDown_m = positionNED[2];
+    }
+
+    public PositionNED(Vector positionNED)
+    {
+        Guard.IsEqualTo(positionNED.NumberOfElements, 3, nameof(positionNED));
+
+        PositionNorth_m = positionNED[0];
+        PositionEast_m = positionNED[1];
+        PositionDown_m = positionNED[2];
     }
 
     public static PositionNED operator +(PositionNED left, PositionNED right)
