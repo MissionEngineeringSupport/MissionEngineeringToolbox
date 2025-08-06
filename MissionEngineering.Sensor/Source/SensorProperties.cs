@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MissionEngineering.MathLibrary;
-
-namespace MissionEngineering.Sensor;
+﻿namespace MissionEngineering.Sensor;
 
 public class SensorProperties
 {
@@ -37,5 +29,4 @@ public class SensorProperties
 
         SensorCoverage = new SensorCoverage();
     }
-
 }

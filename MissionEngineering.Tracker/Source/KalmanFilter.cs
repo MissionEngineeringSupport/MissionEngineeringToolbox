@@ -2,11 +2,13 @@
 
 namespace MissionEngineering.Tracker;
 
-public abstract class KalmanFilter
+public abstract class KalmanFilter : IKalmanFilter
 {
+    public int NumberOfStates { get; set; }
+
     public double LastUpdateTime { get; set; }
 
-    public Vector x { get; set; }
+    public Vector X { get; set; }
 
     public Matrix P { get; set; }
 
@@ -14,15 +16,15 @@ public abstract class KalmanFilter
 
     public Matrix Q { get; set; }
 
-    public Vector xPred { get; set; }
+    public Vector XPred { get; set; }
 
     public Matrix PPred { get; set; }
 
-    public Vector z { get; set; }
+    public Vector Z { get; set; }
 
     public Matrix R { get; set; }
 
-    public Vector zPred { get; set; }
+    public Vector ZPred { get; set; }
 
     public Matrix H { get; set; }
 
@@ -34,59 +36,58 @@ public abstract class KalmanFilter
 
     public Matrix K { get; set; }
 
-    public int NumberOfStates { get; set; }
+    public Vector QSD_Update { get; set; }
 
-    public Vector qSD_Update { get; set; }
+    public Vector QSD_Predict { get; set; }
 
-    public Vector qSD_Predict { get; set; }
-
-    public void Initialise(double time, Vector x0, Matrix P0)
+    public virtual void Initialise(double time, Vector x, Matrix p)
     {
         LastUpdateTime = time;
-        x = x0;
-        P = P0;
+        X = x;
+        P = P;
     }
 
-    public void Update(double time, Vector z, Matrix R, Vector ownshipStates)
+    public virtual void Update(double time, Vector z, Matrix r, Vector ownshipStates)
     {
         var dt = time - LastUpdateTime;
 
-        Phi = CalculateTransitionMatrix(x, dt);
-        Q = CalculateProcessNoiseMatrix(x, dt);
+        Phi = CalculateTransitionMatrix(X, dt);
+        Q = CalculateProcessNoiseMatrix(X, dt);
 
-        xPred = Phi * x;
+        XPred = Phi * X;
         PPred = Phi * P * Phi.Transpose() + Q;
 
-        xPred = xPred - ownshipStates;
+        XPred = XPred - ownshipStates;
 
-        this.z = z;
-        this.R = R;
+        Z = z;
+        R = r;
 
-        zPred = CalculatePredictedMeasurementVector(xPred);
-        H = CalculatePredictedMeasurementMatrix(xPred);
+        ZPred = CalculatePredictedMeasurementVector(XPred);
+        H = CalculatePredictedMeasurementMatrix(XPred);
 
-        Innovation = z - zPred;
+        Innovation = z - ZPred;
         S = H * PPred * H.Transpose() + R;
 
         K = PPred * H.Transpose() * S.Inverse();
 
         DeltaX = K * Innovation;
 
-        x = xPred + DeltaX;
+        X = XPred + DeltaX;
         P = PPred - K * H * PPred;
 
-        x = x + ownshipStates;
+        X = X + ownshipStates;
 
         LastUpdateTime = time;
     }
-    public (Vector xPred, Matrix PPred) Predict(double time)
+
+    public virtual (Vector xPred, Matrix PPred) Predict(double time)
     {
         var dt = time - LastUpdateTime;
 
-        var phi = CalculateTransitionMatrix(x, dt);
-        var q = CalculateProcessNoiseMatrix(x, dt);
+        var phi = CalculateTransitionMatrix(X, dt);
+        var q = CalculateProcessNoiseMatrix(X, dt);
 
-        var xPred = phi * x;
+        var xPred = phi * X;
         var PPred = phi * P * phi.Transpose() + q;
 
         return (xPred, PPred);

@@ -19,7 +19,7 @@ public sealed class RadarDetectionModelHarnessTests
             InputFilePath = inputFilePath,
             OutputFolder = outputFolder
         };
-     
+
         // Act:
         radarDetectionModelHarness.Run();
 

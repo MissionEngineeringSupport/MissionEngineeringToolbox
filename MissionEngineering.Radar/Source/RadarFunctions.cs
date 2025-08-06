@@ -36,13 +36,13 @@ public static class RadarFunctions
         return signalPower;
     }
 
-
     public static double CalculateAtmosphericLoss_dB(RadarDetectionModelInputData inputData, double targetRange_m)
     {
         var atmosphericLoss_dB = CalculateAtmosphericLoss_dB(inputData.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km, targetRange_m);
 
         return atmosphericLoss_dB;
     }
+
     public static double CalculateJammerPower(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
     {
         var antennaGainReceive_dB = inputData.RadarAntennaSettings.AntennaGainReceive_dB;

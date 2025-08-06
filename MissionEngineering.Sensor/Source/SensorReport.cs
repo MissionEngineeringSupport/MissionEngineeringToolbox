@@ -1,11 +1,10 @@
-﻿using MissionEngineering.Core;
-using MissionEngineering.MathLibrary;
+﻿using MissionEngineering.MathLibrary;
 
 namespace MissionEngineering.Sensor;
 
 public class SensorReport
 {
-    public SimulationModelTimeStamp TimeStamp { get; set; }
+    public double DetectionTime { get; set; }
 
     public int SensorPlatformId { get; set; }
 
@@ -21,9 +20,9 @@ public class SensorReport
 
     public PositionLLA TargetPositionLLA { get; set; }
 
-    public PositionLLA TargetPositionNED { get; set; }
+    public PositionNED TargetPositionNED { get; set; }
 
-    public PositionLLA TargetVelocityNED { get; set; }
+    public VelocityNED TargetVelocityNED { get; set; }
 
     public bool IsTargetRangeValid { get; set; }
 

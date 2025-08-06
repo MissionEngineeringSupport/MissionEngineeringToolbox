@@ -1,9 +1,4 @@
 ﻿using Bogus;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MissionEngineering.Task;
 
@@ -61,7 +56,7 @@ public static class TaskFactory
         };
 
         var task = new Task_Mission_Search()
-        { 
+        {
             TaskHeader = taskHeader
         };
 

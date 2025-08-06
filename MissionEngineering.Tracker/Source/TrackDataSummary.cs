@@ -1,5 +1,5 @@
 ﻿namespace MissionEngineering.Tracker;
 
-public class TrackManager
+public record TrackDataSummary
 {
 }
