@@ -7,7 +7,7 @@ public class TrackManager
 {
     public TrackList TrackList { get; set; }
 
-    public int NextTrackId { get; set; } 
+    public int NextTrackId { get; set; }
 
     public List<SensorReport> SensorReports { get; set; }
 

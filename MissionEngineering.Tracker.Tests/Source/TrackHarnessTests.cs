@@ -1,7 +1,6 @@
 ﻿using MissionEngineering.Core;
 using MissionEngineering.MathLibrary;
 using MissionEngineering.Platform;
-using System.IO.Enumeration;
 
 namespace MissionEngineering.Tracker.Tests
 {
@@ -13,7 +12,7 @@ namespace MissionEngineering.Tracker.Tests
         {
             // Arrange
             var dateTimeOrigin = new DateTimeOrigin()
-            { 
+            {
                 DateTime = new DateTime(2023, 10, 1, 0, 0, 0, DateTimeKind.Utc)
             };
 

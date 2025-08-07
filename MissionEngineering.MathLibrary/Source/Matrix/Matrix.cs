@@ -34,7 +34,7 @@ public partial class Matrix
         {
             var (rowOffset, rowLength) = rowIndices.GetOffsetAndLength(NumberOfRows);
             var (columnOffset, columnLength) = columnIndices.GetOffsetAndLength(NumberOfColumns);
-        
+
             var subMatrix = new Matrix(rowLength, columnLength);
 
             for (int i = 0; i < rowLength; i++)
@@ -131,7 +131,6 @@ public partial class Matrix
                     return false;
                 }
             }
-
         }
 
         return true;

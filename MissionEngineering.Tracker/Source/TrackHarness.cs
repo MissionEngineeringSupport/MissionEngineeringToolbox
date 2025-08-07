@@ -2,7 +2,6 @@
 using MissionEngineering.MathLibrary;
 using MissionEngineering.Platform;
 using MissionEngineering.Sensor;
-using System.Net.Security;
 
 namespace MissionEngineering.Tracker;
 
@@ -107,7 +106,7 @@ public class TrackHarness : ISimulationModel
     }
 
     public void InitialiseTrack(SensorReport sensorReport)
-    { 
+    {
         Track = new Track(LLAOrigin);
 
         Track.TrackDataSmoothed.TrackId = 1001;
@@ -116,7 +115,7 @@ public class TrackHarness : ISimulationModel
     }
 
     public void UpdateTrack(SensorReport sensorReport)
-    { 
+    {
         Track.UpdateTrack(SensorReport);
     }
 
@@ -131,7 +130,7 @@ public class TrackHarness : ISimulationModel
             TargetPositionNED = flightpathData.PositionNED,
             TargetVelocityNED = flightpathData.VelocityNED,
             IsTargetRangeValid = true,
-            IsTargetRangeRateValid = true, 
+            IsTargetRangeRateValid = true,
             IsTargetAzimuthValid = true,
             IsTargetElevationValid = true,
         };
