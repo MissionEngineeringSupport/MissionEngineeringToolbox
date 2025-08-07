@@ -6,7 +6,7 @@
         [TestMethod]
         public void Run_WithValidData_ExpectSuccess()
         {
-            // Arrange:
+            // Arrange
             var simulationSettings = SimulationSettingsFactory.SimulationSettings_Test_1_Single();
             var scenarioSettings = ScenarioSettingsFactory.ScenarioSettings_Test_1();
 
@@ -16,10 +16,10 @@
             simulationHarness.ScenarioSettings = scenarioSettings;
             simulationHarness.SimulationHarnessSettings.NumberOfRuns = 1;
 
-            // Act:
+            // Act
             simulationHarness.Run();
 
-            // Assert:
+            // Assert
             Assert.AreEqual(simulationHarness.Simulation.SimulationModels.Count, 2);
         }
     }

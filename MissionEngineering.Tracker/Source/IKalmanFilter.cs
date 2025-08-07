@@ -6,6 +6,8 @@ public interface IKalmanFilter
 {
     int NumberOfStates { get; set; }
 
+    int NumberOfUpdates { get; set; }
+
     double LastUpdateTime { get; set; }
 
     Vector X { get; set; }

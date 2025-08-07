@@ -10,7 +10,7 @@ public partial class Matrix
         {
             for (int j = 0; j < right.NumberOfColumns; j++)
             {
-                result[i, j] += left[i, j] * right[i, j];
+                result[i, j] = left[i, j] + right[i, j];
             }
         }
 
@@ -25,11 +25,31 @@ public partial class Matrix
         {
             for (int j = 0; j < right.NumberOfColumns; j++)
             {
-                result[i, j] += left[i, j] * right[i, j];
+                result[i, j] = left[i, j] - right[i, j];
             }
         }
 
         return result;
+    }
+
+    public static Matrix operator *(Matrix left, double right)
+    {
+        Matrix result = new Matrix(left.NumberOfRows, left.NumberOfColumns);
+
+        for (int i = 0; i < left.NumberOfRows; i++)
+        {
+            for (int j = 0; j < left.NumberOfColumns; j++)
+            {
+                result[i, j] = left[i, j] * right;
+            }
+        }
+
+        return result;
+    }
+
+    public static Matrix operator *(double left, Matrix right)
+    {
+        return right * left;
     }
 
     public static Matrix operator *(Matrix left, Matrix right)
@@ -52,7 +72,7 @@ public partial class Matrix
 
     public static Vector operator *(Matrix left, Vector right)
     {
-        Vector result = new Vector(right.NumberOfElements);
+        Vector result = new Vector(left.NumberOfRows);
 
         for (int i = 0; i < left.NumberOfRows; i++)
         {
@@ -82,7 +102,11 @@ public partial class Matrix
 
     public Matrix Inverse()
     {
-        Matrix result = new Matrix(NumberOfColumns, NumberOfRows);
+        var m = MathNet.Numerics.LinearAlgebra.Matrix<double>.Build.DenseOfArray(Data);
+
+        var mInverse = m.Inverse();
+
+        var result = new Matrix(mInverse.ToArray());
 
         return result;
     }

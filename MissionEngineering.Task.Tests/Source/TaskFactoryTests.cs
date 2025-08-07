@@ -8,10 +8,10 @@ public sealed class TaskFactoryTests
     [TestMethod]
     public void GenerateFakeTasks_ExpectSuccess()
     {
-        // Arrange:
+        // Arrange
         var numberOfTasks = 100;
 
-        // Act:
+        // Act
         var tasks = TaskFactory.GenerateFakeTasks(numberOfTasks);
 
         var outputFolder = Environment.CurrentDirectory;
@@ -20,7 +20,7 @@ public sealed class TaskFactoryTests
 
         tasks.WriteToCsvFile(outputFile);
 
-        // Assert:
+        // Assert
         Assert.AreEqual(tasks.Count, numberOfTasks);
     }
 }

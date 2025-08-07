@@ -9,7 +9,7 @@ namespace MissionEngineering.Platform.Tests
         [TestMethod]
         public void Update_WithInitialiseCalled_ExpectSuccess()
         {
-            // Arrange:
+            // Arrange
             var platformSettings = PlatformSettingsFactory.PlatformSettings_1();
 
             var simulationClock = new SimulationClock(new DateTimeOrigin { DateTime = new DateTime(2024, 12, 24, 15, 45, 10, 123) });
@@ -31,7 +31,7 @@ namespace MissionEngineering.Platform.Tests
 
             platformModel.Initialise(0.0);
 
-            // Act:
+            // Act
             platformModel.Update(0.0);
             platformModel.Update(1.0);
 
@@ -39,7 +39,7 @@ namespace MissionEngineering.Platform.Tests
 
             //platformModel.FlightpathDataList.WriteToCsvFile(path);
 
-            // Assert:
+            // Assert
             Assert.IsTrue(platformModel.FlightpathDataList.Count == 2);
         }
     }

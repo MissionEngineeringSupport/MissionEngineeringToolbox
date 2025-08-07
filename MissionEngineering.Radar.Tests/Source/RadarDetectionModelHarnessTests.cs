@@ -6,7 +6,7 @@ public sealed class RadarDetectionModelHarnessTests
     [TestMethod]
     public void Run_WithValidData_ExpectSuccess()
     {
-        // Arrange:
+        // Arrange
         var inputData = RadarDetectionModelHarnessInputDataFactory.Scenario_1();
 
         var outputFolder = Environment.CurrentDirectory;
@@ -20,12 +20,12 @@ public sealed class RadarDetectionModelHarnessTests
             OutputFolder = outputFolder
         };
 
-        // Act:
+        // Act
         radarDetectionModelHarness.Run();
 
         radarDetectionModelHarness.OutputData();
 
-        // Assert:
+        // Assert
         Assert.AreEqual(radarDetectionModelHarness.TargetRanges.NumberOfElements, radarDetectionModelHarness.OutputDataList[0].Count);
     }
 }

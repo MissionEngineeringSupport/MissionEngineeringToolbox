@@ -37,4 +37,23 @@ public record FlightpathData : ISimulationModelState
         Attitude = new Attitude();
         AttitudeRate = new AttitudeRate();
     }
+
+    public FlightpathData Predict(double time, ILLAOrigin lLAOrigin)
+    {
+        var dt = new DeltaTime(time - TimeStamp.SimulationTime);
+
+        var velocityNED = VelocityNED + AccelerationNED * dt;
+        var positionNED = PositionNED + VelocityNED * dt;
+        var positionLLA = MappingConversions.ConvertPositionNEDToPositionLLA(PositionNED, lLAOrigin.PositionLLA);
+
+        var flightpathData = this with
+        {
+            TimeStamp = TimeStamp with { SimulationTime = time },
+            PositionLLA = positionLLA,
+            PositionNED = positionNED,
+            VelocityNED = velocityNED
+        };
+
+        return flightpathData;
+    }
 }

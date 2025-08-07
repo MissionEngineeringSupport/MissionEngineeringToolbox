@@ -6,7 +6,7 @@ public sealed class TaskTests
     [TestMethod]
     public void CreateTask_WithTaskDemand_ExpectSuccess()
     {
-        // Arrange:
+        // Arrange
         var taskHeader = new TaskHeader
         {
             TaskId = 1001,
@@ -24,13 +24,13 @@ public sealed class TaskTests
             TaskQualityAchieved = 18,
         };
 
-        // Act:
+        // Act
         var task = new Task_Mission_Search
         {
             TaskHeader = taskHeader
         };
 
-        // Assert:
+        // Assert
         Assert.AreEqual(task.TaskHeader.TaskQualityStatus, TaskQualityStatusType.AboveQMin);
     }
 }

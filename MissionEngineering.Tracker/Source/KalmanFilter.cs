@@ -6,6 +6,8 @@ public abstract class KalmanFilter : IKalmanFilter
 {
     public int NumberOfStates { get; set; }
 
+    public int NumberOfUpdates { get; set; }
+
     public double LastUpdateTime { get; set; }
 
     public Vector X { get; set; }
@@ -42,9 +44,12 @@ public abstract class KalmanFilter : IKalmanFilter
 
     public virtual void Initialise(double time, Vector x, Matrix p)
     {
-        LastUpdateTime = time;
         X = x;
-        P = P;
+        P = p;
+
+        NumberOfUpdates = 1;
+
+        LastUpdateTime = time;
     }
 
     public virtual void Update(double time, Vector z, Matrix r, Vector ownshipStates)
@@ -77,6 +82,8 @@ public abstract class KalmanFilter : IKalmanFilter
 
         X = X + ownshipStates;
 
+        NumberOfUpdates++;
+
         LastUpdateTime = time;
     }
 
@@ -88,9 +95,9 @@ public abstract class KalmanFilter : IKalmanFilter
         var q = CalculateProcessNoiseMatrix(X, dt);
 
         var xPred = phi * X;
-        var PPred = phi * P * phi.Transpose() + q;
+        var pPred = phi * P * phi.Transpose() + q;
 
-        return (xPred, PPred);
+        return (xPred, pPred);
     }
 
     public abstract Matrix CalculateTransitionMatrix(Vector x, double dt);
