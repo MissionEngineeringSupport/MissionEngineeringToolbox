@@ -1,6 +1,4 @@
-﻿using static System.Math;
-
-namespace MissionEngineering.MathLibrary;
+﻿namespace MissionEngineering.MathLibrary;
 
 public partial class Vector
 {
@@ -13,6 +11,18 @@ public partial class Vector
             sum += Data[i] * Data[i];
         }
 
-        return Sqrt(sum);
+        return Math.Sqrt(sum);
+    }
+
+    public Vector Sqrt()
+    {
+        var result = new Vector(NumberOfElements);
+
+        for (int i = 0; i < NumberOfElements; i++)
+        {
+            result[i] = Math.Sqrt(Data[i]);
+        }
+
+        return result;
     }
 }

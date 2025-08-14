@@ -4,24 +4,13 @@ using static System.Math;
 
 namespace MissionEngineering.Tracker;
 
-public class KalmanFilterAirTrack_9State_ConstantTurnRate : KalmanFilter
+public class KalmanFilterAirTrack_9State_ConstantAccelerationNED : KalmanFilter
 {
-    public double Omega { get; set; }
-
-    public KalmanFilterAirTrack_9State_ConstantTurnRate()
+    public KalmanFilterAirTrack_9State_ConstantAccelerationNED()
     {
         NumberOfStates = 9;
 
         QSD = new Vector([10.0, 10.0, 10.0]);
-
-        Omega = 0.001;
-    }
-
-    public override void Update(double time, Vector z, Matrix r, Vector ownshipStates)
-    {
-        base.Update(time, z, r, ownshipStates);
-
-        CalculateTurnRate();
     }
 
     public override Matrix CalculateTransitionMatrix(Vector x, double dt)
@@ -80,17 +69,4 @@ public class KalmanFilterAirTrack_9State_ConstantTurnRate : KalmanFilter
         var zPred = new Vector(xPred[0..6]);
 
         return zPred;
-    }
-
-    public void CalculateTurnRate()
-    {
-        var velocity = new Vector(X[3..5]);
-        var acceleration = new Vector(X[6..8]);
-
-        var turnRate = acceleration.Norm() / velocity.Norm();
-
-        Omega = turnRate;
-
-        Omega = Max(Omega, 0.001);
-    }
-}
+    }}

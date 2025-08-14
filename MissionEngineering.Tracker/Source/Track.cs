@@ -122,11 +122,11 @@ public class Track
 
         var attitude = FrameConversions.GetAttitudeFromVelocityVector(velocityNED);
 
-        var positionNorthErrorSd = Sqrt(pPred[0, 0]);
-        var positionEastErrorSd = Sqrt(pPred[1, 1]);
-        var positionDownErrorSd = Sqrt(pPred[2, 2]);
+        var stateUncertaintySD = pPred.Diagonal().Sqrt();
 
-        var positionErrorNEDSd = new PositionNED(positionNorthErrorSd, positionEastErrorSd, positionDownErrorSd);
+        var positionUncertaintyNED = new PositionUncertaintyNED(stateUncertaintySD[0], stateUncertaintySD[1], stateUncertaintySD[2]);
+        var velocityUncertaintyNED = new VelocityUncertaintyNED(stateUncertaintySD[3], stateUncertaintySD[4], stateUncertaintySD[5]);
+        var accelerationUncertaintyNED = new AccelerationUncertaintyNED(stateUncertaintySD[6], stateUncertaintySD[7], stateUncertaintySD[8]);
 
         var ts = TrackDataSmoothed;
 
@@ -141,7 +141,9 @@ public class Track
             PositionNED = positionNED,
             VelocityNED = velocityNED,
             Attitude = attitude,
-            PositionCovarianceSdNED = positionErrorNEDSd,
+            PositionUncertaintyNED = positionUncertaintyNED,
+            VelocityUncertaintyNED = velocityUncertaintyNED,
+            AccelerationUncertaintyNED = accelerationUncertaintyNED
         };
     }
 

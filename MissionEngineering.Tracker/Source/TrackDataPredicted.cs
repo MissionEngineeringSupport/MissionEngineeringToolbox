@@ -32,9 +32,9 @@ public record TrackDataPredicted
 
     public Attitude Attitude { get; set; }
 
-    public PositionNED PositionCovarianceSdNED { get; set; }
+    public PositionUncertaintyNED PositionUncertaintyNED { get; set; }
 
-    public VelocityNED VelocityCovarianceSdNED { get; set; }
+    public VelocityUncertaintyNED VelocityUncertaintyNED { get; set; }
 
-    public AccelerationNED AccelerationCovarianceSdNED { get; set; }
+    public AccelerationUncertaintyNED AccelerationUncertaintyNED { get; set; }
 }

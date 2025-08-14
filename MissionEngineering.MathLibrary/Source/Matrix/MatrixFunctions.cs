@@ -1,5 +1,7 @@
 ﻿namespace MissionEngineering.MathLibrary;
 
+using static System.Math;
+
 public partial class Matrix
 {
     public static Matrix IdentityMatrix(int numberOfRows, int numberOfColumns)
@@ -15,4 +17,19 @@ public partial class Matrix
 
         return x;
     }
+
+    public Vector Diagonal()
+    {
+        var numberOfElements = Min(NumberOfRows, NumberOfColumns);
+
+        var diagonal = new Vector(NumberOfRows);
+
+        for (int i = 0; i < NumberOfRows; i++)
+        {
+            diagonal[i] = this[i, i];
+        }
+
+        return diagonal;
+    }
+
 }

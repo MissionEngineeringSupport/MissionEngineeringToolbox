@@ -38,9 +38,7 @@ public abstract class KalmanFilter : IKalmanFilter
 
     public Matrix K { get; set; }
 
-    public Vector QSD_Update { get; set; }
-
-    public Vector QSD_Predict { get; set; }
+    public Vector QSD { get; set; }
 
     public virtual void Initialise(double time, Vector x, Matrix p)
     {

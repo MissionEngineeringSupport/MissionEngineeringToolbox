@@ -38,9 +38,7 @@ public interface IKalmanFilter
 
     Matrix K { get; set; }
 
-    Vector QSD_Predict { get; set; }
-
-    Vector QSD_Update { get; set; }
+    Vector QSD { get; set; }
 
     void Initialise(double time, Vector x, Matrix p);
 
