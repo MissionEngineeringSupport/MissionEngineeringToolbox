@@ -1,8 +1,9 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Microsoft.VSDiagnostics;
+using BenchmarkDotNet.Diagnosers;
 
 namespace MissionEngineering.Simulation;
 
+[MemoryDiagnoser]
 public class SimulationRunner
 {
     public int NumberOfRuns { get; set; }
@@ -20,7 +21,7 @@ public class SimulationRunner
     [Benchmark]
     public void Run()
     {
-        NumberOfRuns = 1;
+        NumberOfRuns = 100;
 
         GenerateSimulationSettings();
         GenerateScenarioSettings();

@@ -44,21 +44,7 @@ public class Simulation : ISimulation
 
         Initialise(time);
 
-        LogUtilities.LogInformation("Run Started...");
-        LogUtilities.LogInformation("");
-
-        while (time <= clockSettings.TimeEnd)
-        {
-            ShowProgress(time);
-
-            Update(time);
-
-            time += clockSettings.TimeStep;
-        }
-
-        LogUtilities.LogInformation("");
-        LogUtilities.LogInformation("Run Finished.");
-        LogUtilities.LogInformation("");
+        RunSimulation(time);
 
         Finalise(time);
 
@@ -105,6 +91,27 @@ public class Simulation : ISimulation
         LogUtilities.LogInformation($"Scenario Settings {Environment.NewLine} {scenarioSettingsString}");
 
         LogUtilities.LogInformation("Initialise Finished.");
+        LogUtilities.LogInformation("");
+    }
+
+    public void RunSimulation(double time)
+    {
+        var clockSettings = ScenarioSettings.SimulationClockSettings;
+
+        LogUtilities.LogInformation("Run Started...");
+        LogUtilities.LogInformation("");
+
+        while (time <= clockSettings.TimeEnd)
+        {
+            ShowProgress(time);
+
+            Update(time);
+
+            time += clockSettings.TimeStep;
+        }
+
+        LogUtilities.LogInformation("");
+        LogUtilities.LogInformation("Run Finished.");
         LogUtilities.LogInformation("");
     }
 

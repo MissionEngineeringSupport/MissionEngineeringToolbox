@@ -9,7 +9,7 @@ public static class PlatformSettingsFactory
         var platformSettings = new PlatformSettings()
         {
             PlatformId = 1,
-            PlatformName = "Platform 1",
+            PlatformName = "Platform_1",
             PlatformDescription = "Platform 1 Description",
             PlatformType = "Aircraft",
             PlatformIcon = "f-35a_lightning",
@@ -29,7 +29,7 @@ public static class PlatformSettingsFactory
         var platformSettings = new PlatformSettings()
         {
             PlatformId = 2,
-            PlatformName = "Platform 2",
+            PlatformName = "Platform_2",
             PlatformDescription = "Platform 2 Description",
             PlatformType = "Aircraft",
             PlatformIcon = "rq-1b_predator",

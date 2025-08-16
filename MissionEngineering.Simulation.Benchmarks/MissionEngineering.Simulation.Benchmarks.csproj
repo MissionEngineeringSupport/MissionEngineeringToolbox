@@ -10,6 +10,8 @@
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
     <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.BenchmarkDotNetDiagnosers" Version="18.0.36412.2" />
+    <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.CorProfiler" Version="18.0.36412.2" />
+    <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.UserMarks" Version="18.0.36412.2" />
   </ItemGroup>
 
   <ItemGroup>
