@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Tracker"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Tracker.Tests", "MissionEngineering.Tracker.Tests\MissionEngineering.Tracker.Tests.csproj", "{6FEDBA68-13E6-4DD2-9D98-4110258FB893}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulation.Benchmarks", "MissionEngineering.Simulation.Benchmarks\MissionEngineering.Simulation.Benchmarks.csproj", "{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -135,6 +137,10 @@ Global
 		{6FEDBA68-13E6-4DD2-9D98-4110258FB893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FEDBA68-13E6-4DD2-9D98-4110258FB893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FEDBA68-13E6-4DD2-9D98-4110258FB893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
