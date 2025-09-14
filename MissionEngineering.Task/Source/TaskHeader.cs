@@ -6,9 +6,9 @@ public record TaskHeader
 
     public int TaskId { get; set; }
 
-    public string TaskName { get; set; }
+    public string TaskName { get; set; } = "";
 
-    public string TaskDescription { get; set; }
+    public string TaskDescription { get; set; } = "";
 
     public TaskLevelType TaskLevel { get; set; }
 

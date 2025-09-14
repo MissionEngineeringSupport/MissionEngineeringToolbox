@@ -6,7 +6,7 @@ public class TrackList
 
     public TrackList()
     {
-        Tracks = new List<Track>();
+        Tracks = [];
     }
 
     public void AddTrack(Track track)
@@ -33,6 +33,8 @@ public class TrackList
 
     public Track GetTrackById(int trackId)
     {
-        return Tracks.FirstOrDefault(t => t.TrackDataSmoothed.TrackId == trackId);
+        var track = Tracks.FirstOrDefault(t => t.TrackDataSmoothed.TrackId == trackId);
+
+        return track;
     }
 }

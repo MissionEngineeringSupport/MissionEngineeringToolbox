@@ -4,6 +4,15 @@ namespace MissionEngineering.Task;
 
 public static class TaskFactory
 {
+    public static ITask GenerateFakeTask()
+    {
+        var faker = new Faker("en");
+
+        var task = GenerateFakeTask(faker);
+
+        return task;
+    }
+
     public static List<ITask> GenerateFakeTasks(int numberOfTasks)
     {
         var faker = new Faker("en");
@@ -30,13 +39,8 @@ public static class TaskFactory
         return taskList;
     }
 
-    public static ITask GenerateFakeTask(Faker faker = null)
+    private static ITask GenerateFakeTask(Faker faker)
     {
-        if (faker is null)
-        {
-            faker = new Faker("en");
-        }
-
         var taskHeader = new TaskHeader()
         {
             TaskIdParent = faker.Random.Number(1, 5),

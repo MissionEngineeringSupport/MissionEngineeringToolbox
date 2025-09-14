@@ -23,7 +23,7 @@ public class Flightpath
         LLAOrigin = llaOrigin;
 
         FlightpathData = new FlightpathData();
-        FlightpathDataList = new List<FlightpathData>();
+        FlightpathDataList = [];
     }
 
     public void Initialise(double time)
