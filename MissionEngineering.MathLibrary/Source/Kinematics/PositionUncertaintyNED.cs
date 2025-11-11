@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Diagnostics;
-
-namespace MissionEngineering.MathLibrary;
+﻿namespace MissionEngineering.MathLibrary;
 
 public record PositionUncertaintyNED
 {

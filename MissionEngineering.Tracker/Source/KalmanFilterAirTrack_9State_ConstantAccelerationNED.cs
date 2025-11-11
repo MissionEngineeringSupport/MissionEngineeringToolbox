@@ -69,4 +69,5 @@ public class KalmanFilterAirTrack_9State_ConstantAccelerationNED : KalmanFilter
         var zPred = new Vector(xPred[0..6]);
 
         return zPred;
-    }}
+    }
+}

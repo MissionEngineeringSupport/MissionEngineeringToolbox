@@ -1,6 +1,5 @@
 using MissionEngineering.Core;
 using MissionEngineering.MathLibrary;
-using MissionEngineering.Platform;
 
 namespace MissionEngineering.Platform.Tests;
 

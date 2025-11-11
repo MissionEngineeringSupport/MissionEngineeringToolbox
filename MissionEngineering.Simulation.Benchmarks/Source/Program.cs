@@ -12,7 +12,7 @@ public class Program
         var isBenchmark = false;
 
         if (isBenchmark)
-        { 
+        {
             var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
         }
         else

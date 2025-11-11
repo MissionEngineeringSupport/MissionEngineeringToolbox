@@ -1,8 +1,6 @@
 ﻿using MissionEngineering.MathLibrary;
 using MissionEngineering.Sensor;
 
-using static System.Math;
-
 namespace MissionEngineering.Tracker;
 
 public class Track

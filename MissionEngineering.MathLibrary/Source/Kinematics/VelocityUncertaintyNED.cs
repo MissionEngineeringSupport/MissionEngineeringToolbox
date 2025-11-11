@@ -1,7 +1,4 @@
-﻿using CommunityToolkit.Diagnostics;
-using static System.Math;
-
-namespace MissionEngineering.MathLibrary;
+﻿namespace MissionEngineering.MathLibrary;
 
 public record VelocityUncertaintyNED
 {

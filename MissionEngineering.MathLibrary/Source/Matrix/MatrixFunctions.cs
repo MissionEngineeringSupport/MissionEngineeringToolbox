@@ -31,5 +31,4 @@ public partial class Matrix
 
         return diagonal;
     }
-
 }

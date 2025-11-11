@@ -1,56 +1,52 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MissionEngineering.Radar;
+namespace MissionEngineering.Radar.Tests;
 
-namespace MissionEngineering.Radar.Tests
+[TestClass]
+public class RadarDetectionModelDataTests
 {
-    [TestClass]
-    public class RadarDetectionModelDataTests
+    [TestMethod]
+    public void Constructor_DefaultsAreNull()
     {
-        [TestMethod]
-        public void Constructor_DefaultsAreNull()
+        // Arrange & Act
+        var modelData = new RadarDetectionModelData();
+
+        // Assert
+        Assert.IsNull(modelData.InputData, "InputData should be null by default");
+        Assert.IsNull(modelData.OutputData, "OutputData should be null by default");
+    }
+
+    [TestMethod]
+    public void Properties_CanBeAssignedAndReadBack()
+    {
+        // Arrange
+        var input = new RadarDetectionModelInputData
         {
-            // Arrange & Act
-            var modelData = new RadarDetectionModelData();
+            RadarSystemSettings = new RadarSystemSettings
+            {
+                RadarSystemId = 42,
+                RadarSystemName = "TestSystem"
+            }
+        };
 
-            // Assert
-            Assert.IsNull(modelData.InputData, "InputData should be null by default");
-            Assert.IsNull(modelData.OutputData, "OutputData should be null by default");
-        }
-
-        [TestMethod]
-        public void Properties_CanBeAssignedAndReadBack()
+        var output = new RadarDetectionModelOutputData
         {
-            // Arrange
-            var input = new RadarDetectionModelInputData
-            {
-                RadarSystemSettings = new RadarSystemSettings
-                {
-                    RadarSystemId = 42,
-                    RadarSystemName = "TestSystem"
-                }
-            };
+            TargetRange_m = 12345.67
+        };
 
-            var output = new RadarDetectionModelOutputData
-            {
-                TargetRange_m = 12345.67
-            };
+        var modelData = new RadarDetectionModelData();
 
-            var modelData = new RadarDetectionModelData();
+        // Act
+        modelData.InputData = input;
+        modelData.OutputData = output;
 
-            // Act
-            modelData.InputData = input;
-            modelData.OutputData = output;
+        // Assert
+        Assert.IsNotNull(modelData.InputData);
+        Assert.IsNotNull(modelData.OutputData);
+        Assert.AreEqual(42, modelData.InputData.RadarSystemSettings.RadarSystemId);
+        Assert.AreEqual("TestSystem", modelData.InputData.RadarSystemSettings.RadarSystemName);
+        Assert.AreEqual(12345.67, modelData.OutputData.TargetRange_m);
 
-            // Assert
-            Assert.IsNotNull(modelData.InputData);
-            Assert.IsNotNull(modelData.OutputData);
-            Assert.AreEqual(42, modelData.InputData.RadarSystemSettings.RadarSystemId);
-            Assert.AreEqual("TestSystem", modelData.InputData.RadarSystemSettings.RadarSystemName);
-            Assert.AreEqual(12345.67, modelData.OutputData.TargetRange_m);
-
-            // Mutate inner values and verify the same instances are referenced
-            modelData.InputData.RadarSystemSettings.RadarSystemName = "Changed";
-            Assert.AreEqual("Changed", input.RadarSystemSettings.RadarSystemName);
-        }
+        // Mutate inner values and verify the same instances are referenced
+        modelData.InputData.RadarSystemSettings.RadarSystemName = "Changed";
+        Assert.AreEqual("Changed", input.RadarSystemSettings.RadarSystemName);
     }
 }
