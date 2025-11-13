@@ -4,20 +4,13 @@ namespace MissionEngineering.Core;
 
 public static class ZipUtilities
 {
-    public static void ZipDirectory(string folderPath, string zipFileName, bool isCloseLog = false)
+    public static void ZipDirectory(string folderPath, string zipFileName)
     {
-        LogUtilities.LogInformation($"Writing Zip  File : {zipFileName}");
-
         var tempPath = Path.GetTempPath();
 
         var tempFile = Path.GetFileName(zipFileName);
 
         var tempFileFull = Path.Combine(tempPath, tempFile);
-
-        if (isCloseLog)
-        {
-            LogUtilities.CloseLog();
-        }
 
         File.Delete(tempFileFull);
 

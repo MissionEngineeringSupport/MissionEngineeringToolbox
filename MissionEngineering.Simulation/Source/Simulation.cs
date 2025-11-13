@@ -52,7 +52,7 @@ public class Simulation : ISimulation
         LogUtilities.LogInformation("***");
         LogUtilities.LogInformation("");
 
-        CreateZipFile();
+        CreateZipFile(false, true);
     }
 
     public void Initialise(double time)
@@ -133,6 +133,8 @@ public class Simulation : ISimulation
 
         DataRecorder.Finalise(time);
 
+        CreateZipFile(true, false);
+
         LogUtilities.LogInformation("");
         LogUtilities.LogInformation("Finalise Finished.");
         LogUtilities.LogInformation("");
@@ -187,7 +189,7 @@ public class Simulation : ISimulation
         return platformDataAll;
     }
 
-    public void CreateZipFile()
+    public void CreateZipFile(bool isWriteToLog, bool isWriteData)
     {
         if (!DataRecorder.SimulationData.SimulationSettings.IsWriteData)
         {
@@ -203,8 +205,16 @@ public class Simulation : ISimulation
 
         var zipFileNameFull = DataRecorder.SimulationData.SimulationSettings.GetFileNameFull(zipFileName);
 
-        var isCloseLog = true;
+        if (isWriteToLog)
+        {
+            LogUtilities.LogInformation($"Writing     Zip  File : {zipFileNameFull}");
+        }
 
-        ZipUtilities.ZipDirectory(DataRecorder.SimulationData.SimulationSettings.OutputFolder, zipFileNameFull, isCloseLog);
+        if (isWriteData)
+        {
+            LogUtilities.CloseLog();
+
+            ZipUtilities.ZipDirectory(DataRecorder.SimulationData.SimulationSettings.OutputFolder, zipFileNameFull);
+        }
     }
 }

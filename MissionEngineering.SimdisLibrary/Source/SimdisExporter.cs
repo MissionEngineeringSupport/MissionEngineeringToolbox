@@ -9,11 +9,12 @@ public class SimdisExporter : ISimdisExporter
 {
     public SimulationData SimulationData { get; set; }
 
-    public StringBuilder SimdisData { get; set; }
+    private StringBuilder SimdisData { get; set; }
 
     public SimdisExporter(SimulationData simulationData)
     {
         SimulationData = simulationData;
+
         SimdisData = new StringBuilder();
     }
 

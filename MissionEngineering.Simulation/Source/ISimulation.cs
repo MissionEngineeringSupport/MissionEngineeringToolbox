@@ -25,6 +25,4 @@ public interface ISimulation
     void Update(double time);
 
     void Finalise(double time);
-
-    void CreateZipFile();
 }
