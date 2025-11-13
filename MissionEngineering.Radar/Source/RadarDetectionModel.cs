@@ -16,40 +16,40 @@ public class RadarDetectionModel
 
     public void Run()
     {
-        var signalPower = GenerateSignalPower();
-        var noisePower = GenerateNoisePower();
+        var signalPower_W = GenerateSignalPower_W();
+        var noisePower_W = GenerateNoisePower_W();
         var atmosphericLoss_dB = GenerateAtmosphericLoss_dB();
 
-        var jammerPower = GenerateJammerPower();
+        var jammerPower_W = GenerateJammerPower_W();
 
-        var snr = signalPower / noisePower;
+        var snr = signalPower_W / noisePower_W;
 
-        var sinr = signalPower / (jammerPower + noisePower);
+        var sinr = signalPower_W / (jammerPower_W + noisePower_W);
 
         OutputData = new RadarDetectionModelOutputData
         {
             TargetRange_m = TargetRange_m,
-            SignalPower_W = signalPower,
-            NoisePower_W = noisePower,
-            JammerPower_W = jammerPower,
+            SignalPower_W = signalPower_W,
+            NoisePower_W = noisePower_W,
+            JammerPower_W = jammerPower_W,
             AtmosphericLoss_dB = atmosphericLoss_dB,
             SNR = snr,
             SINR = sinr
         };
     }
 
-    private double GenerateSignalPower()
+    private double GenerateSignalPower_W()
     {
-        var signalPower = RadarFunctions.CalculateSignalPower(InputData, TargetRange_m, TargetRangeRate_ms);
+        var signalPower_W = RadarFunctions.CalculateSignalPower_W(InputData, TargetRange_m, TargetRangeRate_ms);
 
-        return signalPower;
+        return signalPower_W;
     }
 
-    private double GenerateNoisePower()
+    private double GenerateNoisePower_W()
     {
-        var noisePower = RadarFunctions.CalculateNoisePower(InputData);
+        var noisePower_W = RadarFunctions.CalculateNoisePower_W(InputData);
 
-        return noisePower;
+        return noisePower_W;
     }
 
     private double GenerateAtmosphericLoss_dB()
@@ -59,15 +59,15 @@ public class RadarDetectionModel
         return atmosphericLoss_dB;
     }
 
-    private double GenerateJammerPower()
+    private double GenerateJammerPower_W()
     {
         if (!InputData.RadarJammerSettings.IsJammerOn)
         {
             return 1.0e-20;
         }
 
-        var jammerPower = RadarFunctions.CalculateJammerPower(InputData, TargetRange_m, TargetRangeRate_ms);
+        var jammerPower_W = RadarFunctions.CalculateJammerPower_W(InputData, TargetRange_m, TargetRangeRate_ms);
 
-        return jammerPower;
+        return jammerPower_W;
     }
 }

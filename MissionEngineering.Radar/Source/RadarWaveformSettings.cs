@@ -60,11 +60,11 @@ public class RadarWaveformSettings
 
     public double MaximumUnambiguousRange_NM => MaximumUnambiguousRange_m.MetersToNauticalMiles();
 
-    public double MaximumUnambiguousRangeRate_ms => RadarFunctions.CalculateMaximumUnambiguousRangeRate(PulseCenterWavelength_m, PulseRepetitionFrequency_Hz);
+    public double MaximumUnambiguousRangeRate_ms => RadarFunctions.CalculateMaximumUnambiguousRangeRate_ms(PulseCenterWavelength_m, PulseRepetitionFrequency_Hz);
 
     public double MaximumUnambiguousRangeRate_kts => MaximumUnambiguousRangeRate_ms.MetersPerSecondToKnots();
 
-    public double PulseWidthUncompressed_m => RadarFunctions.CalculateRangeFromTimeDelay(PulseWidth_s);
+    public double PulseWidthUncompressed_m => RadarFunctions.CalculateRangeFromTimeDelay_m(PulseWidth_s);
 
     public double PulseWidthCompressed_m => PulseWidthUncompressed_m / PulseCompressionRatio;
 

@@ -29,7 +29,7 @@ public class RadarFunctionsTests
         double timeDelay_s = 1.0e-6; // 1 microsecond
 
         // Act
-        var result = RadarFunctions.CalculateRangeFromTimeDelay(timeDelay_s, isTwoWay: true);
+        var result = RadarFunctions.CalculateRangeFromTimeDelay_m(timeDelay_s, isTwoWay: true);
 
         // expected = speed of light * timeDelay / 2
         var expected = PhysicalConstants.SpeedOfLight * timeDelay_s / 2.0;
@@ -47,7 +47,7 @@ public class RadarFunctionsTests
         // Act
         var result = RadarFunctions.CalculateMaximumUnambiguousRange(pri);
 
-        var expected = RadarFunctions.CalculateRangeFromTimeDelay(pri);
+        var expected = RadarFunctions.CalculateRangeFromTimeDelay_m(pri);
 
         // Assert
         Assert.AreEqual(expected, result, 1e-9);
@@ -61,7 +61,7 @@ public class RadarFunctionsTests
         double prf = 1000.0; // Hz
 
         // Act
-        var result = RadarFunctions.CalculateMaximumUnambiguousRangeRate(wavelength_m, prf);
+        var result = RadarFunctions.CalculateMaximumUnambiguousRangeRate_ms(wavelength_m, prf);
 
         var expected = wavelength_m * prf / 2.0;
 
@@ -117,7 +117,7 @@ public class RadarFunctionsTests
         double atmosphericLoss_dB_per_km = 0.0;
 
         // Act
-        var result = RadarFunctions.CalculateSignalPower(
+        var result = RadarFunctions.CalculateSignalPower_W(
             transmitPower_W,
             rfCenterWavelength_m,
             antennaGainTransmit_dB,
@@ -160,7 +160,7 @@ public class RadarFunctionsTests
         double atmosphericLoss_dB_per_km = 0.0;
 
         // Act
-        var result = RadarFunctions.CalculateJammerPower(
+        var result = RadarFunctions.CalculateJammerPower_W(
             transmitPower_W,
             rfCenterWavelength_m,
             antennaGainTransmit_dB,
@@ -206,9 +206,9 @@ public class RadarFunctionsTests
         input.RadarEnvironmentSettings = new RadarEnvironmentSettings { AtmosphericLoss_dB_per_km = 0.0 };
 
         // Act
-        var wrapperSignal = RadarFunctions.CalculateSignalPower(input, targetRange_m, targetRangeRate_ms);
+        var wrapperSignal = RadarFunctions.CalculateSignalPower_W(input, targetRange_m, targetRangeRate_ms);
 
-        var overloadSignal = RadarFunctions.CalculateSignalPower(
+        var overloadSignal = RadarFunctions.CalculateSignalPower_W(
             input.RadarTransmitterSettings.TransmitPower_W,
             input.RadarSystemSettings.RFCentreWavelength_m,
             input.RadarAntennaSettings.AntennaGainTransmit_dB,
@@ -226,7 +226,7 @@ public class RadarFunctionsTests
         Assert.AreEqual(overloadSignal, wrapperSignal, 1e-12);
 
         // Noise wrapper
-        var wrapperNoise = RadarFunctions.CalculateNoisePower(input);
+        var wrapperNoise = RadarFunctions.CalculateNoisePower_W(input);
         var overloadNoise = RadarFunctions.CalculateNoisePower(input.RadarReceiverSettings.ReceiverBandwidth_Hz, input.RadarReceiverSettings.ReceiverNoiseFigure_dB);
 
         Assert.AreEqual(overloadNoise, wrapperNoise, 1e-12);

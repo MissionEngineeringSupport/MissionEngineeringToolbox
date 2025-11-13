@@ -27,6 +27,7 @@ public record FlightpathData : ISimulationModelState
 
     public FlightpathData()
     {
+        TimeStamp = new SimulationModelTimeStamp();
         PlatformId = 0;
         PlatformName = string.Empty;
         PositionLLA = new PositionLLA();

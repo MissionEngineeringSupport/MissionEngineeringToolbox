@@ -4,11 +4,11 @@ namespace MissionEngineering.Radar;
 
 public static class RadarFunctions
 {
-    public static double CalculateSignalPower(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
+    public static double CalculateSignalPower_W(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
     {
         var i = inputData;
 
-        var signalPower = CalculateSignalPower(
+        var signalPower_W = CalculateSignalPower_W(
             i.RadarTransmitterSettings.TransmitPower_W,
             i.RadarSystemSettings.RFCentreWavelength_m,
             i.RadarAntennaSettings.AntennaGainTransmit_dB,
@@ -22,18 +22,18 @@ public static class RadarFunctions
             i.RadarTargetSettings.RadarCrossSection_sqm,
             i.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km);
 
-        return signalPower;
+        return signalPower_W;
     }
 
-    public static double CalculateNoisePower(RadarDetectionModelInputData inputData)
+    public static double CalculateNoisePower_W(RadarDetectionModelInputData inputData)
     {
         var i = inputData;
 
-        var signalPower = CalculateNoisePower(
+        var noisePower_W = CalculateNoisePower(
             i.RadarReceiverSettings.ReceiverBandwidth_Hz,
             i.RadarReceiverSettings.ReceiverNoiseFigure_dB);
 
-        return signalPower;
+        return noisePower_W;
     }
 
     public static double CalculateAtmosphericLoss_dB(RadarDetectionModelInputData inputData, double targetRange_m)
@@ -43,7 +43,7 @@ public static class RadarFunctions
         return atmosphericLoss_dB;
     }
 
-    public static double CalculateJammerPower(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
+    public static double CalculateJammerPower_W(RadarDetectionModelInputData inputData, double targetRange_m, double targetRangeRate_ms)
     {
         var antennaGainReceive_dB = inputData.RadarAntennaSettings.AntennaGainReceive_dB;
 
@@ -54,7 +54,7 @@ public static class RadarFunctions
 
         var i = inputData;
 
-        var jammerPower = CalculateJammerPower(
+        var jammerPower_W = CalculateJammerPower_W(
             i.RadarJammerSettings.JammerPower_W,
             i.RadarSystemSettings.RFCentreWavelength_m,
             i.RadarJammerSettings.JammerAntennaGainTransmit_dB,
@@ -65,10 +65,10 @@ public static class RadarFunctions
             targetRangeRate_ms,
             i.RadarEnvironmentSettings.AtmosphericLoss_dB_per_km);
 
-        return jammerPower;
+        return jammerPower_W;
     }
 
-    public static double CalculateSignalPower(double transmitPower_W, double rfCenterWavelength_m, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth_Hz, double pulseCompressionRatio, int numberOfPulses, double systemLosses_dB, double targetRange_m, double targetRangeRate_m, double radarCrossSection_m2, double atmophericLoss_dB_per_km)
+    public static double CalculateSignalPower_W(double transmitPower_W, double rfCenterWavelength_m, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth_Hz, double pulseCompressionRatio, int numberOfPulses, double systemLosses_dB, double targetRange_m, double targetRangeRate_m, double radarCrossSection_m2, double atmophericLoss_dB_per_km)
     {
         var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
         var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
@@ -104,7 +104,7 @@ public static class RadarFunctions
         return noisePower_dB;
     }
 
-    public static double CalculateJammerPower(double transmitPower_W, double rfCenterWavelength_m, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth_Hz, double systemLosses_dB, double targetRange_m, double targetRangeRate_ms, double atmophericLoss_dB_per_km)
+    public static double CalculateJammerPower_W(double transmitPower_W, double rfCenterWavelength_m, double antennaGainTransmit_dB, double antennaGainReceive_dB, double pulseBandwidth_Hz, double systemLosses_dB, double targetRange_m, double targetRangeRate_ms, double atmophericLoss_dB_per_km)
     {
         var antennaGainTransmit = antennaGainTransmit_dB.DecibelsToPower();
         var antennaGainReceive = antennaGainReceive_dB.DecibelsToPower();
@@ -122,7 +122,7 @@ public static class RadarFunctions
         return jammerPower_W;
     }
 
-    public static double CalculateRangeFromTimeDelay(double timeDelay_s, bool isTwoWay = true)
+    public static double CalculateRangeFromTimeDelay_m(double timeDelay_s, bool isTwoWay = true)
     {
         var range_m = PhysicalConstants.SpeedOfLight * timeDelay_s;
 
@@ -136,12 +136,12 @@ public static class RadarFunctions
 
     public static double CalculateMaximumUnambiguousRange(double pulseRepetitionInterval_s)
     {
-        var maximumUnambiguousRange_m = CalculateRangeFromTimeDelay(pulseRepetitionInterval_s);
+        var maximumUnambiguousRange_m = CalculateRangeFromTimeDelay_m(pulseRepetitionInterval_s);
 
         return maximumUnambiguousRange_m;
     }
 
-    public static double CalculateMaximumUnambiguousRangeRate(double rfWavelength_m, double pulseRepetitionFrequency_Hz)
+    public static double CalculateMaximumUnambiguousRangeRate_ms(double rfWavelength_m, double pulseRepetitionFrequency_Hz)
     {
         var maximumUnambiguousRangeRate_ms = rfWavelength_m * pulseRepetitionFrequency_Hz / 2.0;
 
