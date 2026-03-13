@@ -15,5 +15,6 @@ public class SimulationData
     public SimulationData(SimulationSettings simulationSettings)
     {
         SimulationSettings = simulationSettings;
+        PlatformDataAll = new List<FlightpathData>();
     }
 }

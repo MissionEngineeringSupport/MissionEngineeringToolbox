@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11527.330 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.MathLibrary", "MissionEngineering.MathLibrary\MissionEngineering.MathLibrary.csproj", "{24496800-4F40-4FDB-8CBE-8C8728F32E57}"
 EndProject
@@ -46,6 +46,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Tracker.Tests", "MissionEngineering.Tracker.Tests\MissionEngineering.Tracker.Tests.csproj", "{6FEDBA68-13E6-4DD2-9D98-4110258FB893}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulation.Benchmarks", "MissionEngineering.Simulation.Benchmarks\MissionEngineering.Simulation.Benchmarks.csproj", "{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.DataRecorder.Model", "MissionEngineering.DataRecorder.Model\MissionEngineering.DataRecorder.Model.csproj", "{2E82CB34-6E8E-4699-BB73-8BE5F53CCE33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissionEngineering.Simulation.Model", "MissionEngineering.Simulation.Model\MissionEngineering.Simulation.Model.csproj", "{0318C181-7B33-4C28-8A80-76736E3C8F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -141,6 +145,14 @@ Global
 		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFC2EA08-F0C4-43B8-BD1E-5B1372B42282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E82CB34-6E8E-4699-BB73-8BE5F53CCE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E82CB34-6E8E-4699-BB73-8BE5F53CCE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E82CB34-6E8E-4699-BB73-8BE5F53CCE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E82CB34-6E8E-4699-BB73-8BE5F53CCE33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0318C181-7B33-4C28-8A80-76736E3C8F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0318C181-7B33-4C28-8A80-76736E3C8F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0318C181-7B33-4C28-8A80-76736E3C8F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0318C181-7B33-4C28-8A80-76736E3C8F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
